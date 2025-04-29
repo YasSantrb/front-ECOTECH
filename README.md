@@ -1,7 +1,7 @@
 # ECOTECH 
 Plataforma web para promover a doação, reaproveitamento e descarte sustentável de resíduos eletrônicos.
 
-##Principais funcionalidades
+## Principais funcionalidades
 <br>
 -Cadastro de usuários (doador ou empresa).
 <br>
@@ -16,7 +16,7 @@ Plataforma web para promover a doação, reaproveitamento e descarte sustentáve
 -Painel de administração e histórico de doações.
 <br>
 
-##Como rodar o projeto na sua máquina (desenvolvedores)
+## Como rodar o projeto na sua máquina (desenvolvedores)
 <br>
 -Clonar o repositório: git clone https://github.com/YasSantrb/front-ECOTECH.git
 
