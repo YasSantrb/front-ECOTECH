@@ -1,0 +1,156 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital@1&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.tela_login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-family: 'Poppins', sans-serif;
+  position: relative;
+  background-color: white;
+  overflow: hidden;
+}
+
+.background_tela {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.login-box {
+  position: relative;
+  z-index: 1;
+  background-color: #225C25;
+  border-radius: 20px;
+  width: 780px 55px;
+  color: white;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  padding: 30px 20px;
+  gap: 20px;
+}
+
+.formulario {
+  width: 45%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.logo-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 0 auto 20px auto;
+}
+
+.logo {
+  width: 190px;
+  height: auto;
+}
+
+form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+label {
+  font-weight: bold;
+  font-style: italic;
+  font-size: 14px;
+  color: white;
+  margin-bottom: -5px;
+}
+
+.input-container {
+  position: relative;
+  width: 100%;
+}
+
+.input-container input {
+  width: 100%;
+  padding: 10px 40px 10px 15px;
+  border-radius: 20px;
+  border: none;
+  outline: none;
+  font-family: 'Poppins', sans-serif;
+}
+
+.input-icon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  opacity: 0.8;
+}
+
+button {
+  margin: 20px auto 0;
+  padding: 10px 30px;
+  border-radius: 20px;
+  border: none;
+  background-color: white;
+  color: #225C25;
+  font-weight: bold;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background-color: #a4e2b4;
+}
+
+.Cadastro {
+  font-size: 13px;
+  margin-top: 15px;
+  text-align: center;
+}
+
+.Cadastro a {
+  color: #cfc2f2;
+  text-decoration: none;
+}
+
+.linha-vertical {
+  width: 2px;
+  height: 280px;
+  background-color: white;
+  opacity: 0.4;
+}
+
+.texto-direita {
+  width: 45%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.frase {
+  font-style: italic;
+  font-size: 25px;
+  color: white;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+.img-planeta {
+  width: 150px;
+  height: auto;
+}
