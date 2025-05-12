@@ -20,7 +20,7 @@ function TelaLogin() {
             <img src={logo} alt="logo_ecotech" className="logo" />
           </div>
 
-          <form>
+          <form className="form_login">
             <label>Email</label>
             <div className="input-container">
               <input type="email" placeholder="Insira seu email*" required />
@@ -38,7 +38,7 @@ function TelaLogin() {
               <img src={iconSenha} alt="ícone senha" className="input-icon" />
             </div>
 
-            <button type="submit">Enviar</button>
+            <button className="botao_login" type="submit">Enviar</button>
           </form>
 
           <p className="Cadastro">
