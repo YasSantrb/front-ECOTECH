@@ -83,6 +83,7 @@
 }
 
 .botao_inicial{
+    cursor: pointer;
     background-color: #225C25;
     color: #fff;
     font-size: 20px;
@@ -99,3 +100,4 @@
     color: #225C25;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
+

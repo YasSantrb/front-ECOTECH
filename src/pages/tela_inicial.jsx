@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "../styles/tela_inicial.css";
+import TelaFeed from "./tela_feed";
 
 function TelaInicial() {
   return (
@@ -43,7 +44,9 @@ function TelaInicial() {
           </div>
 
           <div className="botao">
-            <button className="botao_inicial">Faça sua doação!</button>
+            <Link to="/feed">
+            <button className="botao_inicial"> Faça sua doação!</button>
+            </Link>
           </div>
         </div>
       </main>
