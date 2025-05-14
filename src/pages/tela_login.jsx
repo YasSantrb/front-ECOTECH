@@ -1,15 +1,15 @@
-import React from "react";
-import '../styles/tela_login.css';
-import logo from '../assets/imagens/Logo.png';
-import planeta from '../assets/imagens/planeta-login.png';
-import iconEmail from '../assets/imagens/icon-email.png';
-import iconSenha from '../assets/imagens/icon-senha.png';
+import "../styles/tela_login.css";
+import logo from "../assets/imagens/Logo.png";
+import planeta from "../assets/imagens/planeta-login.png";
+import iconEmail from "../assets/imagens/icon-email.png";
+import iconSenha from "../assets/imagens/icon-senha.png";
+import fundo_login_cadastro from "../assets/imagens/fundo_login_cadastro.jpg";
 
 function TelaLogin() {
   return (
     <div className="tela_login">
       <img
-        src="src/assets/imagens/fundo_tela_login.png"
+        src={fundo_login_cadastro}
         alt="imagem_de_fundo"
         className="background_tela"
       />
@@ -19,7 +19,6 @@ function TelaLogin() {
           <div className="logo-container">
             <img src={logo} alt="logo_ecotech" className="logo" />
           </div>
-
           <form className="form_login">
             <label>Email</label>
             <div className="input-container">
@@ -29,7 +28,11 @@ function TelaLogin() {
 
             <label>CPF</label>
             <div className="input-container">
-              <input type="text" placeholder="Insira seu CPF ou CNPJ*" required />
+              <input
+                type="text"
+                placeholder="Insira seu CPF ou CNPJ*"
+                required
+              />
             </div>
 
             <label>Senha</label>
@@ -38,7 +41,9 @@ function TelaLogin() {
               <img src={iconSenha} alt="ícone senha" className="input-icon" />
             </div>
 
-            <button className="botao_login" type="submit">Enviar</button>
+            <button className="botao_login" type="submit">
+              Enviar
+            </button>
           </form>
 
           <p className="Cadastro">
@@ -50,7 +55,8 @@ function TelaLogin() {
 
         <div className="texto-direita">
           <p className="frase">
-            Doe seu lixo eletrônico<br />e cuide do planeta!
+            Doe seu lixo eletrônico
+            <br />e cuide do planeta!
           </p>
           <img src={planeta} alt="planeta" className="img-planeta" />
         </div>

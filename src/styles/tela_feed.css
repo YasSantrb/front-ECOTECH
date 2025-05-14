@@ -24,6 +24,7 @@
   width: 300px;
   color: #225c25;
   font-weight: 500;
+  outline: none;
 }
 
 .pesquisar .icone_pesquisar {
@@ -176,7 +177,6 @@
   align-items: center;
   height: 30px;
   border: none;
-  padding: 4px;
   width: 50%;
   color: #225c25;
   font-size: 16px;

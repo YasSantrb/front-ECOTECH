@@ -19,6 +19,12 @@
   z-index: 0;
 }
 
+.botao_voltar{
+  position: relative;
+  color: #000;
+  z-index: 1;
+}
+
 .login-box {
   position: relative;
   z-index: 1;
@@ -27,16 +33,16 @@
   width: 780px 55px;
   color: white;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-  display: flex;
   align-items: center;
   padding: 30px 20px;
   gap: 20px;
+  display: flex;
 }
 
 .formulario {
-  width: 45%;
   display: flex;
-  flex-direction: column;
+  width: 45%;
+  flex-direction: column; 
   justify-content: flex-start;
   align-items: center;
 }
@@ -45,7 +51,6 @@
   display: flex;
   justify-content: center;
   width: 100%;
-  margin: 0 auto 20px auto;
 }
 
 .logo {
