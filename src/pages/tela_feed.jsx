@@ -21,17 +21,18 @@ function TelaFeed() {
             <div className="lista_feed">
               <ul className="menu">
                 <li>
-                  {" "}
                   <Link className="link_feed" to="/">
                     Home
-                  </Link>{" "}
+                  </Link>
                 </li>
                 <li>
-                  {" "}
-                  <Link className="link_feed">Doe agora</Link>{" "}
+                  <Link className="link_feed">Doe agora</Link>
                 </li>
                 <li>
-                  <Link className="link_feed">Usuário</Link>{" "}
+                  <Link className="link_feed" to="/usuario/doador">Usuário Doador</Link>
+                </li>
+                 <li>
+                  <Link className="link_feed" to="/usuario/empresa">Usuário Empresa</Link>
                 </li>
               </ul>
             </div>
