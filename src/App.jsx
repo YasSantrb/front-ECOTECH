@@ -11,10 +11,10 @@ function App(){
         <Router>
             <div>
                 <Routes>
-                    <Route path="/" element={<TelaInicial/>}/>
+                    <Route path="/" element={<TelaFeed/>}/>
                     <Route path="/login" element={<TelaLogin/>}/>
                     <Route path="/cadastro" element={<TelaCadastro/>}/>
-                    <Route path="/feed" element={<TelaFeed/>}/>
+                    <Route path="/inicial" element={<TelaInicial/>}/>
                     <Route path="/usuario/doador" element={<TelaUsuarioDoador/>}/>
                     <Route path="/usuario/empresa" element={<TelaUsuarioEmpresa/>}/>
                 </Routes>

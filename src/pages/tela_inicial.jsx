@@ -42,7 +42,7 @@ function TelaInicial() {
           </div>
 
           <div className="botao">
-            <Link to="/feed">
+            <Link to="/">
             <button className="botao_inicial"> Faça sua doação!</button>
             </Link>
           </div>
