@@ -15,7 +15,7 @@ import icon_voltar from "../assets/imagens/icon_voltar.png";
 function TelaUsuarioEmpresa() {
   return (
     <div className="tela_usuario_empresa">
-      <img src={fundo_login_cadastro} alt="imagem_de_fundo" className="background_tela" />
+      <img src={fundo_login_cadastro} alt="imagem_de_fundo" className="background_tela_empresa" />
 
       <div className="top-bar">
         <a href="/" className="voltar">
