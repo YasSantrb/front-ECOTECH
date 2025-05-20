@@ -1,0 +1,135 @@
+.tela_usuario_doador{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  position: relative;
+  background-color: white;
+  overflow: hidden;
+}
+.conteiner-doador {
+  position: relative;
+  background-color: #225c25;
+  color: white;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  width: 780px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  padding: 60px 40px 40px;
+  gap: 20px;
+  margin-top: 7px;
+  & button {
+    cursor: pointer;
+  }
+  & buttom:hover{
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+}
+
+#conteiner-top-bar {
+  display: inline;
+}
+
+
+#a1 {
+  display: flex;
+}
+#a2 {
+  display: flex;
+  flex-direction: column;
+}
+#top-botoes {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  display: flex;
+  gap: 12px;
+
+  & button {
+    background-color: transparent;
+    width: 26px;
+    height: 26px;
+    border: 0;
+    & img {
+      width: 100%;
+      height: auto;
+    }
+    & button:hover {
+      background-color: rgba(0, 0, 0, 0.7);
+    }
+  }
+}
+
+#perfil {
+  gap: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  & button {
+    background-color: white;
+    color: #0b561d;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 6px 16px;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 13px;
+    & img {
+      width: 20%;
+      height: auto;
+    }
+  }
+  #imagem {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  }
+}
+#info{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  width: 60%  ;
+  & p {
+    gap: 10px ;
+  }
+  & img{
+    height: 18px;
+    width: 16px;
+    gap: 8px;
+    margin-right: 8px;
+  }
+}
+#superior{
+  padding: 20px 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+
+
+#botoes {
+  display: flex;
+  justify-content: space-around;
+  gap: 20px;
+  & img{
+    height: 80px;
+  }
+  & button{
+  background-color: white;
+  border-radius: 20px;
+  height: 150px;
+  padding: 20px;
+  font-size: 15px;
+  color: #225C25;
+  }
+}

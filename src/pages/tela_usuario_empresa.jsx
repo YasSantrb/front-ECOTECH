@@ -11,6 +11,7 @@ import icon_localizacao from "../assets/imagens/icon_localizacao.png";
 import icon_chat from "../assets/imagens/icon_chat.png";
 import icon_sair from "../assets/imagens/icon_sair.png";
 import icon_voltar from "../assets/imagens/icon_voltar.png";
+import { Link } from "react-router-dom";
 
 function TelaUsuarioEmpresa() {
   return (
@@ -26,7 +27,8 @@ function TelaUsuarioEmpresa() {
 
       <div className="perfil-box">
         <div className="icons-top">
-          <img src={icon_chat} alt="chat" className="icon-top" />
+          <Link className="link_usuario_doador" to="/usuario/doador">Usuário - Doador</Link>
+          <Link to="/chat"><img src={icon_chat} alt="chat" className="icon-top" /></Link>
           <img src={icon_sair} alt="sair" className="icon-top" />
         </div>
 

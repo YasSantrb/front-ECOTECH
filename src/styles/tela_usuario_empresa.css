@@ -77,6 +77,14 @@
   cursor: pointer;
 }
 
+.link_usuario_doador{
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 10px;
+  text-decoration: none;
+  color: #225c25;
+}
+
 .perfil-esquerda {
   display: flex;
   flex-direction: column;

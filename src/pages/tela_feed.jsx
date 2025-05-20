@@ -128,7 +128,7 @@ function TelaFeed() {
               className="filtro_button"
               onClick={() => removerFiltro(tipo)}
             >
-              ×
+              <i class="fa-solid fa-x"></i>
             </button>
           </div>
         );
@@ -167,7 +167,7 @@ function TelaFeed() {
                   </Link>
                 </li>
                 <li>
-                  <Link id="link_doe_agora" className="link_feed">
+                  <Link id="link_doe_agora" className="link_feed" to="/criar/doacao">
                     Doe agora
                   </Link>
                 </li>
@@ -313,7 +313,7 @@ function TelaFeed() {
                       </p>
                     </div>
                   </div>
-                  <button className="botao_card">Saber mais</button>
+                  <Link  className="link_card_feed" to="/informacao/doacao"><button className="botao_card">Saber mais</button></Link>
                 </div>
               </div>
 
@@ -337,7 +337,7 @@ function TelaFeed() {
                       </p>
                     </div>
                   </div>
-                  <button className="botao_card">Saber mais</button>
+                  <Link  className="link_card_feed" to="/informacao/doacao"><button className="botao_card">Saber mais</button></Link>
                 </div>
               </div>
 
@@ -361,7 +361,7 @@ function TelaFeed() {
                       </p>
                     </div>
                   </div>
-                  <button className="botao_card">Saber mais</button>
+                  <Link  className="link_card_feed" to="/informacao/doacao"><button className="botao_card">Saber mais</button></Link>
                 </div>
               </div>
 
@@ -385,7 +385,7 @@ function TelaFeed() {
                       </p>
                     </div>
                   </div>
-                  <button className="botao_card">Saber mais</button>
+                  <Link  className="link_card_feed" to="/informacao/doacao"><button className="botao_card">Saber mais</button></Link>
                 </div>
               </div>
 
@@ -409,7 +409,7 @@ function TelaFeed() {
                       </p>
                     </div>
                   </div>
-                  <button className="botao_card">Saber mais</button>
+                  <Link  className="link_card_feed" to="/informacao/doacao"><button className="botao_card">Saber mais</button></Link>
                 </div>
               </div>
 
@@ -433,7 +433,7 @@ function TelaFeed() {
                       </p>
                     </div>
                   </div>
-                  <button className="botao_card">Saber mais</button>
+                  <Link  className="link_card_feed" to="/informacao/doacao"><button className="botao_card">Saber mais</button></Link>
                 </div>
               </div>
             </div>
@@ -531,7 +531,7 @@ function TelaFeed() {
                     </p>
                   </div>
                 </div>
-                <button className="botao_card">Saber mais</button>
+                <Link  className="link_card_feed" to="/informacao/doacao"><button className="botao_card">Saber mais</button></Link>
               </div>
             </div>
 
@@ -560,7 +560,7 @@ function TelaFeed() {
                     </p>
                   </div>
                 </div>
-                <button className="botao_card">Saber mais</button>
+                <Link  className="link_card_feed" to="/informacao/doacao"><button className="botao_card">Saber mais</button></Link>
               </div>
             </div>
 
@@ -589,7 +589,7 @@ function TelaFeed() {
                     </p>
                   </div>
                 </div>
-                <button className="botao_card">Saber mais</button>
+                <Link  className="link_card_feed" to="/informacao/doacao"><button className="botao_card">Saber mais</button></Link>
               </div>
             </div>
 
@@ -618,7 +618,7 @@ function TelaFeed() {
                     </p>
                   </div>
                 </div>
-                <button className="botao_card">Saber mais</button>
+                <Link  className="link_card_feed" to="/informacao/doacao"><button className="botao_card">Saber mais</button></Link>
               </div>
             </div>
 
@@ -647,7 +647,7 @@ function TelaFeed() {
                     </p>
                   </div>
                 </div>
-                <button className="botao_card">Saber mais</button>
+                <Link  className="link_card_feed" to="/informacao/doacao"><button className="botao_card">Saber mais</button></Link>
               </div>
             </div>
 
@@ -676,7 +676,7 @@ function TelaFeed() {
                     </p>
                   </div>
                 </div>
-                <button className="botao_card">Saber mais</button>
+                <Link  className="link_card_feed" to="/informacao/doacao"><button className="botao_card">Saber mais</button></Link>
               </div>
             </div>
 
@@ -703,7 +703,7 @@ function TelaFeed() {
                     </p>
                   </div>
                 </div>
-                <button className="botao_card">Saber mais</button>
+                <Link  className="link_card_feed" to="/informacao/doacao"><button className="botao_card">Saber mais</button></Link>
               </div>
             </div>
 
@@ -732,7 +732,7 @@ function TelaFeed() {
                     </p>
                   </div>
                 </div>
-                <button className="botao_card">Saber mais</button>
+                <Link  className="link_card_feed" to="/informacao/doacao"><button className="botao_card">Saber mais</button></Link>
               </div>
             </div>
 
@@ -761,7 +761,7 @@ function TelaFeed() {
                     </p>
                   </div>
                 </div>
-                <button className="botao_card">Saber mais</button>
+                <Link className="link_card_feed" to="/informacao/doacao"><button className="botao_card">Saber mais</button></Link>
               </div>
             </div>
             
