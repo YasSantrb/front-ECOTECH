@@ -201,7 +201,7 @@
   transition: background 0.3s;
 }
 
-.botao_carrossel.active,
+.botao_carrossel.ativo,
 .botao_carrossel:hover {
   background-color: #225c25;
 }

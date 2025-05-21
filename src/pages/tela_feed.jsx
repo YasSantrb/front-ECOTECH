@@ -4,29 +4,29 @@ import { useEffect, useRef, useState } from "react";
 
 function TelaFeed() {
   // Função para o carrossel automatico
-  const slideRef = useRef(null);
+  const slideReferencia = useRef(null);
   const [indiceAtual, setIndiceAtual] = useState(0);
   const totalSlides = 4;
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setIndiceAtual((prev) => (prev + 1) % totalSlides);
+    const intervalo = setInterval(() => {
+      setIndiceAtual((valorAtual) => (valorAtual + 1) % totalSlides);
     }, 5000);
-    return () => clearInterval(interval);
+    return () => clearInterval(intervalo);
   }, []);
 
   useEffect(() => {
-    if (slideRef.current) {
-      slideRef.current.style.transform = `translateX(-${indiceAtual * 100}%)`;
+    if (slideReferencia.current) {
+      slideReferencia.current.style.transform = `translateX(-${indiceAtual * 100}%)`;
     }
     const botoes = document.querySelectorAll(".botao_carrossel");
-    botoes.forEach((botao, i) => {
-      botao.classList.toggle("active", i === indiceAtual);
+    botoes.forEach((botao, indiceBotao) => {
+      botao.classList.toggle("ativo", indiceBotao === indiceAtual);
     });
   }, [indiceAtual]);
 
-  function mudarSlide(index) {
-    setIndiceAtual(index);
+  function mudarSlide(indiceSlideEscolhido) {
+    setIndiceAtual(indiceSlideEscolhido);
   }
 
   //Fim da função para o carrossel automatco
@@ -36,8 +36,8 @@ function TelaFeed() {
   const larguraImagem = 400;
 
   const moverCarrossel = (direcao) => {
-    setIndiceAtualFeed((prevIndice) => {
-      let novoIndice = prevIndice + direcao;
+    setIndiceAtualFeed((indiceAtualCarrossel) => {
+      let novoIndice = indiceAtualCarrossel + direcao;
 
       if (novoIndice < 0) novoIndice = 0;
 
@@ -49,7 +49,7 @@ function TelaFeed() {
   };
 
   const estiloDeslizamento = {
-    transform: `translateX(-${indiceAtualFeed * larguraImagem}px)`,
+    transform: `translateX(-${indiceAtualFeed* larguraImagem}px)`,
   };
   //Fim da função para o carrossel manual
 
@@ -60,19 +60,19 @@ function TelaFeed() {
     estado: "todos",
   });
 
-  const handleFiltroChange = (e) => {
-    const { id, value } = e.target;
+  const mudarFiltro = (escolha) => {
+    const { id, value } = escolha.target;
     const filtroNome = id.replace("filtro_", "");
 
-    setFiltros((prev) => ({
-      ...prev,
+    setFiltros((estadoAnterior) => ({
+      ...estadoAnterior,
       [filtroNome]: value,
     }));
   };
 
   const removerFiltro = (tipo) => {
-    setFiltros((prev) => ({
-      ...prev,
+    setFiltros((tipoEscolhido) => ({
+      ...tipoEscolhido,
       [tipo]: "todos",
     }));
   };
@@ -85,14 +85,14 @@ function TelaFeed() {
       const cardLocal = card.getAttribute("data-local");
       const cardEstado = card.getAttribute("data-estado");
 
-      const matchCategoria =
+      const filtrarCategoria =
         filtros.categoria === "todos" || cardCategoria === filtros.categoria;
-      const matchLocal =
+      const filtrarLocal =
         filtros.local === "todos" || cardLocal === filtros.local;
-      const matchEstado =
+      const filtrarEstado =
         filtros.estado === "todos" || cardEstado === filtros.estado;
 
-      if (matchCategoria && matchLocal && matchEstado) {
+      if (filtrarCategoria && filtrarLocal && filtrarEstado) {
         card.style.display = "";
       } else {
         card.style.display = "none";
@@ -100,7 +100,7 @@ function TelaFeed() {
     });
   }, [filtros]);
 
-  const renderChipsFiltros = () => {
+  const filtrosAtivos = () => {
     const chips = [];
     const opcoes = {
       categoria: {
@@ -192,75 +192,75 @@ function TelaFeed() {
       </header>
 
       <main>
-        <div class="carrossel-container">
-          <div class="carrossel-slide" id="carrossel" ref={slideRef}>
-            <div class="slide-conteudo1">
-              <div class="carrossel_titulo">
+        <div className="carrossel-container">
+          <div className="carrossel-slide" id="carrossel" ref={slideReferencia}>
+            <div className="slide-conteudo1">
+              <div className="carrossel_titulo">
                 <img
                   className="img_sustantavel_carrossel"
                   src="src/assets/imagens/sustainable (1) 2.png"
                   alt="Ícone Sustentável"
                 />
-                <h1 class="titulo">
+                <h1 className="titulo">
                   Descarte o seu <span className="e_lixo">e-lixo</span> de forma
                   consciente!
                 </h1>
               </div>
-              <p class="carrossel_p">
+              <p className="carrossel_p">
                 E-lixo refere-se a equipamentos eletrônicos descartados, como
                 celulares, computadores e baterias, que contêm substâncias
                 prejudiciais ao meio ambiente.
               </p>
             </div>
 
-            <div class="slide-conteudo2">
-              <div class="carrossel_titulo">
+            <div className="slide-conteudo2">
+              <div className="carrossel_titulo">
                 <img
                   src="src/assets/imagens/sustainable (1) 2.png"
                   alt="Ícone Sustentável"
                 />
-                <h1 class="titulo">
+                <h1 className="titulo">
                   Descarte o seu <span className="e_lixo">e-lixo</span> de forma
                   consciente!
                 </h1>
               </div>
-              <p class="carrossel_p">
+              <p className="carrossel_p">
                 E-lixo refere-se a equipamentos eletrônicos descartados, como
                 celulares, computadores e baterias, que contêm substâncias
                 prejudiciais ao meio ambiente.
               </p>
             </div>
 
-            <div class="slide-conteudo3">
-              <div class="carrossel_titulo">
+            <div className="slide-conteudo3">
+              <div className="carrossel_titulo">
                 <img
                   src="src/assets/imagens/sustainable (1) 2.png"
                   alt="Ícone Sustentável"
                 />
-                <h1 class="titulo">
+                <h1 className="titulo">
                   Descarte o seu <span className="e_lixo">e-lixo</span> de forma
                   consciente!
                 </h1>
               </div>
-              <p class="carrossel_p">
+              <p className="carrossel_p">
                 E-lixo refere-se a equipamentos eletrônicos descartados, como
                 celulares, computadores e baterias, que contêm substâncias
                 prejudiciais ao meio ambiente.
               </p>
             </div>
 
-            <div class="slide-conteudo4">
-              <div class="carrossel_titulo">
+            <div className="slide-conteudo4">
+              <div className="carrossel_titulo">
                 <img
                   src="src/assets/imagens/sustainable (1) 2.png"
                   alt="Ícone Sustentável"
                 />
-                <h1 class="titulo">
+                <h1 className="titulo">
                   Descarte o seu <span className="e_lixo">e-lixo</span> de forma
                   consciente!
                 </h1>
               </div>
-              <p class="carrossel_p">
+              <p className="carrossel_p">
                 E-lixo refere-se a equipamentos eletrônicos descartados, como
                 celulares, computadores e baterias, que contêm substâncias
                 prejudiciais ao meio ambiente.
@@ -269,11 +269,11 @@ function TelaFeed() {
           </div>
         </div>
 
-        <div class="botoes-navegacao">
-          <span class="botao_carrossel" onclick={() => mudarSlide(0)}></span>
-          <span class="botao_carrossel" onclick={() => mudarSlide(1)}></span>
-          <span class="botao_carrossel" onclick={() => mudarSlide(2)}></span>
-          <span class="botao_carrossel" onclick={() => mudarSlide(3)}></span>
+        <div className="botoes-navegacao">
+          <button className="botao_carrossel" onClick={() => mudarSlide(0)}></button>
+          <button className="botao_carrossel" onClick={() => mudarSlide(1)}></button>
+          <button className="botao_carrossel" onClick={() => mudarSlide(2)}></button>
+          <button className="botao_carrossel" onClick={() => mudarSlide(3)}></button>
         </div>
 
         <section className="carrossel_feed">
@@ -458,7 +458,7 @@ function TelaFeed() {
                 className="filtro_categoria"
                 id="filtro_categoria"
                 value={filtros.categoria}
-                onChange={handleFiltroChange}
+                onChange={mudarFiltro}
               >
                 <option value="todos">Todos</option>
                 <option value="eletronicos">Eletrônicos</option>
@@ -475,7 +475,7 @@ function TelaFeed() {
                 className="filtro_categoria"
                 id="filtro_local"
                 value={filtros.local}
-                onChange={handleFiltroChange}
+                onChange={mudarFiltro}
               >
                 <option value="todos">Todos</option>
                 <option value="floriano">Floriano - PI</option>
@@ -491,7 +491,7 @@ function TelaFeed() {
                 className="filtro_categoria"
                 id="filtro_estado"
                 value={filtros.estado}
-                onChange={handleFiltroChange}
+                onChange={mudarFiltro}
               >
                 <option value="todos">Todos</option>
                 <option value="novo">Novo</option>
@@ -502,7 +502,7 @@ function TelaFeed() {
           </div>
 
           <div className="filtros_ativos" id="filtros_ativos">
-            {renderChipsFiltros()}
+            {filtrosAtivos()}
           </div>
 
           <div className="cards_secao_cards">
