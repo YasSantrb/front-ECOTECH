@@ -1,0 +1,224 @@
+.tela_chat {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  position: fixed;
+}
+
+.container_chat {
+  display: flex;
+  height: 100vh;
+}
+
+.link_chat_voltar {
+  display: flex;
+  gap: 5px;
+  text-decoration: none;
+}
+
+.nav_chat_p {
+  font-size: 20px;
+  color: #225c25;
+  font-weight: 500;
+}
+
+.chat_contatos {
+  width: 350px;
+  padding: 20px 0 20px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.logo_chat_div {
+  padding-left: 70px;
+}
+
+.logo_chat {
+  width: 150px;
+}
+
+.filtro_input_chat {
+  width: 300px;
+  padding-left: 40px;
+  height: 35px;
+  border-radius: 20px;
+  outline: none;
+  border: 2px solid #225c25;
+  padding: 10px 30px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.icone_pesquisar_chat {
+  position: relative;
+  pointer-events: none;
+  font-size: 18px;
+  z-index: 2;
+  left: 10px;
+  top: 30px;
+  color: #225c25;
+}
+
+.botoes_filtros_chat {
+  padding: 20px 0;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.botao_chat{
+  padding: 5px 10px;
+  border-radius: 10px;
+  outline: none;
+  border: 2px solid #225c25;
+  cursor: pointer;
+}
+
+.divisao_chat {
+  width: 10px;
+  height: 100%;
+  background-color: #225c25;
+  margin: 0;
+}
+
+.info_contatos{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    min-height: 0;
+}
+
+.contatos_chat{
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    color: #225c25;
+}
+
+.contato_1{
+    display: flex;
+}
+
+.contato_1::before{
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  font-size: 50px;
+  content: "\f2bd";
+  margin-right: 15px;
+}
+
+.contatos_info .nome_contato{
+    font-weight: 500;
+}
+
+.contatos_info .mensagem_contato{
+    font-size: 15px;
+}
+
+.fundo_chat_mensagens{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  opacity: 0.8;
+}
+
+.chat_mensagens {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.nav_chat_mensagens{
+  display: flex;
+  position: sticky;
+  top:0;
+  z-index: 2;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  height: 60px;
+  background-color: #225c25;
+  color: white;
+  padding: 0 15px;
+  border-bottom: 1px solid #ccc;
+}
+
+.informacoes_contato{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.foto_contato{
+  font-size: 40px;
+}
+
+.texto_contato{
+  display: flex;
+  flex-direction: column;
+}
+
+.nome_contato{
+  font-weight: bold;
+}
+
+.status_contato{
+  font-size: 0.8rem;
+}
+
+.icones_contato i{
+  margin-left: 15px;
+  cursor: pointer;
+}
+
+.mensagens_chat{
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.mensagem{
+  max-width: 60%;
+  padding: 10px 15px 25px 15px;
+  border-radius: 20px;
+  position: relative;
+  word-wrap: break-word;
+}
+
+.recebida{
+  background-color: #ccd5ae;
+  align-self: flex-start;
+  color: #000;
+  border-radius: 20px 20px 20px 0;
+  padding-left: 15px;
+}
+
+.enviada{
+  background-color: #225c25;
+  color: #fff;
+  align-self: flex-end;
+  border-radius: 20px 20px 0 20px;
+}
+
+.hora_mensagem{
+  font-size: 12px;
+  position: absolute;
+  bottom: 5px;
+  right: 10px;
+  text-align: end;
+}
