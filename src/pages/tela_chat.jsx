@@ -133,7 +133,7 @@ function TelaChat() {
               </div>
               <div className="mensagem enviada">
                 {" "}
-                <p>Consegui sim! Muito obrigado 😄</p>
+                <p>Consegui sim! Muito obrigado</p>
                 <span className="hora_mensagem">10:38</span>
               </div>
               <div className="mensagem recebida">
@@ -143,7 +143,7 @@ function TelaChat() {
               </div>
               <div className="mensagem enviada">
                 {" "}
-                <p>Consegui sim! Muito obrigado 😄</p>
+                <p>Consegui sim! Muito obrigado</p>
                 <span className="hora_mensagem">10:38</span>
               </div>
               <div className="mensagem recebida">
@@ -153,7 +153,7 @@ function TelaChat() {
               </div>
               <div className="mensagem enviada">
                 {" "}
-                <p>Consegui sim! Muito obrigado 😄</p>
+                <p>Consegui sim! Muito obrigado</p>
                 <span className="hora_mensagem">10:38</span>
               </div>
             </div>
