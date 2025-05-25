@@ -214,6 +214,11 @@ function TelaFeed() {
             </div>
 
             <div className="slide-conteudo2">
+              <p className="carrossel_p">
+                E-lixo refere-se a equipamentos eletrônicos descartados, como
+                celulares, computadores e baterias, que contêm substâncias
+                prejudiciais ao meio ambiente.
+              </p>
               <div className="carrossel_titulo">
                 <img
                   src="src/assets/imagens/sustainable (1) 2.png"
@@ -224,11 +229,6 @@ function TelaFeed() {
                   consciente!
                 </h1>
               </div>
-              <p className="carrossel_p">
-                E-lixo refere-se a equipamentos eletrônicos descartados, como
-                celulares, computadores e baterias, que contêm substâncias
-                prejudiciais ao meio ambiente.
-              </p>
             </div>
 
             <div className="slide-conteudo3">
