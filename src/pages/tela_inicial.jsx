@@ -7,7 +7,7 @@ function TelaInicial() {
       <img
         src="src/assets/imagens/Tela inicial (2).png"
         alt="imagem_de_fundo"
-        className="background_tela"
+        className="background_tela_inicial"
       />
 
       <nav>
