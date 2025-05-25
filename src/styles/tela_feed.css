@@ -61,36 +61,36 @@
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
-#link_home::after {
+#link_home::before {
   font-family: "Font Awesome 6 Free";
   font-weight: 900;
   content: "\e1b0";
   font-size: 20px;
-  margin-left: 3px;
+  margin-right: 3px;
 }
 
-#link_doe_agora::after {
+#link_doe_agora::before {
   font-family: "Font Awesome 6 Free";
   font-weight: 900;
   font-size: 20px;
   content: "\f06b";
-  margin-left: 3px;
+  margin-right: 3px;
 }
 
-#link_pontos_de_coleta::after {
+#link_pontos_de_coleta::before {
   font-family: "Font Awesome 6 Free";
   font-weight: 900;
   content: "\f3c5";
   font-size: 20px;
-  margin-left: 3px;
+  margin-right: 3px;
 }
 
-#link_usuario::after {
+#link_usuario::before {
   font-family: "Font Awesome 6 Free";
   font-weight: 900;
   content: "\f2bd";
   font-size: 20px;
-  margin-left: 3px;
+  margin-right: 3px;
 }
 /* Fim da estilização para a barra de navegacao */
 
