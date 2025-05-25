@@ -14,6 +14,12 @@
   display: flex;
   gap: 5px;
   text-decoration: none;
+  padding-left: 5px;
+}
+
+.icon_voltar_chat{
+  width: 26px;
+  height: 26px;
 }
 
 .nav_chat_p {
@@ -24,39 +30,45 @@
 
 .chat_contatos {
   width: 350px;
-  padding: 20px 0 20px 20px;
+  padding: 20px 0 1px 0;
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
 .logo_chat_div {
-  padding-left: 70px;
+  padding-left: 100px;
 }
 
 .logo_chat {
   width: 150px;
 }
 
+.pesquisar_contato {
+  position: relative;
+  display: inline-block;
+  padding-left: 25px;
+}
+
 .filtro_input_chat {
   width: 300px;
-  padding-left: 40px;
+  padding: 10px 20px 10px 10px;
   height: 35px;
   border-radius: 20px;
   outline: none;
   border: 2px solid #225c25;
-  padding: 10px 30px;
   box-sizing: border-box;
-  position: relative;
+  color: #225c25;
+  font-size: 15px;
 }
 
 .icone_pesquisar_chat {
-  position: relative;
+  position: absolute;
   pointer-events: none;
   font-size: 18px;
-  z-index: 2;
-  left: 10px;
-  top: 30px;
+  right: 10px;
+  top: 53%;
+  transform: translateY(-50%);
   color: #225c25;
 }
 
@@ -67,12 +79,23 @@
   gap: 20px;
 }
 
-.botao_chat{
+.botao_chat {
   padding: 5px 10px;
-  border-radius: 10px;
+  border-radius: 20px;
   outline: none;
   border: 2px solid #225c25;
   cursor: pointer;
+  background-color: #fff;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.botao_chat.ativo {
+  background-color: #f5f5f5;
+}
+
+.botao_chat:hover {
+  background-color: #f5f5f5;
+  transform: translateY(-2px);
 }
 
 .divisao_chat {
@@ -82,45 +105,62 @@
   margin: 0;
 }
 
-.info_contatos{
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    flex: 1;
-    overflow-y: auto;
-    overflow-x: hidden;
-    min-height: 0;
+.info_contatos {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  min-height: 0;
 }
 
-.contatos_chat{
-    padding-top: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-    color: #225c25;
+.lista_contatos_chat {
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  color: #225c25;
+  cursor: pointer;
 }
 
-.contato_1{
-    display: flex;
+.contato {
+  display: flex;
+  width: 100%;
+  padding: 10px 0 10px 0;
+  gap: 15px;
+  transition: background-color 0.2s;
 }
 
-.contato_1::before{
-  font-family: "Font Awesome 6 Free";
-  font-weight: 900;
-  font-size: 50px;
-  content: "\f2bd";
-  margin-right: 15px;
+.contato:hover {
+  background-color: #79b980;
+  color: #000;
 }
 
-.contatos_info .nome_contato{
-    font-weight: 500;
+.contato img {
+  width: 75px;
+  padding-left: 10px;
 }
 
-.contatos_info .mensagem_contato{
-    font-size: 15px;
+.contato.selecionado {
+  background-color: #79b980;
+  color: #000;
 }
 
-.fundo_chat_mensagens{
+.contatos_info {
+  cursor: pointer;
+}
+
+.contatos_info .nome_contato_lista_contatos {
+  font-weight: 600;
+  font-size: 20px;
+}
+
+.contatos_info .mensagem_contato_lista_contatos {
+  font-size: 15px;
+}
+
+.fundo_chat_mensagens {
   position: absolute;
   top: 0;
   left: 0;
@@ -138,50 +178,46 @@
   overflow-y: auto;
 }
 
-.nav_chat_mensagens{
+.nav_chat_mensagens {
   display: flex;
   position: sticky;
-  top:0;
+  top: 0;
   z-index: 2;
   width: 100%;
   align-items: center;
   justify-content: space-between;
-  height: 60px;
+  height: 80px;
   background-color: #225c25;
   color: white;
   padding: 0 15px;
   border-bottom: 1px solid #ccc;
 }
 
-.informacoes_contato{
+.informacoes_contato_nav_chat {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
-.foto_contato{
-  font-size: 40px;
+.contato_selecionado_icone {
+  width: 50px;
 }
 
-.texto_contato{
+.texto_contato {
   display: flex;
   flex-direction: column;
 }
 
-.nome_contato{
-  font-weight: bold;
+.nome_contato_nav_chat {
+  font-size: 20px;
+  font-weight: 500;
 }
 
-.status_contato{
+.status_contato_nav_chat {
   font-size: 0.8rem;
 }
 
-.icones_contato i{
-  margin-left: 15px;
-  cursor: pointer;
-}
-
-.mensagens_chat{
+.mensagens_chat {
   position: relative;
   z-index: 1;
   display: flex;
@@ -192,7 +228,34 @@
   overflow-y: auto;
 }
 
-.mensagem{
+.separador_data {
+  text-align: center;
+  color: #225c25;
+  font-size: 14px;
+  margin: 2px 0;
+  position: relative;
+  font-weight: 500;
+}
+
+.separador_data::before,
+.separador_data::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 40%;
+  background-color: #225c25;
+  height: 1px;
+}
+
+.separador_data::before {
+  left: 0;
+}
+
+.separador_data::after {
+  right: 0;
+}
+
+.mensagem {
   max-width: 60%;
   padding: 10px 15px 25px 15px;
   border-radius: 20px;
@@ -200,7 +263,17 @@
   word-wrap: break-word;
 }
 
-.recebida{
+.mensagem.notificacao_estilo {
+  background-color: #ccd5ae;
+  align-self: center;
+  color: #000;
+  border-radius: 20px;
+  padding: 10px 15px 25px 15px;
+  max-width: 60%;
+  text-align: center;
+}
+
+.recebida {
   background-color: #ccd5ae;
   align-self: flex-start;
   color: #000;
@@ -208,17 +281,73 @@
   padding-left: 15px;
 }
 
-.enviada{
+.enviada {
   background-color: #225c25;
   color: #fff;
   align-self: flex-end;
   border-radius: 20px 20px 0 20px;
 }
 
-.hora_mensagem{
+.hora_mensagem {
   font-size: 12px;
   position: absolute;
   bottom: 5px;
   right: 10px;
   text-align: end;
+}
+
+.div_enviar_mensagem {
+  display: flex;
+  position: sticky;
+  margin: 5px 50px;
+  z-index: 2;
+  width: 90%;
+  justify-content: space-between;
+  height: 60px;
+  background-color: #225c25;
+  color: white;
+  padding: 0 15px;
+  border-radius: 15px;
+}
+
+.elementos_enviar_mensagem {
+  display: flex;
+  position: sticky;
+  align-items: center;
+  gap: 10px;
+}
+
+.icone_camera {
+  font-size: 20px;
+}
+
+.input_enviar_mensagem {
+  flex: 5;
+  width: 400px;
+  padding: 5px;
+  background-color: #225c25;
+  color: #fff;
+  font-size: 17px;
+  outline: none;
+  border: solid #225c25;
+}
+
+.input_enviar_mensagem::placeholder {
+  color: #fff;
+  opacity: 0.8;
+}
+
+.botao_enviar_mensagem {
+  width: 40px;
+  height: 40px;
+  padding: 10px 10px;
+  cursor: pointer;
+  border-radius: 20px;
+  border: 1px solid #225c25;
+  margin-left: 390px;
+  outline: none;
+}
+
+.botao_enviar_mensagem img {
+  width: 20px;
 }
