@@ -16,6 +16,9 @@
   text-decoration: none;
   padding-left: 5px;
   align-items: center;
+  background-color: #fff;
+  border: none;
+  cursor: pointer;
 }
 
 .icon_voltar_chat{

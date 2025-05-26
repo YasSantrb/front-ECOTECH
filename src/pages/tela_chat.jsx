@@ -2,10 +2,11 @@ import "../styles/tela_chat.css";
 import fundo_login_cadastro from "../assets/imagens/fundo_login_cadastro.jpg";
 import icon_voltar from "../assets/imagens/icon_voltar.png";
 import Logo from "../assets/imagens/Logo.png";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 function TelaChat() {
+  const navigate = useNavigate();
   const contatos = [
     {
       id: 1,
@@ -259,10 +260,10 @@ function TelaChat() {
         <div className="container_chat">
           <div className="chat_contatos">
             <nav className="nav_chat">
-              <Link className="link_chat_voltar" to="/usuario/empresa">
+              <button className="link_chat_voltar" onClick={() => navigate(-1)}>
                 <img className="icon_voltar_chat" src={icon_voltar} alt="" />
                 <p className="nav_chat_p">VOLTAR</p>
-              </Link>
+              </button>
             </nav>
             <div className="info_contatos">
               <div className="logo_chat_div">

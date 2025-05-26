@@ -23,7 +23,7 @@ function App(){
                     <Route path="/usuario/empresa" element={<TelaUsuarioEmpresa/>}/>
                     <Route path="/agendamento" element={<TelaAgendamento/>}/>
                     <Route path="/chat" element={<TelaChat/>}/>
-                    <Route path="/informacao/doacao" element={<TelaInfoDoacao/>}/>
+                    <Route path="/info/doacao/:id" element={<TelaInfoDoacao/>}/>
                     <Route path="/criar/doacao" element={<TelaCriarDoacao/>}/>
                 </Routes>
             </div>

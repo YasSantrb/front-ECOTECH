@@ -17,7 +17,9 @@ function TelaFeed() {
 
   useEffect(() => {
     if (slideReferencia.current) {
-      slideReferencia.current.style.transform = `translateX(-${indiceAtual * 100}%)`;
+      slideReferencia.current.style.transform = `translateX(-${
+        indiceAtual * 100
+      }%)`;
     }
     const botoes = document.querySelectorAll(".botao_carrossel");
     botoes.forEach((botao, indiceBotao) => {
@@ -49,7 +51,7 @@ function TelaFeed() {
   };
 
   const estiloDeslizamento = {
-    transform: `translateX(-${indiceAtualFeed* larguraImagem}px)`,
+    transform: `translateX(-${indiceAtualFeed * larguraImagem}px)`,
   };
   //Fim da função para o carrossel manual
 
@@ -139,6 +141,63 @@ function TelaFeed() {
   };
   //Fim da função de listagem
 
+  const doacoesDoFeed = [
+  {
+    id: "1", 
+    imagem: "src/assets/imagens/download 1 (1).png" , 
+    tipo: "Eletrônico",
+    titulo: "Televisão de tubo",
+    descricao: "Ideal para reaproveitamento de peças.",
+    local: "Floriano – PI",
+    condicao: "Para peças",
+  },
+  {
+    id: "2", 
+    imagem: "src/assets/imagens/download 3.png",
+    tipo: "Eletrônico",
+    titulo: "Placa-mãe ASUS",
+    descricao: "Ideal para reaproveitamento de peças.",
+    local: "Teresina – PI",
+    condicao: "Para peças",
+  },
+  {
+    id: "3", 
+    imagem: "src/assets/imagens/OIP 8.png", 
+    tipo: "Tablet",
+    titulo: "Tablet Samsung",
+    descricao: "Ideal para reaproveitamento de peças.",
+    local: "Floriano – PI",
+    condicao: "Novo",
+  },
+{
+    id:"4", 
+    imagem: "src/assets/imagens/OIP 12.png", 
+    tipo: "Computador",
+    titulo: "Computador antigo",
+    descricao: "Ideal para reaproveitamento de peças.",
+    local: "Teresina – PI",
+    condicao: "Usado",
+  },
+  {
+    id: "5", 
+    imagem: "src/assets/imagens/download 1 (1).png" , 
+    tipo: "Eletrônico",
+    titulo: "Televisão de tubo",
+    descricao: "Ideal para reaproveitamento de peças.",
+    local: "Floriano – PI",
+    condicao: "Para peças",
+  },
+  {
+    id:"6", 
+    imagem: "src/assets/imagens/OIP 8.png", 
+    tipo: "Tablet",
+    titulo: "Tablet Samsung",
+    descricao: "Ideal para reaproveitamento de peças.",
+    local: "Floriano – PI",
+    condicao: "Novo",
+  }
+];
+
   return (
     <>
       <header>
@@ -167,7 +226,11 @@ function TelaFeed() {
                   </Link>
                 </li>
                 <li>
-                  <Link id="link_doe_agora" className="link_feed" to="/criar/doacao">
+                  <Link
+                    id="link_doe_agora"
+                    className="link_feed"
+                    to="/criar/doacao"
+                  >
                     Doe agora
                   </Link>
                 </li>
@@ -212,13 +275,7 @@ function TelaFeed() {
                 prejudiciais ao meio ambiente.
               </p>
             </div>
-
             <div className="slide-conteudo2">
-              <p className="carrossel_p">
-                E-lixo refere-se a equipamentos eletrônicos descartados, como
-                celulares, computadores e baterias, que contêm substâncias
-                prejudiciais ao meio ambiente.
-              </p>
               <div className="carrossel_titulo">
                 <img
                   src="src/assets/imagens/sustainable (1) 2.png"
@@ -229,6 +286,11 @@ function TelaFeed() {
                   consciente!
                 </h1>
               </div>
+              <p className="carrossel_p">
+                E-lixo refere-se a equipamentos eletrônicos descartados, como
+                celulares, computadores e baterias, que contêm substâncias
+                prejudiciais ao meio ambiente.
+              </p>
             </div>
 
             <div className="slide-conteudo3">
@@ -270,10 +332,22 @@ function TelaFeed() {
         </div>
 
         <div className="botoes-navegacao">
-          <button className="botao_carrossel" onClick={() => mudarSlide(0)}></button>
-          <button className="botao_carrossel" onClick={() => mudarSlide(1)}></button>
-          <button className="botao_carrossel" onClick={() => mudarSlide(2)}></button>
-          <button className="botao_carrossel" onClick={() => mudarSlide(3)}></button>
+          <button
+            className="botao_carrossel"
+            onClick={() => mudarSlide(0)}
+          ></button>
+          <button
+            className="botao_carrossel"
+            onClick={() => mudarSlide(1)}
+          ></button>
+          <button
+            className="botao_carrossel"
+            onClick={() => mudarSlide(2)}
+          ></button>
+          <button
+            className="botao_carrossel"
+            onClick={() => mudarSlide(3)}
+          ></button>
         </div>
 
         <section className="carrossel_feed">
@@ -293,149 +367,34 @@ function TelaFeed() {
               id="carrossel"
               style={estiloDeslizamento}
             >
+              {doacoesDoFeed.map((doacao) => (
               <div className="card_feed_carrossel">
                 <img
                   className="card_img"
-                  src="src/assets/imagens/download 1 (1).png"
+                  src={doacao.imagem}
                   alt=""
                 />
-                <p className="tipo_card">Eletrônico</p>
+                <p className="tipo_card">{doacao.tipo}</p>
                 <div className="card_1">
                   <div className="card_info">
-                    <h1 className="titulo_card">Televisão de tubo</h1>
+                    <h1 className="titulo_card">{doacao.titulo}</h1>
                     <p className="p_card">
-                      Ideal para reaproveitamento de peças.
+                      {doacao.descricao}
                     </p>
-                    <span className="span_card">Floriano – PI</span>
+                    <span className="span_card">{doacao.local}</span>
                     <div className="card_meta">
                       <p className="p_card">
-                        <i className="fa-solid fa-gear"></i> Para peças
+                        <i className="fa-solid fa-gear"></i> {doacao.condicao}
                       </p>
                     </div>
                   </div>
-                  <Link  className="link_card_feed" to="/informacao/doacao"><button className="botao_card">Saber mais</button></Link>
+                  <Link className="link_card_feed" to={`/info/doacao/${doacao.id}`}>
+                    <button className="botao_card">Eu quero!</button>
+                  </Link>
                 </div>
               </div>
 
-              <div className="card_feed_carrossel">
-                <img
-                  className="card_img"
-                  src="src/assets/imagens/download 3.png"
-                  alt=""
-                />
-                <p className="tipo_card">Eletrônico</p>
-                <div className="card_1">
-                  <div className="card_info">
-                    <h1 className="titulo_card">Placa-mãe ASUS</h1>
-                    <p className="p_card">
-                      Ideal para reaproveitamento de peças.
-                    </p>
-                    <span className="span_card">Teresina – PI</span>
-                    <div className="card_meta">
-                      <p className="p_card">
-                        <i className="fa-solid fa-gear"></i> Para peças
-                      </p>
-                    </div>
-                  </div>
-                  <Link  className="link_card_feed" to="/informacao/doacao"><button className="botao_card">Saber mais</button></Link>
-                </div>
-              </div>
-
-              <div className="card_feed_carrossel">
-                <img
-                  className="card_img"
-                  src="src/assets/imagens/OIP 8.png"
-                  alt=""
-                />
-                <p className="tipo_card">Tablet</p>
-                <div className="card_1">
-                  <div className="card_info">
-                    <h1 className="titulo_card">Tablet Samsung</h1>
-                    <p className="p_card">
-                      Ideal para reaproveitamento de peças.
-                    </p>
-                    <span className="span_card">Floriano – PI</span>
-                    <div className="card_meta">
-                      <p className="p_card">
-                        <i className="fa-solid fa-gear"></i> Novo
-                      </p>
-                    </div>
-                  </div>
-                  <Link  className="link_card_feed" to="/informacao/doacao"><button className="botao_card">Saber mais</button></Link>
-                </div>
-              </div>
-
-              <div className="card_feed_carrossel">
-                <img
-                  className="card_img"
-                  src="src/assets/imagens/OIP 12.png"
-                  alt=""
-                />
-                <p className="tipo_card">Computador</p>
-                <div className="card_1">
-                  <div className="card_info">
-                    <h1 className="titulo_card">Computador antigo</h1>
-                    <p className="p_card">
-                      Ideal para reaproveitamento de peças.
-                    </p>
-                    <span className="span_card">Teresina – PI</span>
-                    <div className="card_meta">
-                      <p className="p_card">
-                        <i className="fa-solid fa-gear"></i> Usado
-                      </p>
-                    </div>
-                  </div>
-                  <Link  className="link_card_feed" to="/informacao/doacao"><button className="botao_card">Saber mais</button></Link>
-                </div>
-              </div>
-
-              <div className="card_feed_carrossel">
-                <img
-                  className="card_img"
-                  src="src/assets/imagens/download 1 (1).png"
-                  alt=""
-                />
-                <p className="tipo_card">Eletrônico</p>
-                <div className="card_1">
-                  <div className="card_info">
-                    <h1 className="titulo_card">Televisão de tubo</h1>
-                    <p className="p_card">
-                      Ideal para reaproveitamento de peças.
-                    </p>
-                    <span className="span_card">Floriano – PI</span>
-                    <div className="card_meta">
-                      <p className="p_card">
-                        <i className="fa-solid fa-gear"></i> Para peças
-                      </p>
-                    </div>
-                  </div>
-                  <Link  className="link_card_feed" to="/informacao/doacao"><button className="botao_card">Saber mais</button></Link>
-                </div>
-              </div>
-
-              <div className="card_feed_carrossel">
-                <img
-                  className="card_img"
-                  src="src/assets/imagens/OIP 8.png"
-                  alt=""
-                />
-                <p className="tipo_card">Tablet</p>
-                <div className="card_1">
-                  <div className="card_info">
-                    <h1 className="titulo_card">Tablet Samsung</h1>
-                    <p className="p_card">
-                      Ideal para reaproveitamento de peças.
-                    </p>
-                    <span className="span_card">Floriano – PI</span>
-                    <div className="card_meta">
-                      <p className="p_card">
-                        <i className="fa-solid fa-gear"></i> Novo
-                      </p>
-                    </div>
-                  </div>
-                  <Link  className="link_card_feed" to="/informacao/doacao"><button className="botao_card">Saber mais</button></Link>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
           <button
@@ -531,7 +490,9 @@ function TelaFeed() {
                     </p>
                   </div>
                 </div>
-                <Link  className="link_card_feed" to="/informacao/doacao"><button className="botao_card">Saber mais</button></Link>
+                <Link className="link_card_feed" to="/informacao/doacao">
+                  <button className="botao_card">Eu quero!</button>
+                </Link>
               </div>
             </div>
 
@@ -560,7 +521,9 @@ function TelaFeed() {
                     </p>
                   </div>
                 </div>
-                <Link  className="link_card_feed" to="/informacao/doacao"><button className="botao_card">Saber mais</button></Link>
+                <Link className="link_card_feed" to="/informacao/doacao">
+                  <button className="botao_card">Eu quero!</button>
+                </Link>
               </div>
             </div>
 
@@ -589,7 +552,9 @@ function TelaFeed() {
                     </p>
                   </div>
                 </div>
-                <Link  className="link_card_feed" to="/informacao/doacao"><button className="botao_card">Saber mais</button></Link>
+                <Link className="link_card_feed" to="/informacao/doacao">
+                  <button className="botao_card">Eu quero!</button>
+                </Link>
               </div>
             </div>
 
@@ -618,7 +583,9 @@ function TelaFeed() {
                     </p>
                   </div>
                 </div>
-                <Link  className="link_card_feed" to="/informacao/doacao"><button className="botao_card">Saber mais</button></Link>
+                <Link className="link_card_feed" to="/informacao/doacao">
+                  <button className="botao_card">Eu quero!</button>
+                </Link>
               </div>
             </div>
 
@@ -647,7 +614,9 @@ function TelaFeed() {
                     </p>
                   </div>
                 </div>
-                <Link  className="link_card_feed" to="/informacao/doacao"><button className="botao_card">Saber mais</button></Link>
+                <Link className="link_card_feed" to="/informacao/doacao">
+                  <button className="botao_card">Eu quero!</button>
+                </Link>
               </div>
             </div>
 
@@ -676,7 +645,9 @@ function TelaFeed() {
                     </p>
                   </div>
                 </div>
-                <Link  className="link_card_feed" to="/informacao/doacao"><button className="botao_card">Saber mais</button></Link>
+                <Link className="link_card_feed" to="/informacao/doacao">
+                  <button className="botao_card">Eu quero!</button>
+                </Link>
               </div>
             </div>
 
@@ -695,7 +666,9 @@ function TelaFeed() {
               <div className="card_1">
                 <div className="card_info">
                   <h1 className="titulo_card">Tablet Samsung</h1>
-                  <p className="p_card">Ideal para reaproveitamento de peças.</p>
+                  <p className="p_card">
+                    Ideal para reaproveitamento de peças.
+                  </p>
                   <span className="span_card">Floriano – PI</span>
                   <div className="card_meta">
                     <p className="p_card">
@@ -703,7 +676,9 @@ function TelaFeed() {
                     </p>
                   </div>
                 </div>
-                <Link  className="link_card_feed" to="/informacao/doacao"><button className="botao_card">Saber mais</button></Link>
+                <Link className="link_card_feed" to="/informacao/doacao">
+                  <button className="botao_card">Eu quero!</button>
+                </Link>
               </div>
             </div>
 
@@ -732,7 +707,9 @@ function TelaFeed() {
                     </p>
                   </div>
                 </div>
-                <Link  className="link_card_feed" to="/informacao/doacao"><button className="botao_card">Saber mais</button></Link>
+                <Link className="link_card_feed" to="/informacao/doacao">
+                  <button className="botao_card">Eu quero!</button>
+                </Link>
               </div>
             </div>
 
@@ -761,10 +738,11 @@ function TelaFeed() {
                     </p>
                   </div>
                 </div>
-                <Link className="link_card_feed" to="/informacao/doacao"><button className="botao_card">Saber mais</button></Link>
+                <Link className="link_card_feed" to="/informacao/doacao">
+                  <button className="botao_card">Eu quero!</button>
+                </Link>
               </div>
             </div>
-            
           </div>
         </section>
       </main>
