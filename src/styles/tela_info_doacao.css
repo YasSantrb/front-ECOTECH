@@ -1,199 +1,203 @@
 .background_info_doacao {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
 }
 
 .info_doacao_div {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    display: flex; 
-    flex-direction: column; 
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .link_voltar_info_doacao {
-    display: flex;
-    gap: 5px;
-    text-decoration: none;
-    align-items: center;
-    padding: 30px 0 0 30px;
-    position: relative; 
-    z-index: 10; 
+  display: flex;
+  gap: 5px;
+  text-decoration: none;
+  align-items: center;
+  padding: 30px 0 0 30px;
+  position: relative;
+  z-index: 10;
 }
 
 .icon_voltar_info_doacao {
-    width: 26px;
-    height: 26px;
+  width: 26px;
+  height: 26px;
 }
 
 .nav_info_doacao_p {
-    font-size: 20px;
-    color: #225c25;
-    font-weight: 500;
+  font-size: 20px;
+  color: #225c25;
+  font-weight: 500;
 }
 
 .info_doacao_main {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    z-index: 5;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 5;
 }
 
 .info_doacao_container {
-    display: flex;
-    flex-direction: column; 
-    width: 60%;
-    max-width: 900px; 
-    min-height: 400px; 
-    background-color: #225c25; 
-    border-radius: 20px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-    padding: 20px; 
-    color: #fff;
-    position: relative; 
-    padding: 50px 20px 50px 20px; 
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  max-width: 900px;
+  min-height: 400px;
+  background-color: #225c25;
+  border-radius: 20px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  padding: 20px;
+  color: #fff;
+  position: relative;
+  padding: 50px 20px 50px 20px;
 }
 
 .container_header_icons {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    display: flex;
-    gap: 15px; 
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  gap: 15px;
 }
 
 .icon_button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
 }
 
 .icon_button img {
-    width: 30px;
-    height: 30px;
+  width: 30px;
+  height: 30px;
 }
 
 .info_doacao_content_wrapper {
-    display: flex;
-    width: 100%;
-    flex-grow: 1; 
-    gap: 30px; 
+  display: flex;
+  width: 100%;
+  flex-grow: 1;
+  gap: 30px;
 }
 
 .info_doacao_left_side {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start; 
-    width: 40%; 
-    padding-right: 20px; 
-    box-sizing: border-box; 
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 40%;
+  padding-right: 20px;
+  box-sizing: border-box;
 }
 
 .doacao_main_img {
-    width: 100%;
-    max-width: 300px; 
-    height: auto;
-    border-radius: 10px;
-    object-fit: cover;
-    margin-bottom: 20px;
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  border-radius: 10px;
+  object-fit: cover;
+  margin-bottom: 20px;
 }
 
 .tag_disponibilidade {
-    background-color: #ffc107; 
-    color: #333; 
-    width: auto; 
-    padding: 5px 15px; 
-    border-radius: 10px;
-    font-weight: bold;
-    margin-bottom: 20px; 
-    font-size: 1.1em;
+  background-color: #ffc107;
+  color: #333;
+  width: auto;
+  padding: 5px 15px;
+  border-radius: 10px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  font-size: 1.1em;
 }
 
 .doador_info_block,
 .especificacoes_block {
-    display: flex;
-    align-items: flex-start; 
-    gap: 10px;
-    margin-bottom: 15px; 
-    width: 100%; 
-    padding-left: 0px; 
-    box-sizing: border-box;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 15px;
+  width: 100%;
+  padding-left: 0px;
+  box-sizing: border-box;
 }
 
 .doador_info_block h3,
 .especificacoes_block h3 {
-    font-size: 1.2em; 
-    font-weight: 600;
-    margin-bottom: 5px; 
-    line-height: 1.2;
+  font-size: 1.2em;
+  font-weight: 600;
+  margin-bottom: 5px;
+  line-height: 1.2;
 }
 
 .doador_icon,
 .especificacoes_icon {
-    font-size: 1.5em;
-    color: #fff; 
+  font-size: 1.5em;
+  color: #fff;
 }
 
-.especificacoes_content{
-    display: flex;
-    flex-direction: column; 
-    width: 100%; 
+.especificacoes_content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
-.especificacoes_p{
-    font-size: 1em;
-    line-height: 1.6;
-    margin: 0; 
+.especificacoes_p {
+  font-size: 1em;
+  line-height: 1.6;
+  margin: 0;
 }
 
 .info_doacao_right_side {
-    display: flex;
-    flex-direction: column;
-    width: 60%; 
-    padding-left: 20px; 
-    box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  padding-left: 20px;
+  box-sizing: border-box;
 }
 
 .info_doacao_right_side h1 {
-    font-size: 30px; 
-    margin-bottom: 15px; 
-    line-height: 1.0;
-    font-weight: 500;
+  font-size: 30px;
+  margin-bottom: 15px;
+  line-height: 1;
+  font-weight: 500;
 }
 
 .info_section {
-    margin-bottom: 20px; 
+  margin-bottom: 20px;
 }
 
 .info_section h3 {
-    font-size: 1.2em; 
-    font-weight: 600;
-    margin-bottom: 5px; 
-    line-height: 1.2;
+  font-size: 1.2em;
+  font-weight: 600;
+  margin-bottom: 5px;
+  line-height: 1.2;
 }
 
 .info_section p {
-    font-size: 1em;
-    line-height: 1.6;
-    margin: 0; 
+  font-size: 1em;
+  line-height: 1.6;
+  margin: 0;
 }
 
 .botao_agendar_div {
-    display: flex;
-    justify-content: center; 
-    margin-top: auto; 
-    padding-top: 20px; 
+  display: flex;
+  justify-content: center;
+  margin-top: auto;
+  padding-top: 20px;
+}
+
+.agendar_coleta_link {
+  text-decoration: none;
+  color: #225c25;
 }
 
 .botao_agendar_coleta {
   background-color: #fff;
-  color: #225c25;
   border: none;
   border-radius: 25px;
   padding: 8px 16px;

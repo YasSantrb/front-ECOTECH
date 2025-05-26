@@ -6,7 +6,7 @@
   align-items: center;
 }
 
-.nav_feed_info .logo_feed{
+.nav_feed_info .logo_feed {
   width: 140px;
   padding-left: 10px;
 }
@@ -211,7 +211,7 @@
   gap: 20px;
 }
 
-.carrossel_titulo .img_sustantavel_carrossel{
+.carrossel_titulo .img_sustantavel_carrossel {
   width: 90px;
   height: 90px;
 }
@@ -224,7 +224,7 @@
   max-width: 450px;
 }
 
-.titulo .e_lixo{
+.titulo .e_lixo {
   font-weight: bold;
 }
 
@@ -264,7 +264,7 @@
 }
 
 .titulo_feed {
-   text-align: center;
+  text-align: center;
   font-style: italic;
   font-weight: 500;
   font-size: 30px;
@@ -346,7 +346,7 @@
   color: #225c25;
 }
 
-.filtro_item .filtro_categoria{
+.filtro_item .filtro_categoria {
   padding: 10px 14px;
   border-radius: 20px;
   background-color: #fff;
@@ -380,12 +380,12 @@
   transition: background-color 0.3s;
 }
 
-.filtro_chip .filtro_span{
+.filtro_chip .filtro_span {
   font-size: 15px;
   margin-right: 8px;
 }
 
-.filtro_chip .filtro_button{
+.filtro_chip .filtro_button {
   background: none;
   border: none;
   color: #225c25;
@@ -426,7 +426,7 @@
 }
 
 /* Seção para os cards */
-.card_feed_carrossel{
+.card_feed_carrossel {
   flex: 0 0 auto;
   position: relative;
   background-color: #225c25;
@@ -457,9 +457,9 @@
 }
 
 .card_info span::before {
-  font-family: "Font Awesome 6 Free"; 
-  font-weight: 900; 
-  content: "\f3c5"; 
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  content: "\f3c5";
 }
 
 .tipo_card {
@@ -484,18 +484,18 @@
   margin-bottom: 15px;
 }
 
-.card_info .titulo_card{
+.card_info .titulo_card {
   font-size: 22px;
   margin: 0 0 8px 0;
 }
 
-.card_info .p_card{
+.card_info .p_card {
   font-size: 14px;
   margin: 0 0 8px 0;
-  opacity: 1.0;
+  opacity: 1;
 }
 
-.card_info .span_card{
+.card_info .span_card {
   font-size: 14px;
   display: flex;
   align-items: center;
@@ -505,7 +505,7 @@
 
 .card_meta {
   font-size: 12px;
-  opacity: 1.0;
+  opacity: 1;
   margin-top: 8px;
 }
 
@@ -529,7 +529,7 @@
   transform: translateY(-2px);
 }
 
-.link_card_feed{
+.link_card_feed {
   text-decoration: none;
 }
 
@@ -547,7 +547,6 @@
   grid-template-columns: repeat(4, 1fr);
   padding: 3rem 3.5rem;
 }
-
 
 .footer_social_media {
   display: flex;
@@ -622,14 +621,14 @@
   border-radius: 4px;
 }
 
-.input_group .email{
+.input_group .email {
   all: unset;
   padding: 0.75rem;
   width: 100%;
   color: #225c25;
 }
 
-.input_group .botao_footer_feed{
+.input_group .botao_footer_feed {
   background-color: #000;
   border: none;
   color: #fff;

@@ -1,0 +1,110 @@
+.background_tela_agendamento {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  background-position: center;
+  object-fit: cover;
+  z-index: -1;
+}
+
+.botao_voltar_agendamento {
+  display: flex;
+  gap: 5px;
+  text-decoration: none;
+  align-items: center;
+  background-color: #fff;
+  height: 50px;
+  padding: 30px 10px 0 30px;;
+  border: none;
+  cursor: pointer;
+}
+
+.icone_voltar_agendamento {
+  width: 26px;
+  height: 26px;
+}
+
+.botao_voltar_agendamento_p {
+  font-size: 20px;
+  color: #225c25;
+  font-weight: 500;
+}
+
+#conteiner {
+  border-radius: 20px;
+  border: solid black;
+  background-color: #225c25;
+  color: #fff;
+  text-align: center;
+  display: flex;
+  margin: 0 200px 0 200px;
+  align-content: space-between;
+}
+#conteiner_01 {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 20px 10px 20px;
+}
+#conteiner_1 {
+  display: flex;
+  flex-direction: column;
+}
+#data {
+  margin: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+#leftdiv,
+#rightdiv {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 10px;
+  text-align: left;
+}
+
+.textarea_observacao {
+  width: 100%;
+  height: 200px;
+  resize: none !important;
+  padding: 10px;
+  box-sizing: border-box;
+  border-radius: 10px;
+  border: solid black;
+}
+
+#buttons_agendamento {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.botao_agendamento {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 60%;
+  border-radius: 20px;
+  cursor: pointer;
+  border: none;
+  margin-top: 20px;
+  color: #0b561d;
+  border: solid black;
+}
+
+.input_agendamento {
+  border: solid black;
+}
+.tela_agendamento_p {
+  font-style: italic;
+}
+.top-bar {
+  z-index: 1;
+  margin-left: 0;
+}

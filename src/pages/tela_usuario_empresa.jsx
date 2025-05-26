@@ -18,7 +18,7 @@ function TelaUsuarioEmpresa() {
     <div className="tela_usuario_empresa">
       <img src={fundo_login_cadastro} alt="imagem_de_fundo" className="background_tela_empresa" />
 
-      <div className="top-bar">
+      <div className="top-bar_empresa">
         <a href="/" className="voltar">
           <img src={icon_voltar} alt="voltar" className="icone-voltar" />
           VOLTAR
