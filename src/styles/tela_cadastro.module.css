@@ -43,7 +43,7 @@
   }
 }
 
-#divmae {
+.divmae {
   display: flex;
   justify-content: space-between;
 }

@@ -1,0 +1,205 @@
+.tela_usuario_doador {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  font-family: "Poppins", sans-serif;
+  position: relative;
+  background-color: white;
+  overflow: hidden;
+}
+
+.background_tela {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.top_bar {
+  width: 100%;
+  max-width: 890px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px 0 40px;
+  position: relative;
+  z-index: 2;
+  margin-left: -13cm;
+}
+
+.voltar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #225c25;
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.icone_voltar {
+  width: 26px;
+  height: 26px;
+}
+
+.conteiner_doador {
+  position: relative;
+  z-index: 1;
+  background-color: #225c25;
+  color: white;
+  border-radius: 20px;
+  width: 780px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 30px 40px 40px;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 7px;
+}
+
+.top_botoes {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  display: flex;
+  gap: 12px;
+}
+
+.top_botoes button {
+  background-color: transparent;
+  width: 26px;
+  height: 26px;
+  border: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.top_botoes button:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+}
+
+.icon_top {
+  width: 100%;
+  height: auto;
+}
+
+.superior {
+  display: flex;
+  gap: 100px;
+}
+
+.perfil {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 35%;
+  gap: 12px;
+}
+
+.imagem {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.perfil button {
+  margin: 20px 0;
+  padding: 6px 16px;
+  border: none;
+  border-radius: 10px;
+  background-color: white;
+  color: #225c25;
+  font-weight: bold;
+  font-size: 13px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.perfil button:hover {
+  background-color: #c3e7cc;
+}
+
+.perfil button img {
+  width: 24px;
+  height: 24px;
+}
+
+.info {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+  padding-left: 10%;
+}
+
+.info p {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 14px;
+  margin: 4px 0;
+  line-height: 1.4;
+  flex-wrap: wrap;
+}
+
+.info strong {
+  font-weight: bold;
+  font-style: italic;
+  margin-right: 4px;
+}
+
+.info img {
+  height: 18px;
+  width: 18px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.botoes {
+  margin-top: 60px;
+  display: flex;
+  padding: 0 0 0 100px;
+  gap: 50px;
+}
+
+.botoes button {
+  background-color: white;
+  border-radius: 20px;
+  width: 220px;
+  height: 150px;
+  padding: 20px;
+  font-size: 15px;
+  color: #225c25;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.botoes button:hover {
+  background-color: #a4e2b4;
+}
+
+.botoes img {
+  height: 80px;
+}
+
+.link_historico{
+  text-decoration: none;
+}

@@ -9,6 +9,9 @@ import TelaAgendamento from "./pages/tela_agendamento";
 import TelaChat from "./pages/tela_chat";
 import TelaInfoDoacao from "./pages/tela_info_doacao";
 import TelaCriarDoacao from "./pages/tela_criar_doacao";
+import TelaLocalizacaoPontosColeta from "./pages/tela_localizacao_pontos_coleta";
+import TelaSobreNos from "./pages/tela_sobre_nos";
+import TelaHistoricoDoacoes from "./pages/tela_historico_doacoes";
 
 function App(){
     return(
@@ -25,6 +28,9 @@ function App(){
                     <Route path="/chat" element={<TelaChat/>}/>
                     <Route path="/info/doacao/:id" element={<TelaInfoDoacao/>}/>
                     <Route path="/criar/doacao" element={<TelaCriarDoacao/>}/>
+                    <Route path="/localizacao/pontos/coleta" element={<TelaLocalizacaoPontosColeta/>}/>
+                    <Route path="/historico/doacoes" element={<TelaHistoricoDoacoes/>}/>
+                    <Route path="/sobre/nos" element={<TelaSobreNos/>}/>
                 </Routes>
             </div>
         </Router>

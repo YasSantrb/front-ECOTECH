@@ -34,7 +34,7 @@
   font-weight: 500;
 }
 
-#conteiner {
+.conteiner {
   border-radius: 20px;
   border: solid black;
   background-color: #225c25;
@@ -44,23 +44,23 @@
   margin: 0 200px 0 200px;
   align-content: space-between;
 }
-#conteiner_01 {
+.conteiner_01 {
   display: flex;
   flex-direction: column;
   padding: 10px 20px 10px 20px;
 }
-#conteiner_1 {
+.conteiner_1 {
   display: flex;
   flex-direction: column;
 }
-#data {
+.data {
   margin: 50px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
-#leftdiv,
-#rightdiv {
+.leftdiv,
+.rightdiv {
   width: 50%;
   display: flex;
   flex-direction: column;
@@ -79,7 +79,7 @@
   border: solid black;
 }
 
-#buttons_agendamento {
+.buttons_agendamento {
   display: flex;
   flex-direction: column;
   align-items: center;

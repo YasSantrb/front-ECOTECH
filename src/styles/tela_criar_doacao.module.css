@@ -18,7 +18,7 @@
   object-fit: cover;
   z-index: 0;
 }
-.top-bar-doacao {
+.top_bar_doacao {
   width: 100%;
   max-width: 890px;
   display: flex;
@@ -38,11 +38,11 @@
   font-size: 16px;
 }
 
-.icone-voltar {
+.icone_voltar {
   width: 26px;
   height: 26px;
 }
-.form-doacao {
+.form_doacao {
   position: relative;
   z-index: 1;
   background-color: #225C25;
@@ -54,7 +54,7 @@
   margin-top: 10px;
 }
 
-.form-doacao h2 {
+.form_doacao h2 {
   font-size: 24px;
   font-weight: bold;
   text-align: center;
@@ -68,7 +68,7 @@
   margin-bottom: 24px;
 }
 
-.form-campos {
+.form_campos {
   display: flex;
   gap: 20px;
   justify-content: space-between;
@@ -83,8 +83,8 @@
   margin: 0 20px;
 }
 
-.coluna-esquerda,
-.coluna-direita {
+.coluna_esquerda,
+.coluna_direita {
   display: flex;
   flex-direction: column;
   gap: 18px;
@@ -110,13 +110,13 @@ textarea {
   resize: vertical;
   height: 100px;
 }
-.area-fotos {
+.area_fotos {
   display: flex;
   gap: 40px;
   margin-top: 8px;
 }
 
-.foto-placeholder {
+.foto_placeholder {
   background-color: white;
   color: #225C25;
   border-radius: 10px;
@@ -129,12 +129,12 @@ textarea {
   cursor: pointer;
   
 }
-.icon-camera {
+.icon_camera {
   width: 40px;
   height: 40px;
   opacity: 0.7;
 }
-.botao-enviar {
+.botao_enviar {
   margin-top: 30px;
   padding: 12px 24px;
   border-radius: 12px;
@@ -150,6 +150,6 @@ textarea {
   transition: background-color 0.3s ease;
 }
 
-.botao-enviar:hover {
+.botao_enviar:hover {
   background-color: #a4e2b4;
 }

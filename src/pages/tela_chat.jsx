@@ -1,4 +1,4 @@
-import "../styles/tela_chat.css";
+import styles from "../styles/tela_chat.module.css";
 import fundo_login_cadastro from "../assets/imagens/fundo_login_cadastro.jpg";
 import icon_voltar from "../assets/imagens/icon_voltar.png";
 import Logo from "../assets/imagens/Logo.png";
@@ -255,35 +255,35 @@ function TelaChat() {
   }
 
   return (
-    <div className="tela_chat">
+    <div className={styles.tela_chat}>
       <main>
-        <div className="container_chat">
-          <div className="chat_contatos">
-            <nav className="nav_chat">
-              <button className="link_chat_voltar" onClick={() => navigate(-1)}>
-                <img className="icon_voltar_chat" src={icon_voltar} alt="" />
-                <p className="nav_chat_p">VOLTAR</p>
+        <div className={styles.container_chat}>
+          <div className={styles.chat_contatos}>
+            <nav className={styles.nav_chat}>
+              <button className={styles.link_chat_voltar} onClick={() => navigate(-1)}>
+                <img className={styles.icon_voltar_chat} src={icon_voltar} alt="" />
+                <p className={styles.nav_chat_p}>VOLTAR</p>
               </button>
             </nav>
-            <div className="info_contatos">
-              <div className="logo_chat_div">
-                <img className="logo_chat" src={Logo} alt="" />
+            <div className={styles.info_contatos}>
+              <div className={styles.logo_chat_div}>
+                <img className={styles.logo_chat} src={Logo} alt="" />
               </div>
-              <div className="filtros_chat">
-                <div className="pesquisar_contato">
-                  <i className="icone_pesquisar_chat fa-solid fa-magnifying-glass"></i>
+              <div className={styles.filtros_chat}>
+                <div className={styles.pesquisar_contato}>
+                  <i className={`${styles.icone_pesquisar_chat} fa-solid fa-magnifying-glass`}></i>
                   <input
-                    className="filtro_input_chat"
+                    className={styles.filtro_input_chat}
                     type="text"
                     value={pesquisa}
                     onChange={(e) => setPesquisa(e.target.value)}
                     placeholder="Buscar por contato..."
                   />
                 </div>
-                <div className="botoes_filtros_chat">
+                <div className={styles.botoes_filtros_chat}>
                   <button
                     onClick={() => setStatusFiltro("todos")}
-                    className={`botao_chat botao_todas_chat ${
+                    className={` ${styles.botao_chat} ${styles.botao_todas_chat} ${
                       statusFiltro === "todos" ? "ativo" : ""
                     }`}
                   >
@@ -291,7 +291,7 @@ function TelaChat() {
                   </button>
                   <button
                     onClick={() => setStatusFiltro("nao_lidas")}
-                    className={`botao_chat botao_nao_lidas_chat ${
+                    className={`${styles.botao_chat} ${styles.botao_nao_lidas_chat} ${
                       statusFiltro === "nao_lidas" ? "ativo" : ""
                     }`}
                   >
@@ -300,21 +300,21 @@ function TelaChat() {
                 </div>
               </div>
 
-              <div className="lista_contatos_chat">
+              <div className={styles.lista_contatos_chat}>
                 {contatosFiltrados.map((contato, index) => (
                   <div
                     key={contato.id}
-                    className={`contato ${
+                    className={`${styles.contato} ${
                       index === contatoSelecionado ? "selecionado" : ""
                     }`}
                     onClick={() => selecionarContato(index)}
                   >
                     <img src={contato.imagem} alt="" />
-                    <div className="contatos_info">
-                      <h3 className="nome_contato_lista_contatos">
+                    <div className={styles.contatos_info}>
+                      <h3 className={styles.nome_contato_lista_contatos}>
                         {contato.nome}
                       </h3>
-                      <p className="mensagem_contato_lista_contatos">
+                      <p className={styles.mensagem_contato_lista_contatos}>
                         {contato.mensagemContato}
                       </p>
                     </div>
@@ -324,27 +324,27 @@ function TelaChat() {
             </div>
           </div>
 
-          <div className="divisao_chat"></div>
+          <div className={styles.divisao_chat}></div>
 
-          <div className="chat_mensagens">
+          <div className={styles.chat_mensagens}>
             <img
-              className="fundo_chat_mensagens"
+              className={styles.fundo_chat_mensagens}
               src={fundo_login_cadastro}
               alt=""
             />
-            <div className="nav_chat_mensagens">
+            <div className={styles.nav_chat_mensagens}>
               {contatoSelecionado !== null && (
-                <div className="informacoes_contato_nav_chat">
+                <div className={styles.informacoes_contato_nav_chat}>
                   <img
                     src={contatos[contatoSelecionado].imagem}
                     alt=""
-                    className="contato_selecionado_icone"
+                    className={styles.contato_selecionado_icone}
                   />
-                  <div className="texto_contato selecionado">
-                    <p className="nome_contato_nav_chat">
+                  <div className={styles.texto_contato .selecionado}>
+                    <p className={styles.nome_contato_nav_chat}>
                       {contatos[contatoSelecionado].nome}
                     </p>
-                    <span className="status_contato_nav_chat">
+                    <span className={styles.status_contato_nav_chat}>
                       {contatos[contatoSelecionado].status}
                     </span>
                   </div>
@@ -352,24 +352,24 @@ function TelaChat() {
               )}
             </div>
 
-            <div className="mensagens_chat">
+            <div className={styles.mensagens_chat}>
               {contatoSelecionado !== null &&
                 mensagens.map((mens, indx) =>
                   mens.tipo === "data" ? (
-                    <div key={indx} className="separador_data">
+                    <div key={indx} className={styles.separador_data}>
                       {mens.texto}
                     </div>
                   ) : (
                     <div
                       key={indx}
-                      className={`mensagem ${mens.tipo} ${
+                      className={`${styles.mensagem} ${styles[mens.tipo]} ${
                         contatos[contatoSelecionado]?.isNotificacao
-                          ? "notificacao_estilo"
+                          ? styles.notificacao_estilo
                           : ""
                       }`}
                     >
                       <p>{mens.texto}</p>
-                      <span className="hora_mensagem">
+                      <span className={styles.hora_mensagem}>
                         {mens.hora_mensagem ?? ""}
                       </span>
                     </div>
@@ -378,11 +378,11 @@ function TelaChat() {
             </div>
 
             {!contatoSelecionado?.isNotificacao && (
-              <div className="div_enviar_mensagem">
-                <div className="elementos_enviar_mensagem">
-                  <i className="icone_camera fa-solid fa-camera"></i>
+              <div className={styles.div_enviar_mensagem}>
+                <div className={styles.elementos_enviar_mensagem}>
+                  <i className={`${styles.icone_camera} fa-solid fa-camera`}></i>
                   <input
-                    className="input_enviar_mensagem"
+                    className={styles.input_enviar_mensagem}
                     value={mensagem}
                     onChange={(e) => setMensagem(e.target.value)}
                     type="text"
@@ -390,7 +390,7 @@ function TelaChat() {
                   />
                   <button
                     onClick={enviarMensagem}
-                    className="botao_enviar_mensagem"
+                    className={styles.botao_enviar_mensagem}
                   >
                     <img src="src/assets/imagens/send.png" alt="" />
                   </button>

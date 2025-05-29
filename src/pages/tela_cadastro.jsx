@@ -1,60 +1,60 @@
-import "../styles/tela_cadastro.css";
+import styles from "../styles/tela_cadastro.module.css";
 import Logo from "../assets/imagens/Logo.png";
 import fundo_login_cadastro from "../assets/imagens/fundo_login_cadastro.jpg";
 
 function TelaCadastro() {
   return (
-    <div className="conteiner">
+    <div className={styles.conteiner}>
       <img
         src={fundo_login_cadastro}
         alt="imagem_de_fundo"
-        className="background"
+        className={styles.background}
       />
 
-      <form className="formulario_cadastro">
+      <form className={styles.formulario_cadastro}>
         <img src={Logo} />
-        <h1 className="titulo_cadastro">Insira os seus dados</h1>
-        <div id="divmae">
-          <div className="item">
-            <p className="cadastro_p">Nome do Usuário</p>
+        <h1 className={styles.titulo_cadastro}>Insira os seus dados</h1>
+        <div className={styles.divmae}>
+          <div className={styles.item}>
+            <p className={styles.cadastro_p}>Nome do Usuário</p>
             <input
-              className="input_cadastro"
+              className={styles.input_cadastro}
               placeholder="Insira seu nome de usuário*"
               name="Nome"
               type="text"
             />
-            <p className="cadastro_p">Email</p>
+            <p className={styles.cadastro_p}>Email</p>
             <input
-              className="input_cadastro"
+              className={styles.input_cadastro}
               placeholder="Insira o seu email*"
               name="Email"
               type="email"
             />
-            <p className="cadastro_p">Senha</p>
+            <p className={styles.cadastro_p}>Senha</p>
             <input
-              className="input_cadastro"
+              className={styles.input_cadastro}
               placeholder="Insira a sua senha*"
               name="Senha"
               type="password"
             />
           </div>
-          <div className="item">
-            <p className="cadastro_p">Confirmar senha</p>
+          <div className={styles.item}>
+            <p className={styles.cadastro_p}>Confirmar senha</p>
             <input
-              className="input_cadastro"
+              className={styles.input_cadastro}
               placeholder="Confirme a sua senha*"
               name="Confirmar-senha"
               type="password"
             />
-            <p className="cadastro_p">CPF/CNPJ</p>
+            <p className={styles.cadastro_p}>CPF/CNPJ</p>
             <input
-              className="input_cadastro"
+              className={styles.input_cadastro}
               type="text"
               name="CPF/CNPJ"
               placeholder="Insira seu CPF ou CNPJ"
             />
-            <p className="cadastro_p">Tipo de usuário</p>
-            <div className="form-group">
+            <p className={styles.cadastro_p}>Tipo de usuário</p>
+            <div className={styles.form_group}>
               <select name="tipoUsuario">
                 <option value="doador">Doador</option>
                 <option value="empresa">Empresa</option>
@@ -62,10 +62,10 @@ function TelaCadastro() {
             </div>
           </div>
         </div>
-        <button className="botao_cadastro" type="button">
+        <button className={styles.botao_cadastro} type="button">
           Cadastrar
         </button>
-        <p className="cadastro_p">Já é cadastrado? Faça Login</p>
+        <p className={styles.cadastro_p}>Já é cadastrado? Faça Login</p>
       </form>
     </div>
   );

@@ -1,4 +1,4 @@
-import "../styles/tela_usuario_doador.css";
+import styles from "../styles/tela_usuario_doador.module.css";
 import perfil from "../assets/imagens/220_F_805282248_LHUxw7t2pnQ7x8lFEsS2IZgK8IGFXePS.jpg";
 import chat from "../assets/imagens/icon_chat.png";
 import sair from "../assets/imagens/icon_sair.png";
@@ -11,38 +11,44 @@ import lugar from "../assets/imagens/icon_localizacao_empresa.png";
 import data from "../assets/imagens/icon_calendario.png";
 import tipo from "../assets/imagens/icon_usuario.png";
 import icon_voltar from "../assets/imagens/icon_voltar.png";
+import { Link } from "react-router-dom";
 
 function TelaUsuarioDoador() {
   return (
     <>
-      <div className="tela_usuario_doador">
+      <div className={styles.tela_usuario_doador}>
         <title>Tela de Usuário</title>
-        <img className="background_tela" src={fundo} />
-        <div className="top-bar">
-          <a href="/usuario/empresa" className="voltar">
-            <img src={icon_voltar} alt="voltar" className="icone-voltar" />
+        <img className={styles.background_tela} src={fundo} />
+        <div className={styles.top_bar}>
+          <a href="/usuario/empresa" className={styles.voltar}>
+            <img
+              src={icon_voltar}
+              alt="voltar"
+              className={styles.icone_voltar}
+            />
             VOLTAR
           </a>
         </div>
-        <div className="conteiner-doador">
-          <div id="top-botoes">
+        <div className={styles.conteiner_doador}>
+          <div className={styles.top_botoes}>
             <button>
-              <img src={chat} />
+              <img src={chat} className={styles.icon_top} />
             </button>
             <button>
-              <img src={sair} />
+              <img src={sair} className={styles.icon_top}/>
             </button>
           </div>
-          <div id="superior">
-            <div id="perfil">
-              <img id="imagem" src={perfil} />
+          <div className={styles.superior}>
+            <div className={styles.perfil}>
+              <img className={styles.imagem} src={perfil} />
               <button>
                 <p>Editar Perfil</p>
                 <img src={lapis} alt="editar" />
               </button>
             </div>
 
-            <div id="info">
+            <div className={styles.info}>
+              <h2 className={styles.nome_usuario}>Ana Clara</h2>
               <p>
                 <img src={email} /> <strong>Email:</strong>{" "}
                 <span>ana@gmail.com</span>
@@ -64,11 +70,13 @@ function TelaUsuarioDoador() {
               </p>
             </div>
           </div>
-          <div id="botoes">
-            <button>
-              <img src={doacao} />
-              <p>Minhas Doaçoes</p>
-            </button>
+          <div className={styles.botoes}>
+            <Link className={styles.link_historico} to="/historico/doacoes">
+              <button>
+                <img src={doacao} />
+                <p className={styles.link_p}>Minhas Doaçoes</p>
+              </button>
+            </Link>
             <button>
               <img src={premio} />
               <p>Loja de Pontos</p>

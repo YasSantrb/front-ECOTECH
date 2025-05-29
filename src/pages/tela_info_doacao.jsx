@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import "../styles/tela_info_doacao.css";
+import styles from "../styles/tela_info_doacao.module.css";
 import fundo_login_cadastro from "../assets/imagens/fundo_login_cadastro.jpg";
 import icon_voltar from "../assets/imagens/icon_voltar.png";
 import { Link, useParams } from "react-router-dom";
@@ -104,29 +104,29 @@ function TelaInfoDoacao() {
   }, [id]);
 
   if (loading) {
-    return <p className="mensagem-carregando">Carregando detalhes da doação...</p>;
+    return <p className={styles.mensagem_carregando}>Carregando detalhes da doação...</p>;
   }
 
   if (!doacaoAtual) {
-    return <p className="mensagem-nenhuma-doacao">Nenhuma doação selecionada ou encontrada.</p>;
+    return <p className={styles.mensagem_nenhuma_doacao}>Nenhuma doação selecionada ou encontrada.</p>;
   }
 
   return (
-    <div className="tela_info_doacao">
+    <div className={styles.tela_info_doacao}>
       <img
         src={fundo_login_cadastro}
         alt="imagem_de_fundo"
-        className="background_info_doacao"
+        className={styles.background_info_doacao}
       />
-      <div className="info_doacao_div">
-        <nav className="nav_info_doacao">
-          <Link className="link_voltar_info_doacao" to="/">
-            <img className="icon_voltar_info_doacao" src={icon_voltar} alt="Voltar" />
-            <p className="nav_info_doacao_p">VOLTAR</p>
+      <div className={styles.info_doacao_div}>
+        <nav className={styles.nav_info_doacao}>
+          <Link className={styles.link_voltar_info_doacao} to="/">
+            <img className={styles.icon_voltar_info_doacao} src={icon_voltar} alt="Voltar" />
+            <p className={styles.nav_info_doacao_p}>VOLTAR</p>
           </Link>
         </nav>
 
-        <main className="info_doacao_main">
+        <main className={styles.info_doacao_main}>
           <InformacoesDoacaoComponente
             nomeDoador={doacaoAtual.nomeDoador}
             especificacoes={doacaoAtual.especificacoes}
