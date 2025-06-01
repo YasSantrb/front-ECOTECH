@@ -1,3 +1,158 @@
-.p{
-    color: #000;
+body{
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  font-family: 'Poppins', sans-serif;
+}
+
+.tela_historico_doacoes {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  overflow: hidden;
+}
+
+.background_tela {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 114%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.container_verde {
+  position: relative;
+  z-index: 1;
+  background-color: #225c25;
+  border-radius: 28px;
+  padding: 20px 40px 40px;
+  margin: 40px auto;
+  width: 90%;
+  max-width: 1100px;
+  box-sizing: border-box;
+  color: white;
+  text-align: center;
+}
+
+.voltar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #225c25;
+  font-weight: bold;
+  font-size: 16px;
+  text-decoration: none;
+  margin: 20px 0 0 60px;
+  position: relative;
+  z-index: 2;
+}
+
+.icone_voltar {
+  width: 24px;
+  height: 24px;
+}
+
+.titulo {
+  font-size: 28px;
+  font-weight: bold;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+.subtitulo {
+  font-size: 15px;
+  color: #e0e0e0;
+  margin-bottom: 25px;
+}
+
+.tabela_container {
+  overflow-x: auto;
+}
+
+.tabela_doacoes {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #edf4dc;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.tabela_doacoes th {
+  background-color: #d4e4b5;
+  color: #222;
+  padding: 12px;
+  text-align: left;
+}
+
+.tabela_doacoes td {
+  padding: 12px;
+  border-bottom: 1px solid #ccc;
+  font-size: 14px;
+  color: #222;
+}
+
+.tabela_doacoes tr:last-child td {
+  border-bottom: none;
+}
+
+.status_badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 13px;
+}
+
+.status_icon {
+  width: 16px;
+  height: 16px;
+}
+
+.concluida {
+  background-color: #d4f8d4;
+  color: #228b22;
+}
+
+.pendente {
+  background-color: #ffe9a9;
+  color: #c59b00;
+}
+
+.cancelada {
+  background-color: #ffd5d5;
+  color: #c0392b;
+}
+
+.aguardando {
+  background-color: #f9e4b3;
+  color: #c47f17;
+}
+
+.botao_pendentes {
+  margin-top: 30px;
+  padding: 12px 24px;
+  background-color: white;
+  color: #225c25;
+  font-weight: bold;
+  font-size: 15px;
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.botao_pendentes:hover {
+  background-color: #d7f2dc;
+}
+
+.icon_verificar {
+  width: 20px;
+  height: 20px;
 }
