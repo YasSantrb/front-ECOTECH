@@ -48,10 +48,14 @@ function TelaUsuarioEmpresa() {
           <p><img src={icon_calendario} alt="data cadastro" className={styles.icone_texto} /><strong>Data de cadastro:</strong> <span>06/12/2020</span></p>
           <p><img src={icon_usuario} alt="tipo usuario" className={styles.icone_texto} /><strong>Tipo de usuário:</strong> <span>Empresa</span></p>
 
+          
           <button className={styles.botao_pontos}>
+            <Link to="/localizacao/pontos/coleta">
             <img src={icon_localizacao} alt="icon_localizacao" className={styles.icon_localizacao} />
             <span>Pontos de coletas</span>
+            </Link>
           </button>
+          
         </div>
       </div>
     </div>

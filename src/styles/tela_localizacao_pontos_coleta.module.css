@@ -1,4 +1,256 @@
-.p{
-    color: #355;
-    font-size: 300px;
+.tela_localizacao_pontos{
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    position: fixed;
 }
+
+.main{
+    display: flex;
+    height: 100vh;
+}
+
+.localizar_pontos{
+  width: 350px;
+  padding: 20px 0 1px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.link_voltar {
+  display: flex;
+  gap: 5px;
+  text-decoration: none;
+  padding-left: 5px;
+  align-items: center;
+  background-color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.icon_voltar{
+  width: 26px;
+  height: 26px;
+}
+
+.nav_p {
+  font-size: 20px;
+  color: #225c25;
+  font-weight: 500;
+}
+
+.info_localizacao{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  min-height: 0;
+}
+
+.logo_div {
+  padding-left: 100px;
+}
+
+.logo_ecotech_localizacao {
+  width: 150px;
+}
+
+.pesquisar_local {
+  position: relative;
+  display: inline-block;
+  padding-left: 25px;
+}
+
+.filtro_input {
+  width: 300px;
+  padding: 10px 20px 10px 10px;
+  height: 35px;
+  border-radius: 20px;
+  outline: none;
+  border: 2px solid #225c25;
+  box-sizing: border-box;
+  color: #225c25;
+  font-size: 15px;
+}
+
+.icone_pesquisar {
+  position: absolute;
+  pointer-events: none;
+  font-size: 18px;
+  right: 10px;
+  top: 53%;
+  transform: translateY(-50%);
+  color: #225c25;
+}
+
+.divisao {
+  width: 5px;
+  height: 100%;
+  background-color: #225c25;
+}
+
+.lista_pontos_coleta {
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  color: #225c25;
+  cursor: pointer;
+}
+
+.ponto {
+  display: flex;
+  width: 100%;
+  padding: 10px 0 10px 2px;
+  gap: 15px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  padding: 12px;
+  transition: all 0.3s ease;
+}
+
+.ponto:hover {
+  background-color: #e1f5e3;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.ponto img {
+  width: 100px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.ponto.selecionado {
+  border: 2px solid #225c25;
+  background-color: #ccffcc;
+}
+
+.pontos_info {
+  cursor: pointer;
+}
+
+.nome_ponto_coleta {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.nome_rua{
+  font-size: 14px;
+  color: #555;
+}
+
+.mapa_localizacao{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  flex: 1;
+}
+
+.popUpDiv{
+  position: absolute;
+  top: 30px;
+  left: 20px;
+  z-index: 10;
+}
+
+.popUp{
+  position: relative;
+  background-color: #fff;
+  color: #225c25;
+  border-radius: 12px;
+  overflow: hidden;
+  width: 350px;
+  height: auto;
+  padding-bottom: 12px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+}
+
+.popUpmain{
+  padding: 5px 0 0 10px;
+}
+
+.imgPopUp{
+  display: block;
+  width: 100%;
+  height: 150px;
+  object-fit:cover;
+}
+
+.botaoFechar{
+  display: flex;
+  justify-content: right;
+  font-size: 30px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #fff;
+  border-radius: 20px;
+  cursor: pointer;
+  border: none;
+  transtion: 0.2s ease;
+}
+
+.botaoFechar:hover{
+  opacity: 0.9;
+}
+
+.InfoPopUp{
+  padding: 105px;
+}
+
+.infoPopUp h3{
+  font-size: 20px;
+  font-weight: 600;
+  color: #225c25;
+  padding-bottom: 5px;
+}
+
+.infoItem{
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  margin-bottom: 15px;
+  font-size: 16px;
+  color: #225c25;
+}
+
+.infoItem i{
+  color: #225c25;
+  font-size: 20px;
+  margin-right: 5px;
+}
+
+.icone_localizacao{
+  padding-left: 3px;
+}
+
+.popUp_span{
+  display: flex;
+  gap: 5px;
+}
+
+.ajusteSpan{
+  padding-left: 2px;
+}
+
+.ajusteSpanB{
+  padding-left: 4px;
+}
+
+.ajusteSpanN{
+  padding-left: 3px;
+}
+
+.popUpInfo {
+  font-weight: 600;
+  font-size: 17px;
+  color: #333;
+}
+

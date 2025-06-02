@@ -16,8 +16,8 @@ const todasAsDoacoes = [
         especificacoes: "Tela de 29 polegadas, som estéreo, entrada AV.", 
         nomeEletronico: "Televisão de tubo",
         infoProduto: "TV de tubo clássica em bom estado. Ideal para quem busca um toque vintage ou para uso em projetos de reaproveitamento de peças.",
-        condicao: "Usado, bom estado",
-        observacao: "Funciona perfeitamente, mas não possui entrada HDMI. Controle remoto não incluso.",
+        condicao: "Usado",
+        observacao: "Pode ser reutilizado ou ter partes aproveitadas.",
         imagem: televisao, 
     },
     {
@@ -26,8 +26,8 @@ const todasAsDoacoes = [
         especificacoes: "Socket AM4, chipset B450, 4 slots RAM DDR4.", 
         nomeEletronico: "Placa-mãe ASUS",
         infoProduto: "Placa-mãe ASUS usada, mas em ótimo estado. Perfeita para montar um PC de entrada ou para substituir uma peça danificada.",
-        condicao: "Semi-nova",
-        observacao: "Compatível com processadores AMD Ryzen. Acompanha caixa e espelho traseiro.",
+        condicao: "Para peças.",
+        observacao: "Ideal para reaproveitamento de peças.",
         imagem: placa_mae, 
     },
     {
@@ -36,8 +36,8 @@ const todasAsDoacoes = [
         especificacoes: "Tela de 10.1 polegadas, 32GB de armazenamento, Wi-Fi e Bluetooth.",
         nomeEletronico: "Tablet Samsung",
         infoProduto: "Tablet Samsung em bom estado de conservação, ideal para navegar na internet, assistir vídeos e estudar. Perfeito para uso diário.",
-        condicao: "Usado, com pequenas marcas de uso",
-        observacao: "Bateria com boa autonomia. Acompanha cabo USB, mas sem carregador de parede.",
+        condicao: "Novo",
+        observacao: "Produto novo, mas quebrado.",
         imagem: tablet, 
     },
     {
@@ -46,8 +46,8 @@ const todasAsDoacoes = [
         especificacoes: "Processador Pentium III, 256MB RAM, HD 40GB.", 
         nomeEletronico: "Computador antigo",
         infoProduto: "Computador de mesa antigo, funcional, ideal para projetos retro gaming, peças de reposição ou para colecionadores. Sistema operacional não incluso.",
-        condicao: "Usado, para peças",
-        observacao: "Gabinete com algumas marcas de uso. Ligando normalmente, mas lentidão esperada pela idade.",
+        condicao: "Usado",
+        observacao: "Pode ser reutilizado ou ter partes aproveitadas.",
         imagem: computador_antigo, 
     },
     {
@@ -56,8 +56,8 @@ const todasAsDoacoes = [
         especificacoes: "Tela de 21 polegadas, entrada coaxial, mono áudio.", 
         nomeEletronico: "Televisão de tubo",
         infoProduto: "Outra TV de tubo, menor e mais compacta. Boa para ambientes pequenos ou para quem quer desfrutar de jogos clássicos. Requer conversor para canais digitais.",
-        condicao: "Usado, bom estado",
-        observacao: "Cores vivas, sem falhas na tela. Não inclui controle remoto.",
+        condicao: "Usado",
+        observacao: "Pode ser reutilizado ou ter partes aproveitadas.",
         imagem: televisao, 
     },
     {
@@ -66,8 +66,8 @@ const todasAsDoacoes = [
         especificacoes: "Tela de 8 polegadas, 16GB de armazenamento, câmera frontal e traseira.", 
         nomeEletronico: "Tablet Samsung",
         infoProduto: "Tablet Samsung compacto, ideal para crianças ou para quem busca um dispositivo leve para leitura e redes sociais. Ótimo custo-benefício.",
-        condicao: "Usado, excelente estado",
-        observacao: "Pouquíssimas marcas de uso. Acompanha capa protetora. Sem carregador.",
+        condicao: "Novo",
+        observacao: "Produto novo, mas já está quebrado.",
         imagem: tablet, 
     }
 ];

@@ -305,7 +305,7 @@ function TelaChat() {
                   <div
                     key={contato.id}
                     className={`${styles.contato} ${
-                      index === contatoSelecionado ? "selecionado" : ""
+                      index === contatoSelecionado ? styles.selecionado : ""
                     }`}
                     onClick={() => selecionarContato(index)}
                   >
