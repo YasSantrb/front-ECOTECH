@@ -572,7 +572,7 @@ const mapaCondicoes = {
               <h3>Ecotech</h3>
             </li>
             <li>
-              <a href="#" className={styles.footer_link}>
+              <a href="sobre/nos" className={styles.footer_link}>
                 Sobre nós
               </a>
             </li>
