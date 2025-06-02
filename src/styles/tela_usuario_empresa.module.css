@@ -175,10 +175,17 @@
   cursor: pointer;
   transition: background-color 0.3s ease;
   display: flex;
-  align-items: center;
   gap: 10px;
-  align-self: flex-start;
+  align-self: center;
   flex-direction: column;
+}
+
+.botao_ponto_coleta{
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: #225c25;
+  align-items: center;
 }
 
 .botao_pontos:hover {
