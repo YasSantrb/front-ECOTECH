@@ -6,6 +6,7 @@ import icon_cancelar from "../assets/imagens/icon_cancelar.png";
 import icon_pendente from "../assets/imagens/icon_pendente.png";
 import icon_concluido from "../assets/imagens/icon_concluido.png";
 import icon_verificar from "../assets/imagens/icon_verificar.png";
+import { Link } from "react-router-dom";
 
 function TelaHistoricoDoacoes() {
   return (
@@ -95,10 +96,12 @@ function TelaHistoricoDoacoes() {
           </table>
         </div>
 
+        <Link to="/doacao/pendente">
         <button className={styles.botao_pendentes}>
           <img src={icon_verificar} alt="verificar" className={styles.icon_verificar} />
           Visualizar doações pendentes
         </button>
+        </Link>
       </div>
     </div>
   );

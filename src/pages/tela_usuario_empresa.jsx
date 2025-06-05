@@ -50,7 +50,7 @@ function TelaUsuarioEmpresa() {
 
           
           <button className={styles.botao_pontos}>
-            <Link className={styles.botao_ponto_coleta} to="/localizacao/pontos/coleta">
+            <Link className={styles.botao_ponto_coleta} to="/registro/pontos/coleta">
             <img src={icon_localizacao} alt="icon_localizacao" className={styles.icon_localizacao} />
             <span>Pontos de coletas</span>
             </Link>

@@ -77,10 +77,12 @@ function TelaUsuarioDoador() {
                 <p className={styles.link_p}>Minhas Doaçoes</p>
               </button>
             </Link>
+            <Link className={styles.link_historico} to="/sistema/pontos">
             <button>
               <img src={premio} />
               <p>Loja de Pontos</p>
             </button>
+            </Link>
           </div>
         </div>
       </div>
