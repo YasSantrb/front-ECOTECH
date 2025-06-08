@@ -1,4 +1,295 @@
-.p{
-    font-size: 20px;
-    color: red;
+.tela_sistema_pontos {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  position: fixed;
+}
+
+.div_principal {
+  display: flex;
+  height: 100vh;
+}
+
+.sistema_pontos {
+  width: 350px;
+  padding: 20px 0 1px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.nav_sistemas_pontos {
+  display: flex;
+}
+
+.link_voltar {
+  display: flex;
+  gap: 5px;
+  text-decoration: none;
+  padding-left: 5px;
+  align-items: center;
+  background-color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.icon_voltar {
+  width: 26px;
+  height: 26px;
+}
+
+.nav_p {
+  font-size: 20px;
+  color: #225c25;
+  font-weight: 500;
+}
+
+.info_sistema_pontos {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  flex: 1;
+  min-height: 0;
+}
+
+.logo_div {
+  padding-left: 100px;
+}
+
+.logo_ecotech {
+  width: 150px;
+}
+
+.divisao {
+  width: 5px;
+  height: 100%;
+  background-color: #225c25;
+}
+
+.cupons {
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  color: #225c25;
+  cursor: pointer;
+  position: relative;
+  flex: 1;
+  overflow: hidden;
+}
+
+.botao_cupom {
+  display: flex;
+  width: 100%;
+  height: 70px;
+  justify-content: center;
+  align-items: center;
+  gap: 3px;
+  background-color: rgba(100, 194, 123, 0.5);
+}
+
+.img_desconto {
+  width: 45px;
+}
+
+.nome_cupom {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.qtd_pontos {
+  padding: 4px 0 0 100px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.quantidade {
+  background-color: #fff;
+  border-radius: 30px;
+  border: 3px solid #225c25;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 6px 16px;
+  box-shadow: 0 0 8px rgba(56, 176, 0, 0.4);
+  color: #225c25;
+}
+
+.lado_cupons {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.div_img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.fundo_cupons {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.cupons_desconto {
+  display: flex;
+  position: relative;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 10px 0 0 30px;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.cupom {
+  width: 280px;
+  padding: 20px;
+  color: #000;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.cupom_img_titulo {
+  display: flex;
+  gap: 5px;
+}
+
+.logo_cupom {
+  width: 40px;
+  padding-bottom: 15px;
+}
+
+.cupom_titulo {
+  font-size: 20px;
+  font-weight: 500;
+  padding-top: 3px;
+}
+
+.botao_desconto {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.descricao_ponto {
+  font-size: 20px;
+  text-align: center;
+  padding-bottom: 15px;
+}
+
+.cupom_codigo {
+  display: flex;
+  padding: 5px;
+  height: 35px;
+  font-size: 17px;
+  font-weight: 500;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  gap: 5px;
+  background-color: #fff;
+  color: #225c25;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  transtion: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.cupom_codigo:hover {
+  background-color: #fff;
+  transform: translateY(-2px);
+}
+
+.botao_desconto {
+  padding-bottom: 8px;
+}
+
+.popUpCupom {
+  position: fixed;
+  display: flex;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+}
+
+.popUp {
+  background-color: #fff;
+  color: #225c25;
+  width: auto;
+  height: auto;
+  padding: 20px;
+  border-radius: 20px;
+}
+
+.titulo_popUp {
+  display: flex;
+  gap: 20px;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.botao_sair {
+  cursor: pointer;
+}
+
+.codigoCupom {
+  font-size: 18px;
+  font-weight: 400;
+  text-align: center;
+  padding-top: 15px;
+}
+
+.botaoPopUp {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 15px;
+}
+
+.botaoCopiar {
+  display: flex;
+  padding: 5px;
+  height: 35px;
+  font-size: 15px;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  gap: 5px;
+  background-color: #225c25;
+  color: #fff;
+  border: 1px solid #225c25;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.botaoCopiar:hover {
+  background-color: #225c25;
+  transform: translateY(-2px);
+}
+
+.span_popUpSucesso {
+  display: flex;
+  gap: 5px;
+}
+
+.icone_sucesso {
+  width: 30px;
 }
