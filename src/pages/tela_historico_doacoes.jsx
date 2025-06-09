@@ -16,7 +16,7 @@ function TelaHistoricoDoacoes() {
         alt="imagem_de_fundo"
         className={styles.background_tela}
       />
-      <a href="/" className={styles.voltar}>
+      <a href="/usuario/empresa" className={styles.voltar}>
     <img src={icon_voltar} alt="voltar" className={styles.icone_voltar} />
     VOLTAR
     </a>

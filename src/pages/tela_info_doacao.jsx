@@ -33,7 +33,7 @@ const todasAsDoacoes = [
     {
         id: "3",
         nomeDoador: "Carla Pires",
-        especificacoes: "Tela de 10.1 polegadas, 32GB de armazenamento, Wi-Fi e Bluetooth.",
+        especificacoes: "Tela de 10.1 polegadas, 32GB de armazenamento.",
         nomeEletronico: "Tablet Samsung",
         infoProduto: "Tablet Samsung em bom estado de conservação, ideal para navegar na internet, assistir vídeos e estudar. Perfeito para uso diário.",
         condicao: "Novo",
