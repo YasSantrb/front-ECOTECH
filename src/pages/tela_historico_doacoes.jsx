@@ -16,10 +16,10 @@ function TelaHistoricoDoacoes() {
         alt="imagem_de_fundo"
         className={styles.background_tela}
       />
-      <a href="/usuario/empresa" className={styles.voltar}>
+      <Link to="/usuario/doador" className={styles.voltar}>
     <img src={icon_voltar} alt="voltar" className={styles.icone_voltar} />
     VOLTAR
-    </a>
+    </Link>
 
       <div className={styles.container_verde}>
         <div className={styles.header_container}>

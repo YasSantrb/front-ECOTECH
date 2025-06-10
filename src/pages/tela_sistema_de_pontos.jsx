@@ -122,7 +122,7 @@ function TelaSistemaPontos() {
       <div className={styles.div_principal}>
         <div className={styles.sistema_pontos}>
           <nav className={styles.nav_sistemas_pontos}>
-            <Link className={styles.link_voltar} to="/usuario/empresa">
+            <Link className={styles.link_voltar} to="/usuario/doador">
               <img className={styles.icon_voltar} src={icon_voltar} alt="" />
               <p className={styles.nav_p}>VOLTAR</p>
             </Link>

@@ -1,6 +1,6 @@
 import styles from "../styles/tela_usuario_empresa.module.css";
 import fundo_login_cadastro from "../assets/imagens/fundo_login_cadastro.jpg";
-import icon_usuario from "../assets/imagens/woman (1).png";
+import icon_amazon from "../assets/imagens/logo_amazon.png";
 // import icon_chat from "../assets/imagens/icon_chat.png";
 // import icon_sair from "../assets/imagens/icon_sair.png";
 import icon_voltar from "../assets/imagens/icon_voltar.png";
@@ -9,10 +9,10 @@ import { Link } from "react-router-dom";
 
 function TelaUsuarioEmpresa() {
   const [usuario, setUsuario] = useState({
-    nome_usuario: "Ana Clara",
-    email: "ana@gmail.com",
-    telefone: "(89)999292129",
-    localizacao: "Floriano - PI - Brasil",
+    nome_usuario: "Amazon",
+    email: "amazon@gmail.com",
+    telefone: "(89)3521-7373",
+    localizacao: "Teresina - PI - Brasil",
   });
 
   const [isEditarModalOpen, setIsEditarModalOpen] = useState(false);
@@ -72,10 +72,10 @@ function TelaUsuarioEmpresa() {
 
         <div className={styles.secao_perfil}>
           <div className={styles.perfil_esquerda}>
-            <img src={icon_usuario} alt="" className={styles.perfil} />
+            <img src={icon_amazon} alt="" className={styles.perfil} />
             <div className={styles.info_usuario}>
               <h1 className={styles.nome_usuario}>{usuario.nome_usuario}</h1>
-              <span className={styles.tipo_usuario}>Doador</span>
+              <Link to="/usuario/doador"  className={styles.tipo_usuario}><span className={styles.tipo_usuario}>Empresa</span></Link>
             </div>
 
             {/* <div className={styles.info_pontos}>
@@ -189,8 +189,7 @@ function TelaUsuarioEmpresa() {
         <div className={styles.secao_informacoes}>
           <h2 className={styles.titulo_secao}>Acesso rápido</h2>
           <div className={styles.botoes_rapidos}>
-            <Link to="/sistema/pontos" className={styles.botao_chat}>Loja de pontos</Link>
-            <Link to="/historico/doacoes" className={styles.botao_sair}>Meu histórico</Link>
+            <Link to="/registro/pontos/coleta" className={styles.botao_sair}>Registrar pontos coleta</Link>
             <Link to="/chat" className={styles.botao_chat}>Meu chat</Link>
             <Link className={styles.botao_sair}>Sair do site</Link>
           </div>
