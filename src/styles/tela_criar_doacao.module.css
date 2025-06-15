@@ -153,3 +153,18 @@ textarea {
 .botao_enviar:hover {
   background-color: #a4e2b4;
 }
+
+.campo{
+  display: flex;
+  flex-direction: column;
+}
+
+.erro{
+  color: red;
+  font-size: 13px;
+  margin-top: 2px;
+}
+
+.erro_input{
+  border: 1px solid red;
+}
