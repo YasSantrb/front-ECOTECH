@@ -18,14 +18,12 @@
 
 .top_bar_empresa {
   width: 100%;
-  max-width: 890px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 20px 40px 0 40px;
   position: relative;
-  z-index: 2;
-  margin-left: -13cm;
+  z-index: 1;
 }
 
 .link_voltar {
@@ -319,12 +317,17 @@
 .inputs{
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 20px;
+}
+
+.campo{
+  display:flex;
+  flex-direction: column;
 }
 
 .input{
   padding: 10px 5px 10px 5px;
-  border: 1px solid #64748b;
+  border: 1px solid #225c25;
   width: 100%;
 }
 
@@ -340,21 +343,19 @@
 }
 
 .botao_formulario {
-  display: flex;
-  padding: 5px;
-  height: 35px;
-  font-size: 20px;
-  font-weight: 500;
-  align-items: center;
-  justify-content: center;
-  width: 100px;
-  gap: 5px;
   background-color: #225c25;
   color: #fff;
-  border: 1px solid #225c25;
-  border-radius: 8px;
+  border: none;
+  border-radius: 10px;
+  padding: 8px 14px;
+  font-weight: 500;
+  font-size: 18px;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(34, 92, 37, 0.2);
 }
 
 .botao_formulario:hover {

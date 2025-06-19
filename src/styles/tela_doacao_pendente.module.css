@@ -24,11 +24,20 @@
   font-weight: bold;
   color: #1b5e20;
   text-decoration: none;
+  background-color: #fff;
+  border: none;
+  cursor: pointer;
 }
 
 .icone_voltar {
   width: 24px;
   margin-right: 8px;
+}
+
+.nav_doacao_p{
+  font-size: 20px;
+  color: #225c25;
+  font-weight: 500;
 }
 
 .card_doacao {
@@ -52,24 +61,30 @@
   gap: 10px;
 }
 
-.botao_editar,
-.botao_excluir {
+.botoes_doacao {
+  background-color: #225c25;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 8px 16px;
+  font-weight: 500;
+  font-size: 16px;
+  cursor: pointer;
   display: flex;
   align-items: center;
   gap: 6px;
-  background-color: #ffffff;
-  color: #1b5e20;
-  font-weight: bold;
-  border: none;
-  border-radius: 10px;
-  padding: 8px 14px;
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(34, 92, 37, 0.2);
 }
 
-.botao_editar:hover {
-  background-color: #c8e6c9;
-  transform: scale(1.05);
+.pincel {
+  color: #fff;
+  width: 16px;
+  height: 16px;
+}
+
+.botoes_doacao:hover {
+  transform: translateY(-1px);
 }
 
 .botao_excluir {
@@ -81,102 +96,427 @@
   transform: scale(1.05);
 }
 
-.botao_editar img,
-.botao_excluir img {
-  width: 16px;
+.icon_lixeira{
+  width: 20px;
 }
 
-.conteudo {
+.popUpFormulario{
+  position: fixed;
   display: flex;
-  justify-content: space-between;
-  gap: 30px;
-  flex-wrap: wrap;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
 }
 
-.imagem {
+.popUp {
+  background-color: #fff;
+  color: #225c25;
+  width: 30%;
+  height: auto;
+  padding: 10px;
+  border-radius: 20px;
+}
+
+.titulo{
+  display: flex;
+  gap: 20px;
+  font-size: 20px;
+  font-weight: 500;
+  align-items: center;
+  justify-content: center;
+}
+
+.h3{
+  font-weight: 500;
+}
+
+.icone_sair_modal{
+  display: flex;
+  align-items: right;
+  justify-content: right;
+}
+
+.botao_sair_modal {
+  cursor: pointer;
+  align-self: flex-start;
+  font-size: 18px;
+}
+
+.inputs{
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.campo{
+  display:flex;
+  flex-direction: column;
+}
+
+.input{
+  padding: 10px 5px 10px 5px;
+  border: 1px solid #225c25;
+  width: 100%;
+}
+
+.label_modal{
+  font-weight: 500;
+}
+
+.botao_formulario_div{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 20px;
+}
+
+.botao_formulario {
+  background-color: #225c25;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 8px 14px;
+  font-weight: 500;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(34, 92, 37, 0.2);
+}
+
+.botao_formulario:hover {
+  background-color: #225c25;
+  transform: translateY(-2px);
+}
+
+.span_popUpSucesso {
+  display: flex;
+  gap: 5px;
+}
+
+.icone_sucesso {
+  width: 30px;
+}
+
+.info_doacao_main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 5;
+}
+
+.info_doacao_container {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  height: 95%;
+  max-width: 900px;
+  min-height: 400px;
+  background-color: #fff;
+  border-radius: 20px;
+  /* /* box-shadow: 0 0 15px rgba(0, 0, 0, 0.3); */
+  box-shadow: 0 0 8px 4px rgba(34, 92, 37, 0.4); 
+  padding: 20px;
+  color: #225c25;
+  position: relative;
+  padding: 50px 20px 50px 20px;
+}
+
+.container_header_icons {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  gap: 15px;
+}
+
+.icon_button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.icon_button img {
+  width: 30px;
+  height: 30px;
+}
+
+.info_doacao_conteudos {
+  display: flex;
+  width: 100%;
+  flex-grow: 1;
+  gap: 30px;
+}
+
+.info_doacao_lado_esquerdo {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  flex: 1;
-  max-width: 260px;
+  width: 40%;
+  padding-right: 20px;
+  box-sizing: border-box;
 }
 
-.img_tv {
-  width: 250px;
+.doacao_main_img {
+  width: 110%;
+  max-width: 350px;
   height: auto;
   border-radius: 10px;
-  margin-bottom: 15px;
-}
-
-.botao_contato {
-  background-color: #ffffff;
-  color: #1b5e20;
-  font-weight: bold;
-  border: none;
-  border-radius: 20px;
-  padding: 6px 16px;
-  cursor: pointer;
+  object-fit: cover;
   margin-bottom: 20px;
-  align-self: flex-start;
-  margin-left: 5px;
-  transition: all 0.3s ease-in-out;
-  text-decoration: none; 
+}
+
+.botao_entrar_em_contato{
+  display: flex;
+  justify-content: left;
+  padding-top: 10px;
+}
+
+.link_entrar_em_contato{
   display: inline-block;
+  text-decoration: none;
+  background-color: #225c25;
+  color: #fff;
+  width: auto;
+  padding: 5px 15px;
+  border-radius: 25px;
+  font-weight: 600;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.botao_contato:hover {
-  background-color: #c8e6c9;
-  transform: translateX(5px);
+.link_entrar_em_contato:hover{
+  background-color: #225c25;
+  transform: translateY(-2px);
 }
 
-.icone_texto {
+.doador_info_esquerda{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+} 
+
+.especificacoes {
   display: flex;
   align-items: flex-start;
-  gap: 8px;
-  color: #ffffff;
-  margin-bottom: 12px;
-  margin-left: 10px;
-  line-height: 1.4;
+  gap: 10px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-.icone_texto img {
-  width: 18px;
-  margin-top: 4px;
+.doador_info_esquerda h3,
+.especificacoes_contenteudo h3 {
+  font-size: 1.2em;
+  font-weight: 600;
+  margin-bottom: 5px;
+  line-height: 1.2;
 }
 
-.descricao {
-  flex: 2;
-  min-width: 300px;
+.doador_icon,
+.especificacoes_icon {
+  font-size: 1.5em;
+  color: #225c25;
 }
 
-h2 {
-  font-size: 24px;
-  margin-bottom: 15px;
+.especificacoes_conteudo {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
-.titulo_secao {
-  font-weight: bold;
-  margin-top: 15px;
-  margin-bottom: 10px;
+.especificacoes_p {
+  font-size: 1em;
+  line-height: 1.6;
+  margin: 0;
 }
 
-.botao_coleta {
-  margin-top: 35px;
-  margin-left: 25%;
-  background-color: #ffffff;
-  color: #1b5e20;
-  font-weight: bold;
-  border: none;
+.info_doacao_lado_direito {
+  width: auto;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  padding: 20px;
   border-radius: 20px;
-  padding: 11px 16px;
-  cursor: pointer;
-  align-self: flex-start;
-  transition: all 0.3s ease-in-out;
-  text-decoration: none;
-  display: inline-block;
+  box-sizing: border-box;
+  margin-left: 10px;
 }
 
-.botao_coleta:hover {
-  background-color: #c8e6c9;
-  transform: scale(1.05);
+.info_doacao_lado_direito h1 {
+  font-size: 30px;
+  margin-bottom: 15px;
+  line-height: 1;
+  font-weight: 500;
+}
+
+.secao_info_direito {
+  margin-bottom: 20px;
+}
+
+.secao_info_direito h3 {
+  font-size: 1.2em;
+  font-weight: 600;
+  margin-bottom: 5px;
+  line-height: 1.2;
+}
+
+.secao_info_direito p {
+  font-size: 1em;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.botao_agendar_div {
+  display: flex;
+  justify-content: center;
+  margin-top: auto;
+  padding-top: 20px;
+}
+
+.agendar_coleta_link {
+  text-decoration: none;
+  color: #fff;
+}
+
+.botao_agendar_coleta {
+  background-color: #225c25;
+  border: none;
+  border-radius: 25px;
+  padding: 8px 16px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  width: 45%;
+  display: block;
+  margin: 0 auto;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.botao_agendar_coleta:hover {
+  background-color: #225c25;
+  transform: translateY(-2px);
+}
+
+.info_doador{
+  display: flex;
+  gap: 10px;
+}
+
+.img_doador{
+  width: 70px;
+  height: 70px;
+}
+
+.doador_contato{
+  display: flex;
+  flex-direction: column;
+}
+
+.nome_doador{
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.dataHoraPublicacao{
+  font-size: 15px;
+}
+
+.info_status{
+  display: flex;
+  gap: 5px;
+  padding-bottom: 20px;
+}
+
+.img_sucesso{
+  width: 30px;
+}
+
+.popUpSair {
+  position: fixed;
+  display: flex;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+}
+
+.popUp {
+  background-color: #fff;
+  color: #225c25;
+  width: auto;
+  height: auto;
+  padding: 20px;
+  border-radius: 20px;
+  position: relative;
+}
+
+.botao_sair {
+  position: absolute;
+  top: 8px;
+  right: 15px;
+  cursor: pointer;
+}
+
+.popUp_p {
+  font-size: 20px;
+  font-weight: 500;
+  text-align: center;
+  padding-top: 15px;
+}
+
+.botaoPopUp {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  padding-top: 15px;
+}
+
+.botoes {
+  display: flex;
+  padding: 10px;
+  height: 35px;
+  font-size: 18px;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  gap: 5px;
+  background-color: #225c25;
+  color: #fff;
+  border: 1px solid #225c25;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.botoes:hover {
+  background-color: #225c25;
+  transform: translateY(-2px);
+}
+
+.icone_cancelar {
+  font-size: 23px;
+}
+
+.icone_sucesso {
+  width: 25px;
+}
+
+.links_popUp{
+  text-decoration: none;
 }

@@ -83,14 +83,13 @@
     width: 230px;
     height: 45px;
     border-radius: 15px;
-    border: 3px solid #000;
+    border: none;
     margin: 20px 140px;
-    transition: 0.5s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.botao_inicial:hover{
-    background-color: #fff;
-    color: #225C25;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+.botao_inicial:hover {
+  background-color: #225c25;
+  transform: translateY(-2px);
 }
 

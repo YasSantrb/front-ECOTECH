@@ -1,23 +1,27 @@
 import styles from "../styles/tela_criar_doacao.module.css";
 import fundo_login_cadastro from "../assets/imagens/fundo_login_cadastro.jpg";
 import icon_voltar from "../assets/imagens/icon_voltar.png";
-import icon_camera from "../assets/imagens/icon-camera.png";
-import PopUpSucesso from "../components/popUpSucesso";
+import { useRef } from "react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 function TelaCriarDoacao() {
+  const navigate = useNavigate();
+  const inputImagemRef = useRef(null);
+
   const [nome, setNome] = useState("");
   const [especificacao, setEspecificacao] = useState("");
   const [descricao, setDescricao] = useState("");
   const [observacao, setObservacao] = useState("");
   const [condicao, setCondicao] = useState("");
+  const [imagens, setImagens] = useState([]);
   const [erroNome, setErroNome] = useState("");
   const [erroEspecificacao, setErroEspecificacao] = useState("");
   const [erroDescricao, setErroDescricao] = useState("");
   const [erroObservacao, setErroObservacao] = useState("");
   const [erroCondicao, setErroCondicao] = useState("");
-  const [mensagemSucesso, setMensagemSucesso] = useState(null);
+  const [erroImagens, setErroImagens] = useState("");
 
   function enviarDoacao(evento) {
     evento.preventDefault();
@@ -26,7 +30,8 @@ function TelaCriarDoacao() {
       !especificacao.trim() ||
       !descricao.trim() ||
       !observacao.trim() ||
-      !condicao.trim()
+      !condicao.trim() ||
+      imagens.length === 0
     ) {
       setErroNome(!nome.trim() ? "Preencha o nome do eletrônico!" : "");
       setErroEspecificacao(
@@ -37,6 +42,9 @@ function TelaCriarDoacao() {
       setErroCondicao(
         !condicao.trim() ? "Preencha a condição do eletrônico!" : ""
       );
+      setErroImagens(
+        imagens.length === 0 ? "Adicione pelo menos uma imagem!" : ""
+      );
       return;
     }
     setErroNome("");
@@ -44,28 +52,34 @@ function TelaCriarDoacao() {
     setErroDescricao("");
     setErroObservacao("");
     setErroCondicao("");
+    setErroImagens("");
 
-    console.log("Doação enviada com sucesso!", {
-      nome,
-      especificacao,
-      descricao,
-      observacao,
-      condicao,
+    navigate("/doacao/pendente", {
+      state: {
+        nome,
+        especificacao,
+        descricao,
+        observacao,
+        condicao,
+        imagens,
+      },
     });
-    setMensagemSucesso("Doação enviada com sucesso!");
     setTimeout(() => {
-      setMensagemSucesso(null);
+      navigate;
     }, 2000);
     setNome("");
     setEspecificacao("");
     setDescricao("");
     setObservacao("");
     setCondicao("");
+    setImagens([]);
+    if (inputImagemRef.current) {
+      inputImagemRef.current.value = "";
+    }
   }
 
   return (
     <div className={styles.tela_criar_doacao}>
-      {mensagemSucesso && <PopUpSucesso mensagem={mensagemSucesso} />}
       <img
         src={fundo_login_cadastro}
         alt="imagem_de_fundo"
@@ -75,7 +89,7 @@ function TelaCriarDoacao() {
       <div className={styles.top_bar_doacao}>
         <Link to="/" className={styles.voltar}>
           <img src={icon_voltar} alt="voltar" className={styles.icone_voltar} />
-          VOLTAR
+          <p className={styles.nav_chat_p}>VOLTAR</p>
         </Link>
       </div>
 
@@ -169,22 +183,17 @@ function TelaCriarDoacao() {
 
               <div className={styles.campo}>
                 <label>Insira as fotos do eletrônico</label>
-                <div className={styles.area_fotos}>
-                  <div className={styles.foto_placeholder}>
-                    <img
-                      src={icon_camera}
-                      alt="ícone câmera"
-                      className={styles.icon_camera}
-                    />
-                  </div>
-                  <div className={styles.foto_placeholder}>
-                    <img
-                      src={icon_camera}
-                      alt="ícone câmera"
-                      className={styles.icon_camera}
-                    />
-                  </div>
-                </div>
+                <input
+                  type="file"
+                  accept="image/*"
+                  multiple
+                  className={`${styles.input} ${
+                    erroImagens ? styles.inputErro : ""
+                  }`}
+                  onChange={(e) => setImagens(Array.from(e.target.files))}
+                  ref={inputImagemRef}
+                />
+                {erroImagens && <p className={styles.erro}>{erroImagens}</p>}
               </div>
             </div>
           </div>

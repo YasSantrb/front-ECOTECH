@@ -18,14 +18,12 @@
 
 .top_bar_empresa {
   width: 100%;
-  max-width: 890px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 20px 40px 0 40px;
   position: relative;
-  z-index: 2;
-  margin-left: -13cm;
+  z-index: 1;
 }
 
 .link_voltar {

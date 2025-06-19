@@ -13,8 +13,8 @@ function TelaSobreNos() {
           <img alt="logo_ecotech" src={logo} className={styles.logo} />
           <ul className={styles.lista_inicial}>
             <li>
-              <Link className={styles.link} to="/inicial">
-                Home
+              <Link className={styles.link} to="/">
+                Feed
               </Link>
             </li>
             <li>
@@ -36,8 +36,8 @@ function TelaSobreNos() {
         <p className={styles.paragrafo}>
           Somos uma plataforma dedicada a facilitar o descarte consciente de
           lixo eletrônico. Nosso objetivo é conectar pessoas a empresas
-          especializadas na reciclagem e reaproveitamento de e-lixo,
-          promovendo um futuro mais sustentável.
+          especializadas na reciclagem e reaproveitamento de e-lixo, promovendo
+          um futuro mais sustentável.
         </p>
       </div>
 
@@ -45,8 +45,8 @@ function TelaSobreNos() {
         <h2 className={styles.titulo}>Nossa Missão</h2>
         <p className={styles.paragrafo}>
           Combater o descarte inadequado de resíduos eletrônicos, preservando o
-          meio ambiente e incentivando práticas sustentáveis através de
-          conexões simples e acessíveis.
+          meio ambiente e incentivando práticas sustentáveis através de conexões
+          simples e acessíveis.
         </p>
       </div>
 

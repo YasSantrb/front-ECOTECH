@@ -75,7 +75,9 @@ function TelaUsuarioDoador() {
             <img src={icon_usuario} alt="" className={styles.perfil} />
             <div className={styles.info_usuario}>
               <h1 className={styles.nome_usuario}>{usuario.nome_usuario}</h1>
-              <Link to="/usuario/empresa"  className={styles.tipo_usuario}><span className={styles.tipo_usuario}>Doador</span></Link>
+              <Link to="/usuario/empresa" className={styles.tipo_usuario}>
+                <span className={styles.tipo_usuario}>Doador</span>
+              </Link>
             </div>
 
             {/* <div className={styles.info_pontos}>
@@ -109,38 +111,38 @@ function TelaUsuarioDoador() {
                     <h3 className={styles.h3}>Editar perfil</h3>
                   </div>
                   {/* <div className={styles.inputs}> */}
-                    <label className={styles.label_modal}>Nome</label>
-                    <input
-                      className={styles.input}
-                      type="text"
-                      value={nome}
-                      placeholder="Insira o novo nome"
-                      onChange={(e) => setNome(e.target.value)}
-                      required
-                    />
-                    <label className={styles.label_modal}>Telefone</label>
-                    <input
-                      className={styles.input}
-                      type="text"
-                      value={telefone}
-                      placeholder="Insira o novo telefone"
-                      onChange={(e) => setTelefone(e.target.value)}
-                      required
-                    />
-                    <label className={styles.label_modal}>Localização</label>
-                    <input
-                      className={styles.input}
-                      type="text"
-                      value={localizacao}
-                      placeholder="Insira a nova localização"
-                      onChange={(e) => setLocalizacao(e.target.value)}
-                      required
-                    />
+                  <label className={styles.label_modal}>Nome</label>
+                  <input
+                    className={styles.input}
+                    type="text"
+                    value={nome}
+                    placeholder="Insira o novo nome"
+                    onChange={(e) => setNome(e.target.value)}
+                    required
+                  />
+                  <label className={styles.label_modal}>Telefone</label>
+                  <input
+                    className={styles.input}
+                    type="text"
+                    value={telefone}
+                    placeholder="Insira o novo telefone"
+                    onChange={(e) => setTelefone(e.target.value)}
+                    required
+                  />
+                  <label className={styles.label_modal}>Localização</label>
+                  <input
+                    className={styles.input}
+                    type="text"
+                    value={localizacao}
+                    placeholder="Insira a nova localização"
+                    onChange={(e) => setLocalizacao(e.target.value)}
+                    required
+                  />
                   {/* </div> */}
                   <div className={styles.botao_formulario_div}>
-                  <button className={styles.botao_formulario} type="submit">
-                    Salvar
-                  </button>
+                    <button className={styles.botao_formulario} type="submit">
+                      Salvar
+                    </button>
                   </div>
                 </form>
               </div>
@@ -188,12 +190,6 @@ function TelaUsuarioDoador() {
 
         <div className={styles.secao_informacoes}>
           <h2 className={styles.titulo_secao}>Acesso rápido</h2>
-          <div className={styles.botoes_rapidos}>
-            <Link to="/sistema/pontos" className={styles.botao_chat}>Loja de pontos</Link>
-            <Link to="/historico/doacoes" className={styles.botao_sair}>Meu histórico</Link>
-            <Link to="/chat" className={styles.botao_chat}>Meu chat</Link>
-            <Link className={styles.botao_sair}>Sair do site</Link>
-          </div>
         </div>
       </div>
     </div>

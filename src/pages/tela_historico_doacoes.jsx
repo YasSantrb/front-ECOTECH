@@ -16,15 +16,17 @@ function TelaHistoricoDoacoes() {
         alt="imagem_de_fundo"
         className={styles.background_tela}
       />
-      <Link to="/usuario/doador" className={styles.voltar}>
-    <img src={icon_voltar} alt="voltar" className={styles.icone_voltar} />
-    VOLTAR
-    </Link>
+      <Link to="/" className={styles.voltar}>
+        <img src={icon_voltar} alt="voltar" className={styles.icone_voltar} />
+        VOLTAR
+      </Link>
 
       <div className={styles.container_verde}>
         <div className={styles.header_container}>
-        <h2 className={styles.titulo}>Histórico de Doações</h2>
-          <p className={styles.subtitulo}>Veja o registro das suas doações realizadas e em andamento</p>
+          <h2 className={styles.titulo}>Histórico de Doações</h2>
+          <p className={styles.subtitulo}>
+            Veja o registro das suas doações realizadas e em andamento
+          </p>
         </div>
 
         <div className={styles.tabela_container}>
@@ -47,8 +49,14 @@ function TelaHistoricoDoacoes() {
                 <td>Floriano - PI</td>
                 <td>Positivo LTDA</td>
                 <td>
-                  <span className={`${styles.status_badge} ${styles.concluida}`}>
-                    <img src={icon_concluido} alt="Concluída" className={styles.status_icon} />
+                  <span
+                    className={`${styles.status_badge} ${styles.concluida}`}
+                  >
+                    <img
+                      src={icon_concluido}
+                      alt="Concluída"
+                      className={styles.status_icon}
+                    />
                     Doação Concluída
                   </span>
                 </td>
@@ -61,7 +69,11 @@ function TelaHistoricoDoacoes() {
                 <td>-</td>
                 <td>
                   <span className={`${styles.status_badge} ${styles.pendente}`}>
-                    <img src={icon_pendente} alt="Pendente" className={styles.status_icon} />
+                    <img
+                      src={icon_pendente}
+                      alt="Pendente"
+                      className={styles.status_icon}
+                    />
                     Pendente
                   </span>
                 </td>
@@ -73,8 +85,14 @@ function TelaHistoricoDoacoes() {
                 <td>Floriano - PI</td>
                 <td>-</td>
                 <td>
-                  <span className={`${styles.status_badge} ${styles.cancelada}`}>
-                    <img src={icon_cancelar} alt="Cancelada" className={styles.status_icon} />
+                  <span
+                    className={`${styles.status_badge} ${styles.cancelada}`}
+                  >
+                    <img
+                      src={icon_cancelar}
+                      alt="Cancelada"
+                      className={styles.status_icon}
+                    />
                     Cancelada
                   </span>
                 </td>
@@ -86,8 +104,14 @@ function TelaHistoricoDoacoes() {
                 <td>Floriano - PI</td>
                 <td>Adreiltom Lima</td>
                 <td>
-                  <span className={`${styles.status_badge} ${styles.aguardando}`}>
-                    <img src={icon_aguardando} alt="Aguardando" className={styles.status_icon} />
+                  <span
+                    className={`${styles.status_badge} ${styles.aguardando}`}
+                  >
+                    <img
+                      src={icon_aguardando}
+                      alt="Aguardando"
+                      className={styles.status_icon}
+                    />
                     Aguardando Coleta
                   </span>
                 </td>
@@ -97,10 +121,14 @@ function TelaHistoricoDoacoes() {
         </div>
 
         <Link to="/doacao/pendente">
-        <button className={styles.botao_pendentes}>
-          <img src={icon_verificar} alt="verificar" className={styles.icon_verificar} />
-          Visualizar doações pendentes
-        </button>
+          <button className={styles.botao_pendentes}>
+            <img
+              src={icon_verificar}
+              alt="verificar"
+              className={styles.icon_verificar}
+            />
+            Visualizar doações pendentes
+          </button>
         </Link>
       </div>
     </div>

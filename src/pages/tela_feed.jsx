@@ -5,6 +5,7 @@ import feed2 from "../assets/imagens/2.png";
 import feed3 from "../assets/imagens/3.png";
 import feed4 from "../assets/imagens/4.png";
 import feed5 from "../assets/imagens/1.png";
+import icone_sucesso from "../assets/imagens/checked 2.png";
 
 function TelaFeed() {
   // Função para o carrossel automatico
@@ -247,16 +248,30 @@ function TelaFeed() {
     return categoria && local && estado;
   });
 
+  const [menuAberto, setMenuAberto] = useState(false);
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  function abrirModal() {
+    setIsModalOpen(true);
+  }
+
+  function fecharModal() {
+    setIsModalOpen(false);
+  }
+
   return (
     <>
       <header>
         <nav className={styles.nav_feed}>
           <div className={styles.nav_feed_info}>
-            <img
-              className={styles.logo_feed}
-              src="src/assets/imagens/Logo.png"
-              alt=""
-            />
+            <Link to="/inicial">
+              <img
+                className={styles.logo_feed}
+                src="src/assets/imagens/Logo.png"
+                alt=""
+              />
+            </Link>
 
             <div className={styles.pesquisar}>
               <i
@@ -274,9 +289,9 @@ function TelaFeed() {
                 <li>
                   <Link
                     className={`${styles.link_feed} ${styles.link_home} `}
-                    to="/inicial"
+                    to="/sobre/nos"
                   >
-                    Home
+                    Sobre nós
                   </Link>
                 </li>
                 <li>
@@ -295,13 +310,98 @@ function TelaFeed() {
                     Pontos de Coleta
                   </Link>
                 </li>
-                <li className="link_usuario">
-                  <Link
+                <li className={` ${styles.dropdown}`}>
+                  <span
+                    onClick={() => setMenuAberto(!menuAberto)}
                     className={`${styles.link_feed} ${styles.link_usuario}`}
-                    to="/usuario/empresa"
                   >
                     Usuário
-                  </Link>
+                  </span>
+
+                  {menuAberto && (
+                    <ul className={styles.dropdown_menu}>
+                      <li>
+                        <Link to="/login" className={styles.link_dropdown}>
+                          Entrar
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          to="/usuario/empresa"
+                          className={styles.link_dropdown}
+                        >
+                          Meu perfil
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          to="historico/doacoes"
+                          className={styles.link_dropdown}
+                        >
+                          Meu histórico
+                        </Link>
+                      </li>
+                      <li>
+                        <Link to="/chat" className={styles.link_dropdown}>
+                          Meu chat
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          to="/sistema/pontos"
+                          className={styles.link_dropdown}
+                        >
+                          Meus pontos
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          onClick={() => abrirModal()}
+                          className={styles.link_dropdown}
+                        >
+                          Sair
+                        </Link>
+                      </li>
+
+                      {isModalOpen && (
+                        <div className={styles.popUpSair}>
+                          <div className={styles.popUp}>
+                            <i
+                              className={`${styles.botao_sair} fa-solid fa-x`}
+                              onClick={fecharModal}
+                            ></i>
+                            <p className={styles.popUp_p}>
+                              Tem certeza de que deseja sair do site?
+                            </p>
+                            <div className={styles.botaoPopUp}>
+                              <button
+                                onClick={fecharModal}
+                                className={styles.botoes}
+                              >
+                                Cancelar
+                                <i
+                                  className={`${styles.icone_cancelar} fa-solid fa-circle-xmark`}
+                                ></i>
+                              </button>
+                              <Link
+                                className={styles.links_popUp}
+                                to="/inicial"
+                              >
+                                <button className={styles.botoes}>
+                                  Confirmo!
+                                  <img
+                                    className={styles.icone_sucesso}
+                                    src={icone_sucesso}
+                                    alt=""
+                                  />
+                                </button>
+                              </Link>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+                    </ul>
+                  )}
                 </li>
               </ul>
             </div>
@@ -437,7 +537,8 @@ function TelaFeed() {
               <i className="fa-solid fa-recycle"></i>
               <h2 className={styles.resumo_titulo}>Dê um novo destino</h2>
               <p className={styles.resumo_texto}>
-                Cada doação é um passo a mais por um mundo mais justo e sustentável.
+                Cada doação é um passo a mais por um mundo mais justo e
+                sustentável.
               </p>
             </div>
 
