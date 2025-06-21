@@ -43,7 +43,7 @@
   align-items: center;
   gap: 30px;
   font-size: 22px;
-  padding-right: 10px;
+  padding-right: 15px;
 }
 
 .menu .link_feed {
@@ -69,12 +69,68 @@
   margin-right: 3px;
 }
 
-.link_doe_agora::before {
+.entrar::before{
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  font-size: 20px;
+  content: "\f2f6";
+  margin-right: 5px;
+}
+
+.doe_agora::before {
   font-family: "Font Awesome 6 Free";
   font-weight: 900;
   font-size: 20px;
   content: "\f06b";
-  margin-right: 3px;
+  margin-right: 5px;
+}
+
+.meu_perfil::before{
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  font-size: 20px;
+  content: "\f007";
+  margin-right: 5px;
+}
+
+.meu_chat::before{
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  font-size: 20px;
+  content: "\f086";
+  margin-right: 5px;
+}
+
+.registro_pontos::before{
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  font-size: 20px;
+  content: "\f093";
+  margin-right: 5px;
+}
+
+.sair::before{
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  font-size: 20px;
+  content: "\f2f5";
+  margin-right: 5px;
+}
+
+.sistema_pontos::before{
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  font-size: 20px;
+  content: "\f79c";
+  margin-right: 5px;
+}
+
+.meu_historico::before{
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  font-size: 20px;
+  content: "\f1da";
+  margin-right: 5px;
 }
 
 .link_pontos_de_coleta::before {
@@ -102,13 +158,14 @@
   display: none;
   position: absolute;
   top: 120%;
+  left: -15%;
   background-color: white;
   list-style: none;
-  padding: 5px 2px;
+  padding: 5px 0;
   margin: 0;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 4px;
-  width: 110%;
+  width: 130%;
   z-index: 1000;
   white-space: nowrap;
 }

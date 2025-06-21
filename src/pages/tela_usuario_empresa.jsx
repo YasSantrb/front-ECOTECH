@@ -73,7 +73,7 @@ function TelaUsuarioEmpresa() {
             <img src={icon_amazon} alt="" className={styles.perfil} />
             <div className={styles.info_usuario}>
               <h1 className={styles.nome_usuario}>{usuario.nome_usuario}</h1>
-              <Link to="/usuario/doador" className={styles.tipo_usuario}>
+              <Link to="/usuario/empresa" className={styles.tipo_usuario}>
                 <span className={styles.tipo_usuario}>Empresa</span>
               </Link>
             </div>
@@ -194,11 +194,6 @@ function TelaUsuarioEmpresa() {
 
         <div className={styles.secao_informacoes}>
           <h2 className={styles.titulo_secao}>Acesso rápido</h2>
-          <div className={styles.botoes_rapidos}>
-            <Link to="/registro/pontos/coleta" className={styles.botao_sair}>
-              Registrar pontos coleta
-            </Link>
-          </div>
         </div>
       </div>
     </div>

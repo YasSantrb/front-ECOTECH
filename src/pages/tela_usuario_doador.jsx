@@ -75,7 +75,7 @@ function TelaUsuarioDoador() {
             <img src={icon_usuario} alt="" className={styles.perfil} />
             <div className={styles.info_usuario}>
               <h1 className={styles.nome_usuario}>{usuario.nome_usuario}</h1>
-              <Link to="/usuario/empresa" className={styles.tipo_usuario}>
+              <Link to="/usuario/doador" className={styles.tipo_usuario}>
                 <span className={styles.tipo_usuario}>Doador</span>
               </Link>
             </div>

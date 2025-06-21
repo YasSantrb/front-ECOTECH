@@ -19,19 +19,26 @@
   z-index: 0;
 }
 
-.link_voltar {
+.link_chat_voltar {
   display: flex;
   gap: 5px;
   text-decoration: none;
   padding-left: 5px;
   align-items: center;
+  background-color: #fff;
   border: none;
   cursor: pointer;
 }
 
-.icon_voltar {
+.icon_voltar_chat{
   width: 26px;
   height: 26px;
+}
+
+.nav_chat_p {
+  font-size: 20px;
+  color: #225c25;
+  font-weight: 500;
 }
 .barra_voltar {
   position: absolute;

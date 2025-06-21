@@ -104,7 +104,7 @@ function TelaRegistroPontosColeta() {
       />
 
       <div className={styles.top_bar_doacao}>
-        <Link to="/usuario/empresa" className={styles.voltar}>
+        <Link to="/" className={styles.voltar}>
           <img src={icon_voltar} alt="voltar" className={styles.icone_voltar} />
           <p className={styles.nav_p}>VOLTAR</p>
         </Link>

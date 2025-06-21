@@ -36,7 +36,6 @@
 
 .conteiner {
   border-radius: 20px;
-  border: solid black;
   background-color: #225c25;
   color: #fff;
   text-align: center;
@@ -72,11 +71,9 @@
 .textarea_observacao {
   width: 100%;
   height: 200px;
-  resize: none !important;
   padding: 10px;
   box-sizing: border-box;
   border-radius: 10px;
-  border: solid black;
 }
 
 .buttons_agendamento {
@@ -95,15 +92,8 @@
   border: none;
   margin-top: 20px;
   color: #0b561d;
-  border: solid black;
 }
 
-.input_agendamento {
-  border: solid black;
-}
-.tela_agendamento_p {
-  font-style: italic;
-}
 .top-bar {
   z-index: 1;
   margin-left: 0;
@@ -122,4 +112,97 @@
 
 .erro_input{
   border: 1px solid red;
+}
+
+.popUpFormulario{
+  position: fixed;
+  display: flex;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+}
+
+.popUp {
+  background-color: #fff;
+  color: #225c25;
+  width: 30%;
+  height: auto;
+  padding: 10px;
+  border-radius: 20px;
+}
+
+.titulo{
+  display: flex;
+  gap: 20px;
+  font-size: 20px;
+  font-weight: 500;
+  align-items: center;
+  justify-content: center;
+}
+
+.h3{
+  font-weight: 500;
+}
+
+.icone_sair_modal{
+  display: flex;
+  align-items: right;
+  justify-content: right;
+}
+
+.botao_sair_modal {
+  cursor: pointer;
+  align-self: flex-start;
+  font-size: 18px;
+}
+
+.inputs{
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.input{
+  padding: 10px 5px 10px 5px;
+  border: 1px solid #64748b;
+  width: 100%;
+}
+
+.label_modal{
+  font-weight: 500;
+}
+
+.botao_formulario_div{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 20px;
+}
+
+.botao_formulario {
+  display: flex;
+  padding: 5px;
+  height: 35px;
+  font-size: 20px;
+  font-weight: 500;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  gap: 5px;
+  background-color: #225c25;
+  color: #fff;
+  border: 1px solid #225c25;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.botao_formulario:hover {
+  background-color: #225c25;
+  transform: translateY(-2px);
 }

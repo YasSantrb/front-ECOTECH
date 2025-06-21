@@ -2,6 +2,7 @@ import styles from "../styles/tela_agendamento.module.css";
 import point from "../assets/imagens/icon_localizacao.png";
 import fundo from "../assets/imagens/fundo_login_cadastro.jpg";
 import icon_voltar from "../assets/imagens/icon_voltar.png";
+import PopUpSucesso from "../components/popUpSucesso.jsx";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
@@ -14,14 +15,37 @@ function TelaAgendamento() {
   const [erroHoraColeta, setErroHoraColeta] = useState("");
   const [erroObservacao, setErroObservacao] = useState("");
   const [mensagemSucesso, setMensagemSucesso] = useState(null);
+  const [dadosAgendamento, setDadosAgendamento] = useState({
+    data: "",
+    hora: "",
+    observacao: "",
+  });
 
   function enviarAgendamento(evento) {
     evento.preventDefault();
 
-    if (!dataColeta.trim() || !horaColeta.trim() || !observacao.trim()) {
-      setErroDataColeta(!dataColeta.trim() ? "Preencha a data da coleta!" : "");
-      setErroHoraColeta(!horaColeta.trim() ? "Preencha a hora da coleta!" : "");
+    const { data, hora, observacao } = dadosAgendamento;
+    const hoje = new Date();
+    const dataSelecionada = new Date(data);
+
+    if (!data.trim() || !hora.trim() || !observacao.trim()) {
+      setErroDataColeta(!data.trim() ? "Preencha a data da coleta!" : "");
+      setErroHoraColeta(!hora.trim() ? "Preencha a hora da coleta!" : "");
       setErroObservacao(!observacao.trim() ? "Preencha a observação" : "");
+      return;
+    }
+
+    if (dataSelecionada < hoje.setHours(0, 0, 0, 0)) {
+      setErroDataColeta("A data da coleta não pode ser no passado!");
+      return;
+    }
+
+    const [horaStr, minutoStr] = hora.split(":");
+    const horaNum = parseInt(horaStr);
+    const minutoNum = parseInt(minutoStr);
+
+    if (horaNum < 8 || horaNum > 18 || (horaNum === 18 && minutoNum > 0)) {
+      setErroHoraColeta("O horário deve ser entre 08:00 e 18:00!");
       return;
     }
     setErroDataColeta("");
@@ -29,10 +53,11 @@ function TelaAgendamento() {
     setErroObservacao("");
 
     console.log("Agendamento realizado com sucesso!", {
-      dataColeta,
-      horaColeta,
+      data,
+      hora,
       observacao,
     });
+    setMensagemSucesso("Agendamento realizado com sucesso!");
 
     setTimeout(() => {
       setMensagemSucesso(null);
@@ -40,7 +65,23 @@ function TelaAgendamento() {
     setDataColeta("");
     setHoraColeta("");
     setObservacao("");
+    setDadosAgendamento({ data: "", hora: "", observacao: "" });
   }
+
+  const [isEditarModalOpen, setIsEditarModalOpen] = useState(false);
+  function abrirModalEditar() {
+    setDadosAgendamento({
+      data: dataColeta,
+      hora: horaColeta,
+      observacao: observacao,
+    });
+    setIsEditarModalOpen(true);
+  }
+
+  function fecharModalEditar() {
+    setIsEditarModalOpen(false);
+  }
+
   return (
     <div className={styles.background_agendamento}>
       {mensagemSucesso && <PopUpSucesso mensagem={mensagemSucesso} />}
@@ -70,7 +111,12 @@ function TelaAgendamento() {
               Preencha os campos abaixo para agendar ou retirar sua coleta!
             </p>
           </div>
-          <form onSubmit={enviarAgendamento}>
+          <form
+            onSubmit={(e) => {
+              enviarAgendamento(e);
+              fecharModalEditar();
+            }}
+          >
             <div className={styles.data}>
               <div className={styles.leftdiv}>
                 <div className={styles.campo}>
@@ -106,7 +152,7 @@ function TelaAgendamento() {
                   )}
                 </div>
               </div>
-              <div class={styles.rightdiv}>
+              <div className={styles.rightdiv}>
                 <div className={styles.campo}>
                   <p className={styles.tela_agendamento_p}>Horario da coleta</p>
                   <input
@@ -131,9 +177,51 @@ function TelaAgendamento() {
                     <img src={point} height="80px" />
                     Pontos de coleta
                   </button>
-                  <button type="submit" className={styles.botao_agendamento}>
+                  <button
+                    type="button"
+                    onClick={abrirModalEditar}
+                    className={styles.botao_agendamento}
+                  >
                     <h2>Enviar</h2>
                   </button>
+
+                  {isEditarModalOpen && (
+                    <div className={styles.popUpFormulario}>
+                      <div className={styles.popUp}>
+                        <div className={styles.formulario}>
+                          <div className={styles.icone_sair_modal}>
+                            <i
+                              className={`${styles.botao_sair_modal} fa-solid fa-x`}
+                              onClick={fecharModalEditar}
+                            ></i>
+                          </div>
+                          <div className={styles.titulo}>
+                            <h3 className={styles.h3}>Revisar Agendamento</h3>
+                          </div>
+                          <label className={styles.label_modal}>
+                            Data Coleta
+                          </label>
+                          <p>{dadosAgendamento.data}</p>
+                          <label className={styles.label_modal}>
+                            Hora Coleta
+                          </label>
+                          <p>{dadosAgendamento.hora}</p>
+                          <label className={styles.label_modal}>
+                            Observação
+                          </label>
+                          <p>{dadosAgendamento.observacao}</p>
+                          <div className={styles.botao_formulario_div}>
+                            <button
+                              className={styles.botao_formulario}
+                              type="submit"
+                            >
+                              Salvar
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>

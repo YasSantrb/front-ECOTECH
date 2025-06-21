@@ -5,7 +5,8 @@ import feed2 from "../assets/imagens/2.png";
 import feed3 from "../assets/imagens/3.png";
 import feed4 from "../assets/imagens/4.png";
 import feed5 from "../assets/imagens/1.png";
-import icone_sucesso from "../assets/imagens/checked 2.png";
+import BarraNavegacaoDoador from "../components/navBarDoador";
+import BarraNavegacaoEmpresa from "../components/navBarEmpresa";
 
 function TelaFeed() {
   // Função para o carrossel automatico
@@ -248,166 +249,14 @@ function TelaFeed() {
     return categoria && local && estado;
   });
 
-  const [menuAberto, setMenuAberto] = useState(false);
-
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  function abrirModal() {
-    setIsModalOpen(true);
-  }
-
-  function fecharModal() {
-    setIsModalOpen(false);
-  }
+  const tipoUsuario = localStorage.getItem("tipoUsuario"); 
+  const logado = localStorage.getItem("logado") === "true";
 
   return (
     <>
-      <header>
-        <nav className={styles.nav_feed}>
-          <div className={styles.nav_feed_info}>
-            <Link to="/inicial">
-              <img
-                className={styles.logo_feed}
-                src="src/assets/imagens/Logo.png"
-                alt=""
-              />
-            </Link>
-
-            <div className={styles.pesquisar}>
-              <i
-                className={`${styles.icone_pesquisar} fa-solid fa-magnifying-glass`}
-              ></i>
-              <input
-                className={styles.campo_pesquisa}
-                type="text"
-                placeholder="Pesquisar"
-              />
-            </div>
-
-            <div className={styles.lista_feed}>
-              <ul className={styles.menu}>
-                <li>
-                  <Link
-                    className={`${styles.link_feed} ${styles.link_home} `}
-                    to="/sobre/nos"
-                  >
-                    Sobre nós
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    className={`${styles.link_feed} ${styles.link_doe_agora}`}
-                    to="/criar/doacao"
-                  >
-                    Doe agora
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    className={`${styles.link_feed} ${styles.link_pontos_de_coleta}`}
-                    to="/localizacao/pontos/coleta"
-                  >
-                    Pontos de Coleta
-                  </Link>
-                </li>
-                <li className={` ${styles.dropdown}`}>
-                  <span
-                    onClick={() => setMenuAberto(!menuAberto)}
-                    className={`${styles.link_feed} ${styles.link_usuario}`}
-                  >
-                    Usuário
-                  </span>
-
-                  {menuAberto && (
-                    <ul className={styles.dropdown_menu}>
-                      <li>
-                        <Link to="/login" className={styles.link_dropdown}>
-                          Entrar
-                        </Link>
-                      </li>
-                      <li>
-                        <Link
-                          to="/usuario/empresa"
-                          className={styles.link_dropdown}
-                        >
-                          Meu perfil
-                        </Link>
-                      </li>
-                      <li>
-                        <Link
-                          to="historico/doacoes"
-                          className={styles.link_dropdown}
-                        >
-                          Meu histórico
-                        </Link>
-                      </li>
-                      <li>
-                        <Link to="/chat" className={styles.link_dropdown}>
-                          Meu chat
-                        </Link>
-                      </li>
-                      <li>
-                        <Link
-                          to="/sistema/pontos"
-                          className={styles.link_dropdown}
-                        >
-                          Meus pontos
-                        </Link>
-                      </li>
-                      <li>
-                        <Link
-                          onClick={() => abrirModal()}
-                          className={styles.link_dropdown}
-                        >
-                          Sair
-                        </Link>
-                      </li>
-
-                      {isModalOpen && (
-                        <div className={styles.popUpSair}>
-                          <div className={styles.popUp}>
-                            <i
-                              className={`${styles.botao_sair} fa-solid fa-x`}
-                              onClick={fecharModal}
-                            ></i>
-                            <p className={styles.popUp_p}>
-                              Tem certeza de que deseja sair do site?
-                            </p>
-                            <div className={styles.botaoPopUp}>
-                              <button
-                                onClick={fecharModal}
-                                className={styles.botoes}
-                              >
-                                Cancelar
-                                <i
-                                  className={`${styles.icone_cancelar} fa-solid fa-circle-xmark`}
-                                ></i>
-                              </button>
-                              <Link
-                                className={styles.links_popUp}
-                                to="/inicial"
-                              >
-                                <button className={styles.botoes}>
-                                  Confirmo!
-                                  <img
-                                    className={styles.icone_sucesso}
-                                    src={icone_sucesso}
-                                    alt=""
-                                  />
-                                </button>
-                              </Link>
-                            </div>
-                          </div>
-                        </div>
-                      )}
-                    </ul>
-                  )}
-                </li>
-              </ul>
-            </div>
-          </div>
-        </nav>
-      </header>
+      {logado && tipoUsuario === "doador" && <BarraNavegacaoDoador />}
+      {logado && tipoUsuario === "empresa" && <BarraNavegacaoEmpresa />}
+      {!logado && <BarraNavegacaoDoador />}
 
       <main>
         <div className={styles.carrossel_container}>

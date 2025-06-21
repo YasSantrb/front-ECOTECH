@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styles from "../styles/tela_login.module.css";
 import logo from "../assets/imagens/Logo.png";
 import planeta from "../assets/imagens/planeta-login.png";
@@ -24,20 +24,44 @@ function TelaLogin() {
 
     let valido = true;
 
-    if (!email.trim())  {setErroEmail("Preencha o campo de email.");  valido = false;}
-    else                {setErroEmail("");}
+    if (!email.trim()) {
+      setErroEmail("Preencha o campo de email.");
+      valido = false;
+    } else {
+      setErroEmail("");
+    }
 
-    if (!cpf.trim())    {setErroCpf("Preencha o campo de CPF.");      valido = false;}
-    else                {setErroCpf("");}
+    if (!cpf.trim()) {
+      setErroCpf("Preencha o campo de CPF.");
+      valido = false;
+    } else {
+      setErroCpf("");
+    }
 
-    if (!senha.trim())  {setErroSenha("Preencha o campo de senha.");  valido = false;}
-    else                {setErroSenha("");}
+    if (!senha.trim()) {
+      setErroSenha("Preencha o campo de senha.");
+      valido = false;
+    } else {
+      setErroSenha("");
+    }
 
     if (!valido) return;
     setEmail("");
     setCpf("");
     setSenha("");
 
+    const cpfNumeros = cpf.replace(/\D/g, "");
+
+    if (cpfNumeros.length === 11) {
+      localStorage.setItem("tipoUsuario", "doador");
+    } else if (cpfNumeros.length === 14) {
+      localStorage.setItem("tipoUsuario", "empresa");
+    } else {
+      setErroCpf("CPF ou CNPJ inválido.");
+      return;
+    }
+
+    localStorage.setItem("logado", "true");
 
     navigate("/");
   }
@@ -51,10 +75,13 @@ function TelaLogin() {
       />
 
       <div className={styles.barra_voltar}>
-        <Link className={styles.link_voltar} to="/">
-          <img className={styles.icon_voltar} src={icon_voltar} alt="voltar" />
-          <p className={styles.nav_p}>VOLTAR</p>
-        </Link>
+        <button
+          className={styles.link_chat_voltar}
+          onClick={() => navigate(-1)}
+        >
+          <img className={styles.icon_voltar_chat} src={icon_voltar} alt="" />
+          <p className={styles.nav_chat_p}>VOLTAR</p>
+        </button>
       </div>
 
       <div className={styles.login_box}>
@@ -76,7 +103,7 @@ function TelaLogin() {
               <img src={iconEmail} alt="" className={styles.input_icon} />
             </div>
             {erroEmail && <span className={styles.erro}>{erroEmail}</span>}
-            <label>CPF</label>
+            <label>CPF ou CNPJ</label>
             <div className={styles.input_container}>
               <input
                 type="text"
@@ -115,8 +142,7 @@ function TelaLogin() {
         <div className={styles.texto_direita}>
           <p className={styles.frase}>
             Doe seu lixo eletrônico
-            <br />
-            e cuide do planeta!
+            <br />e cuide do planeta!
           </p>
           <img src={planeta} alt="planeta" className={styles.img_planeta} />
         </div>
