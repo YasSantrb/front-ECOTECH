@@ -4,6 +4,8 @@
   height: 100%;
   object-fit: cover;
   z-index: 0;
+  opacity: 0.15;
+  filter: blur(2px);
 }
 
 .info_doacao_div {
@@ -45,20 +47,20 @@
 }
 
 .info_doacao_container {
-  display: flex;
-  flex-direction: column;
-  width: 80%;
-  height: 95%;
   max-width: 900px;
-  min-height: 400px;
-  background-color: #fff;
-  border-radius: 20px;
-  /* /* box-shadow: 0 0 15px rgba(0, 0, 0, 0.3); */
-  box-shadow: 0 0 8px 4px rgba(34, 92, 37, 0.4); 
-  padding: 20px;
-  color: #225c25;
+  box-sizing: border-box;
   position: relative;
-  padding: 50px 20px 50px 20px;
+  z-index: 1;
+  background-color: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(20px);
+  border-radius: 24px;
+  width: 90%;
+  padding: 20px 30px;
+  box-shadow: 0 0 8px 4px rgba(34, 92, 37, 0.4);
+  margin-bottom: 20px;
+  border: 1px solid rgba(45, 90, 45, 0.08);
+  color: #225c25;
+  overflow-x: hidden;
 }
 
 .container_header_icons {
@@ -221,6 +223,7 @@
 
 .botao_agendar_coleta {
   background-color: #225c25;
+  color: #fff;
   border: none;
   border-radius: 25px;
   padding: 8px 16px;

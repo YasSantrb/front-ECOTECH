@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import styles from "../styles/tela_info_doacao.module.css";
-import icon_user from "../assets/imagens/ceo.png";
 import icon_sucesso from "../assets/imagens/checked 2.png";
+import { useNavigate } from "react-router-dom";
 
 function InformacoesDoacaoComponente({
   nomeDoador,
@@ -10,8 +10,11 @@ function InformacoesDoacaoComponente({
   infoProduto,
   condicao,
   observacao,
+  endereco,
+  imagem_user,
   imagem,
 }) {
+  const navigate = useNavigate();
   return (
     <div className={styles.info_doacao_container}>
       <div className={styles.info_doacao_conteudos}>
@@ -33,15 +36,13 @@ function InformacoesDoacaoComponente({
             <div className={styles.doador_info_esquerda}>
               <h3>Doado por:</h3>
               <div className={styles.info_doador}>
-                <img className={styles.img_doador} src={icon_user} alt="" />
+                <img className={styles.img_doador} src={imagem_user} alt="" />
                 <div className={styles.doador_contato}>
                   <p className={styles.nome_doador}>{nomeDoador}</p>
                   <p className={styles.dataHoraPublicacao}>
                     Publicado 19/05/2025 às 18:02
                   </p>
-                  <p className={styles.dataHoraPublicacao}>
-                    Localizacao: Floriano - PI
-                  </p>
+                  <p className={styles.dataHoraPublicacao}>{endereco}</p>
                   <div className={styles.botao_entrar_em_contato}>
                     <Link className={styles.link_entrar_em_contato} to="/chat">
                       <span className={styles.tag_disponibilidade}>
@@ -79,12 +80,20 @@ function InformacoesDoacaoComponente({
           </div>
 
           <div className={styles.botao_agendar_div}>
-            <button className={styles.botao_agendar_coleta}>
+            <button
+              className={styles.botao_agendar_coleta}
+              onClick={() =>
+                navigate("/agendamento", {
+                  state: {
+                    produto: nomeEletronico,
+                    doador: nomeDoador,
+                    endereco: endereco,
+                  },
+                })
+              }
+            >
               {" "}
-              <Link className={styles.agendar_coleta_link} to="/agendamento">
-                {" "}
-                Agendar coleta!
-              </Link>
+              Agendar coleta!
             </button>
           </div>
         </div>

@@ -1,13 +1,15 @@
 import styles from "../styles/tela_agendamento.module.css";
-import point from "../assets/imagens/icon_localizacao.png";
 import fundo from "../assets/imagens/fundo_login_cadastro.jpg";
 import icon_voltar from "../assets/imagens/icon_voltar.png";
 import PopUpSucesso from "../components/popUpSucesso.jsx";
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 function TelaAgendamento() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const { produto, doador, endereco } = location.state || {};
+
   const [dataColeta, setDataColeta] = useState("");
   const [horaColeta, setHoraColeta] = useState("");
   const [observacao, setObservacao] = useState("");
@@ -15,71 +17,113 @@ function TelaAgendamento() {
   const [erroHoraColeta, setErroHoraColeta] = useState("");
   const [erroObservacao, setErroObservacao] = useState("");
   const [mensagemSucesso, setMensagemSucesso] = useState(null);
-  const [dadosAgendamento, setDadosAgendamento] = useState({
-    data: "",
-    hora: "",
-    observacao: "",
-  });
+  const [isEditarModalOpen, setIsEditarModalOpen] = useState(false);
 
-  function enviarAgendamento(evento) {
-    evento.preventDefault();
+  const [dadosAgendamentoParaRevisao, setDadosAgendamentoParaRevisao] =
+    useState({
+      data: "",
+      hora: "",
+      observacao: "",
+      produto: produto || "Não informado",
+      doador: doador || "Não informado",
+      endereco: endereco || "Não informado",
+    });
 
-    const { data, hora, observacao } = dadosAgendamento;
-    const hoje = new Date();
-    const dataSelecionada = new Date(data);
+  useEffect(() => {
+    setDadosAgendamentoParaRevisao((prev) => ({
+      ...prev,
+      data: dataColeta,
+      hora: horaColeta,
+      observacao: observacao,
+    }));
+  }, [dataColeta, horaColeta, observacao]);
 
-    if (!data.trim() || !hora.trim() || !observacao.trim()) {
-      setErroDataColeta(!data.trim() ? "Preencha a data da coleta!" : "");
-      setErroHoraColeta(!hora.trim() ? "Preencha a hora da coleta!" : "");
-      setErroObservacao(!observacao.trim() ? "Preencha a observação" : "");
-      return;
-    }
+  function validarCampos() {
+    let isValid = true;
 
-    if (dataSelecionada < hoje.setHours(0, 0, 0, 0)) {
-      setErroDataColeta("A data da coleta não pode ser no passado!");
-      return;
-    }
-
-    const [horaStr, minutoStr] = hora.split(":");
-    const horaNum = parseInt(horaStr);
-    const minutoNum = parseInt(minutoStr);
-
-    if (horaNum < 8 || horaNum > 18 || (horaNum === 18 && minutoNum > 0)) {
-      setErroHoraColeta("O horário deve ser entre 08:00 e 18:00!");
-      return;
-    }
     setErroDataColeta("");
     setErroHoraColeta("");
     setErroObservacao("");
 
-    console.log("Agendamento realizado com sucesso!", {
-      data,
-      hora,
-      observacao,
-    });
-    setMensagemSucesso("Agendamento realizado com sucesso!");
+    if (!dataColeta.trim()) {
+      setErroDataColeta("Por favor, selecione a data da coleta.");
+      isValid = false;
+    } else {
+      const hoje = new Date();
+      hoje.setHours(0, 0, 0, 0);
+      const dataSelecionada = new Date(dataColeta);
 
-    setTimeout(() => {
-      setMensagemSucesso(null);
-    }, 2000);
-    setDataColeta("");
-    setHoraColeta("");
-    setObservacao("");
-    setDadosAgendamento({ data: "", hora: "", observacao: "" });
+      if (dataSelecionada < hoje) {
+        setErroDataColeta("A data da coleta não pode ser no passado.");
+        isValid = false;
+      }
+    }
+
+    if (!horaColeta.trim()) {
+      setErroHoraColeta("Por favor, selecione a hora da coleta.");
+      isValid = false;
+    } else {
+      const [horaStr, minutoStr] = horaColeta.split(":");
+      const horaNum = parseInt(horaStr);
+      const minutoNum = parseInt(minutoStr);
+
+      if (
+        isNaN(horaNum) ||
+        isNaN(minutoNum) ||
+        horaNum < 8 ||
+        horaNum > 18 ||
+        (horaNum === 18 && minutoNum > 0)
+      ) {
+        setErroHoraColeta("O horário deve ser entre 08:00 e 18:00.");
+        isValid = false;
+      }
+    }
+
+    if (!observacao.trim()) {
+      setErroObservacao("Por favor, preencha a observação.");
+      isValid = false;
+    }
+
+    return isValid;
   }
 
-  const [isEditarModalOpen, setIsEditarModalOpen] = useState(false);
-  function abrirModalEditar() {
-    setDadosAgendamento({
+  function abrirModalRevisao() {
+    if (validarCampos()) {
+      setIsEditarModalOpen(true);
+    }
+  }
+
+  function fecharModalRevisao() {
+    setIsEditarModalOpen(false);
+  }
+
+  function confirmarAgendamento(evento) {
+    evento.preventDefault();
+
+    console.log("Agendamento realizado com sucesso!", {
       data: dataColeta,
       hora: horaColeta,
       observacao: observacao,
     });
-    setIsEditarModalOpen(true);
-  }
+    setMensagemSucesso("Agendamento realizado com sucesso!");
 
-  function fecharModalEditar() {
-    setIsEditarModalOpen(false);
+    setDataColeta("");
+    setHoraColeta("");
+    setObservacao("");
+    fecharModalRevisao();
+
+    setDadosAgendamentoParaRevisao({
+      data: "",
+      hora: "",
+      observacao: "",
+      produto: produto || "Não informado",
+      doador: doador || "Não informado",
+      endereco: endereco || "Não informado",
+    });
+
+    setTimeout(() => {
+      setMensagemSucesso(null);
+    }, 2000);
   }
 
   return (
@@ -104,130 +148,136 @@ function TelaAgendamento() {
         </button>
       </div>
       <div className={styles.conteiner}>
-        <div className={styles.conteiner_01}>
-          <div className={styles.conteiner_1}>
-            <h1>Agendar Coleta</h1>
-            <p className={styles.tela_agendamento_p}>
-              Preencha os campos abaixo para agendar ou retirar sua coleta!
-            </p>
+        <h2 className={styles.titulo_principal}>Agendar Coleta</h2>
+        <div className={styles.info_agendamento}>
+          <p>
+            <strong>Produto:</strong> {produto || "Não informado"}
+          </p>
+          <p>
+            <strong>Doador:</strong> {doador || "Não informado"}
+          </p>
+          <p>
+            <strong>Endereço:</strong> {endereco || "Não informado"}
+          </p>
+        </div>
+        <form onSubmit={(e) => e.preventDefault()}>
+          <div className={styles.formulario_grid}>
+            <div className={styles.campo}>
+              <label htmlFor="dataColeta" className={styles.label_campo}>
+                Data da Coleta
+              </label>
+              <input
+                className={`${styles.input_agendamento} ${
+                  erroDataColeta ? styles.erro_input : ""
+                }`}
+                value={dataColeta}
+                onChange={(e) => setDataColeta(e.target.value)}
+                type="date"
+              />
+              {erroDataColeta && (
+                <p className={styles.erro}>{erroDataColeta}</p>
+              )}
+            </div>
+            <div className={styles.campo}>
+              <label htmlFor="horaColeta" className={styles.label_campo}>
+                Horário da Coleta
+              </label>
+              <input
+                className={`${styles.input_agendamento} ${
+                  erroHoraColeta ? styles.erro_input : ""
+                }`}
+                value={horaColeta}
+                onChange={(e) => setHoraColeta(e.target.value)}
+                type="time"
+              />
+              {erroHoraColeta && (
+                <p className={styles.erro}>{erroHoraColeta}</p>
+              )}
+            </div>
+            <div className={styles.campo}>
+              <label htmlFor="observacao" className={styles.label_campo}>
+                Observação sobre a Coleta
+              </label>
+              <textarea
+                className={`${styles.input_agendamento} ${
+                  erroObservacao ? styles.erro_input : ""
+                }`}
+                value={observacao}
+                onChange={(e) => setObservacao(e.target.value)}
+                placeholder="Insira uma observação sobre o agendamento/retirada da sua coleta!"
+                rows="5"
+                type="text"
+              />
+              {erroObservacao && (
+                <p className={styles.erro}>{erroObservacao}</p>
+              )}
+            </div>
           </div>
-          <form
-            onSubmit={(e) => {
-              enviarAgendamento(e);
-              fecharModalEditar();
-            }}
+          <button
+            type="button"
+            onClick={abrirModalRevisao}
+            className={styles.botao_principal_agendar}
           >
-            <div className={styles.data}>
-              <div className={styles.leftdiv}>
-                <div className={styles.campo}>
-                  <p className={styles.tela_agendamento_p}>Data da coleta</p>
-                  <input
-                    className={`${styles.input_agendamento} ${
-                      erroDataColeta ? styles.erro_input : ""
-                    }`}
-                    value={dataColeta}
-                    onChange={(e) => setDataColeta(e.target.value)}
-                    type="date"
-                  />
-                  {erroDataColeta && (
-                    <p className={styles.erro}>{erroDataColeta}</p>
-                  )}
-                </div>
-                <div className={styles.campo}>
-                  <p className={styles.tela_agendamento_p}>
-                    Observação sobre a coleta
-                  </p>
-                  <textarea
-                    className={`${styles.textarea_observacao} ${
-                      erroObservacao ? styles.erro_input : ""
-                    }`}
-                    value={observacao}
-                    onChange={(e) => setObservacao(e.target.value)}
-                    placeholder="Insira uma observação sobre o agendamento/retirada da sua coleta!"
-                    rows="30"
-                    type="text"
-                  />
-                  {erroObservacao && (
-                    <p className={styles.erro}>{erroObservacao}</p>
-                  )}
-                </div>
-              </div>
-              <div className={styles.rightdiv}>
-                <div className={styles.campo}>
-                  <p className={styles.tela_agendamento_p}>Horario da coleta</p>
-                  <input
-                    className={`${styles.input_agendamento} ${
-                      erroHoraColeta ? styles.erro_input : ""
-                    }`}
-                    value={horaColeta}
-                    onChange={(e) => setHoraColeta(e.target.value)}
-                    type="time"
-                  />
-                  {erroHoraColeta && (
-                    <p className={styles.erro}>{erroHoraColeta}</p>
-                  )}
-                </div>
+            <p>Enviar</p>
+          </button>
+        </form>
+      </div>
+      {isEditarModalOpen && (
+        <div className={styles.popUpOverlay}>
+          <div className={styles.popUpCard}>
+            <div className={styles.popUpHeader}>
+              <h3 className={styles.popUpTitulo}>Revisar Agendamento</h3>
+              <button
+                className={styles.popUpBotaoFechar}
+                onClick={fecharModalRevisao}
+              >
+                &times;
+              </button>
+            </div>
+            <div className={styles.popUpContent}>
+              <div className={styles.info_modal}>
                 <p>
-                  Quer levar sua doação a um ponto de coleta? Clique no botão
-                  abaixo.
+                  <strong>Produto:</strong>{" "}
+                  {dadosAgendamentoParaRevisao.produto}
                 </p>
-                <div className={styles.buttons_agendamento}>
-                  <button className={styles.botao_agendamento}>
-                    {" "}
-                    <img src={point} height="80px" />
-                    Pontos de coleta
-                  </button>
-                  <button
-                    type="button"
-                    onClick={abrirModalEditar}
-                    className={styles.botao_agendamento}
-                  >
-                    <h2>Enviar</h2>
-                  </button>
-
-                  {isEditarModalOpen && (
-                    <div className={styles.popUpFormulario}>
-                      <div className={styles.popUp}>
-                        <div className={styles.formulario}>
-                          <div className={styles.icone_sair_modal}>
-                            <i
-                              className={`${styles.botao_sair_modal} fa-solid fa-x`}
-                              onClick={fecharModalEditar}
-                            ></i>
-                          </div>
-                          <div className={styles.titulo}>
-                            <h3 className={styles.h3}>Revisar Agendamento</h3>
-                          </div>
-                          <label className={styles.label_modal}>
-                            Data Coleta
-                          </label>
-                          <p>{dadosAgendamento.data}</p>
-                          <label className={styles.label_modal}>
-                            Hora Coleta
-                          </label>
-                          <p>{dadosAgendamento.hora}</p>
-                          <label className={styles.label_modal}>
-                            Observação
-                          </label>
-                          <p>{dadosAgendamento.observacao}</p>
-                          <div className={styles.botao_formulario_div}>
-                            <button
-                              className={styles.botao_formulario}
-                              type="submit"
-                            >
-                              Salvar
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                </div>
+                <p>
+                  <strong>Doador:</strong> {dadosAgendamentoParaRevisao.doador}
+                </p>
+                <p>
+                  <strong>Endereço:</strong>{" "}
+                  {dadosAgendamentoParaRevisao.endereco}
+                </p>
+                <p>
+                  <strong>Data da Coleta:</strong>{" "}
+                  {dadosAgendamentoParaRevisao.data}
+                </p>
+                <p>
+                  <strong>Hora da Coleta:</strong>{" "}
+                  {dadosAgendamentoParaRevisao.hora}
+                </p>
+                <p>
+                  <strong>Observação:</strong>{" "}
+                  {dadosAgendamentoParaRevisao.observacao}
+                </p>
+              </div>
+              <div className={styles.popUp_botoes}>
+                <button
+                  className={styles.botao_cancelar_agendamento}
+                  onClick={fecharModalRevisao}
+                >
+                  Cancelar
+                </button>
+                <button
+                  className={styles.botao_confirmar_agendamento}
+                  onClick={confirmarAgendamento}
+                >
+                  Confirmar
+                </button>
               </div>
             </div>
-          </form>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

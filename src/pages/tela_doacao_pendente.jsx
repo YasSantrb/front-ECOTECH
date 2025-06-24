@@ -21,6 +21,7 @@ function TelaDoacaoPendente() {
       "TV de tubo clássica em bom estado. Ideal para quem busca um toque vintage ou para uso em projetos de reaproveitamento de peças.",
     condicao: "Usado",
     observacao: "Pode ser reutilizado ou ter partes aproveitadas.",
+    endereco: "Rua das flores, Floriano - PI",
     imagem: televisao,
   });
 
@@ -30,6 +31,7 @@ function TelaDoacaoPendente() {
   const [infoProduto, setInfoProduto] = useState("");
   const [condicao, setCondicao] = useState("");
   const [observacao, setObservacao] = useState("");
+  const [endereco, setEndereco] = useState("");
   const [imagem, setImagem] = useState(null);
 
   function abrirModalEditar() {
@@ -38,6 +40,7 @@ function TelaDoacaoPendente() {
     setInfoProduto(doacao.infoProduto);
     setCondicao(doacao.condicao);
     setObservacao(doacao.observacao);
+    setEndereco(doacao.endereco);
     setImagem(doacao.imagem);
     setIsEditarModalOpen(true);
   }
@@ -56,6 +59,7 @@ function TelaDoacaoPendente() {
       infoProduto,
       condicao,
       observacao,
+      endereco,
       imagem,
     };
 
@@ -77,6 +81,7 @@ function TelaDoacaoPendente() {
         infoProduto: location.state.descricao,
         condicao: location.state.condicao,
         observacao: location.state.observacao,
+        endereco: location.state.endereco,
         imagem: imagemCriacao,
       });
       setImagem(imagemCriacao);
@@ -111,12 +116,18 @@ function TelaDoacaoPendente() {
             <div className={styles.info_doacao_lado_esquerdo}>
               <img
                 className={styles.doacao_main_img}
-                src={imagem}
+                src={
+                  imagem
+                    ? typeof imagem === "string"
+                      ? imagem
+                      : URL.createObjectURL(imagem)
+                    : doacao.imagem
+                }
                 alt={nomeEletronico}
               />
               <div className={styles.informacoes_esquerda}>
                 <div className={styles.doador_info_esquerda}>
-                  <h3>Status:</h3>
+                  <h3 className={styles.info_esquerda_h3}>Status:</h3>
                   <div className={styles.info_status}>
                     <img
                       className={styles.img_sucesso}
@@ -128,7 +139,7 @@ function TelaDoacaoPendente() {
                 </div>
 
                 <div className={styles.doador_info_esquerda}>
-                  <h3>Doado por:</h3>
+                  <h3 className={styles.info_esquerda_h3}>Doado por:</h3>
                   <div className={styles.info_doador}>
                     <img className={styles.img_doador} src={icon_user} alt="" />
                     <div className={styles.doador_contato}>
@@ -137,7 +148,7 @@ function TelaDoacaoPendente() {
                         Publicado 19/05/2025 às 18:02
                       </p>
                       <p className={styles.dataHoraPublicacao}>
-                        Localizacao: Floriano - PI
+                        {doacao.endereco}
                       </p>
                       <div className={styles.botao_entrar_em_contato}>
                         <div className={styles.botoes_acoes}>
@@ -152,21 +163,20 @@ function TelaDoacaoPendente() {
                           </button>
 
                           {isEditarModalOpen && (
-                            <div className={styles.popUpFormulario}>
+                            <div className={styles.popUp_overlay}>
                               <div className={styles.popUp}>
-                                <form
-                                  className={styles.formulario}
-                                  onSubmit={editarPerfil}
-                                >
-                                  <div className={styles.icone_sair_modal}>
-                                    <i
-                                      className={`${styles.botao_sair_modal} fa-solid fa-x`}
-                                      onClick={fecharModalEditar}
-                                    ></i>
-                                  </div>
-                                  <div className={styles.titulo}>
-                                    <h3 className={styles.h3}>Editar perfil</h3>
-                                  </div>
+                                <div className={styles.popUp_inicio}>
+                                  <h3 className={styles.titulo_popUp}>
+                                    Editar informações
+                                  </h3>
+                                  <button
+                                    className={styles.popUpBotaoFechar}
+                                    onClick={fecharModalEditar}
+                                  >
+                                    &times;
+                                  </button>
+                                </div>
+                                <div className={styles.popUp_conteudo}>
                                   <div className={styles.inputs}>
                                     <div className={styles.campo}>
                                       <label className={styles.label_modal}>
@@ -194,6 +204,21 @@ function TelaDoacaoPendente() {
                                         placeholder="Insira a nova especificação"
                                         onChange={(e) =>
                                           setEspecificacao(e.target.value)
+                                        }
+                                        required
+                                      />
+                                    </div>
+                                    <div className={styles.campo}>
+                                      <label className={styles.label_modal}>
+                                        Endereco
+                                      </label>
+                                      <input
+                                        className={styles.input}
+                                        type="text"
+                                        value={endereco}
+                                        placeholder="Insira o novo endereco"
+                                        onChange={(e) =>
+                                          setEndereco(e.target.value)
                                         }
                                         required
                                       />
@@ -244,7 +269,9 @@ function TelaDoacaoPendente() {
                                       />
                                     </div>
                                     <div className={styles.campo}>
-                                      <label>Insira a foto do eletrônico</label>
+                                      <label className={styles.label_modal}>
+                                        Insira a foto do eletrônico
+                                      </label>
                                       <input
                                         type="file"
                                         accept="image/*"
@@ -262,15 +289,25 @@ function TelaDoacaoPendente() {
                                       />
                                     </div>
                                   </div>
-                                  <div className={styles.botao_formulario_div}>
+                                  <div className={styles.popUp_botoes}>
                                     <button
-                                      className={styles.botao_formulario}
-                                      type="submit"
+                                      className={
+                                        styles.botao_cancelar_agendamento
+                                      }
+                                      onClick={fecharModalEditar}
                                     >
-                                      Salvar
+                                      Cancelar
+                                    </button>
+                                    <button
+                                      className={
+                                        styles.botao_confirmar_agendamento
+                                      }
+                                      onClick={editarPerfil}
+                                    >
+                                      Confirmar
                                     </button>
                                   </div>
-                                </form>
+                                </div>
                               </div>
                             </div>
                           )}
@@ -335,22 +372,24 @@ function TelaDoacaoPendente() {
               <h1>{doacao.nomeEletronico}</h1>
 
               <div className={styles.secao_info_direito}>
-                <h3>Informações sobre o produto:</h3>
+                <h3 className={styles.lado_direito_h3}>
+                  Informações sobre o produto:
+                </h3>
                 <p>{doacao.infoProduto}</p>
               </div>
 
               <div className={styles.secao_info_direito}>
-                <h3>Condição:</h3>
+                <h3 className={styles.lado_direito_h3}>Condição:</h3>
                 <p>{doacao.condicao}</p>
               </div>
 
               <div className={styles.secao_info_direito}>
-                <h3>Observação:</h3>
+                <h3 className={styles.lado_direito_h3}>Observação:</h3>
                 <p>{doacao.observacao}</p>
               </div>
 
               <div className={styles.especificacoes_conteudo}>
-                <h3>Especificações:</h3>
+                <h3 className={styles.lado_direito_h3}>Especificações:</h3>
                 <p className={styles.especificacoes_p}>
                   {doacao.especificacao}
                 </p>

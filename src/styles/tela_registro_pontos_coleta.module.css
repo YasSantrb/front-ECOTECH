@@ -3,9 +3,7 @@
   flex-direction: column;
   align-items: center;
   min-height: 100vh;
-  font-family: "Poppins", sans-serif;
   position: relative;
-  background-color: white;
   overflow: hidden;
 }
 
@@ -15,6 +13,8 @@
   height: 100%;
   object-fit: cover;
   z-index: 0;
+  opacity: 0.25;
+  filter: blur(3px);
 }
 
 .top_bar_doacao {
@@ -47,27 +47,34 @@
 }
 
 .form_registro {
+  max-width: 900px;
+  box-sizing: border-box;
   position: relative;
   z-index: 1;
-  background-color: #225c25;
-  color: white;
-  border-radius: 20px;
-  width: 890px;
-  padding: 20px 40px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-  margin-top: 20px;
+  background-color: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(20px);
+  border-radius: 24px;
+  width: 90%;
+  padding: 20px 30px;
+  box-shadow: 0 0 8px 4px rgba(34, 92, 37, 0.4);
+  margin-top: 30px;
+  border: 1px solid rgba(45, 90, 45, 0.08);
+  color: #225c25;
+  overflow-x: hidden;
 }
 
 .form_registro h2 {
-  font-size: 24px;
-  font-weight: bold;
+  font-size: 28px;
+  font-weight: 700;
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 32px;
+  color: #225c25;
+  position: relative;
 }
 
 .form_campos {
   display: flex;
-  gap: 20px;
+  gap: 32px;
   justify-content: space-between;
   flex-wrap: wrap;
 }
@@ -75,95 +82,209 @@
 .coluna {
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 24px;
   flex: 1;
-  min-width: 250px;
+  min-width: 300px;
 }
 
 .campo {
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
-label {
-  font-weight: 500;
+.label_formulario {
+  font-weight: 600;
+  margin-bottom: 8px;
+  font-size: 16px;
+  letter-spacing: 0.5px;
 }
 
-input,
-textarea {
-  padding: 10px;
-  border-radius: 8px;
-  border: none;
-  font-size: 14px;
+.input {
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 2px solid #e8f5e8;
+  font-size: 15px;
   outline: none;
   width: 100%;
+  background: #ffffff;
+  color: #2c3e50;
+  transition: all 0.3s ease;
 }
 
-textarea {
-  resize: vertical;
-  height: 100px;
+.input::placeholder {
+  color: #95a5a6;
+  font-weight: 400;
 }
 
 .botao_enviar {
-  margin-top: 30px;
-  padding: 10px 20px;
+  margin-top: 32px;
+  padding: 12px 15px;
   border-radius: 25px;
   border: none;
-  background-color: white;
-  color: #225c25;
-  font-weight: 600;
+  background-color: #225c25;
+  color: #fff;
+  font-weight: 500;
   font-size: 16px;
   cursor: pointer;
   display: block;
   margin-left: auto;
   margin-right: auto;
   transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 12px rgba(45, 90, 45, 0.2);
+  letter-spacing: 0.5px;
 }
 
 .botao_enviar:hover {
-  background-color: #f0f0f0;
+  background-color: #225c25;
   transform: translateY(-2px);
+}
+
+.botao_ver_pontos {
+  margin-top: 20px;
+  background-color: #225c25;
+  color: #fff;
+  border: 2px solid #4a7c59;
+  padding: 12px 24px;
+  border-radius: 25px;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  letter-spacing: 0.5px;
+}
+
+.botao_ver_pontos:hover {
+  background: #4a7c59;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(74, 124, 89, 0.2);
 }
 
 .lista_pontos {
   width: 890px;
   margin-top: 40px;
-  background-color: #f9f9f9;
-  border-radius: 16px;
-  padding: 20px 30px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(45, 90, 45, 0.1);
   position: relative;
   z-index: 1;
+  border: 1px solid rgba(45, 90, 45, 0.08);
 }
 
 .lista_pontos h2 {
-  color: #225c25;
-  margin-bottom: 16px;
-  font-size: 20px;
+  color: #2d5a2d;
+  margin-bottom: 20px;
+  font-size: 22px;
+  font-weight: 700;
 }
 
 .item_ponto {
-  background-color: #fff;
-  border: 1px solid #dcdcdc;
-  padding: 12px 16px;
-  border-radius: 10px;
+  background: #ffffff;
+  border: 1px solid #e8f5e8;
+  padding: 16px 20px;
+  border-radius: 12px;
   margin-bottom: 12px;
   font-size: 14px;
-  color: #333;
+  color: #2c3e50;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(45, 90, 45, 0.05);
 }
 
-.campo {
-  display: flex;
-  flex-direction: column;
+.item_ponto:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(45, 90, 45, 0.1);
+  border-color: #4a7c59;
 }
 
 .erro {
-  color: red;
-  font-size: 13px;
+  color: #e74c3c;
+  font-size: 14px;
+  margin-top: 6px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .erro_input {
-  border: 1px solid red;
+  border-color: #e74c3c;
+}
+
+.modal_overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(45, 90, 45, 0.2);
+  backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modal {
+  background: white;
+  color: #2c3e50;
+  padding: 32px;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 600px;
+  position: relative;
+  box-shadow: 0 20px 40px rgba(45, 90, 45, 0.2);
+  animation: slideUp 0.3s ease;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal h3 {
+  color: #225c25;
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.fechar {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  border: none;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  background-color: #fff;
 }
 
 @media (max-width: 768px) {
@@ -178,62 +299,14 @@ textarea {
   }
 }
 
-.botao_ver_pontos {
-  margin-top: 20px;
-  background-color: white;
-  color: #225c25;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 25px;
-  font-weight: bold;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
+@media (max-width: 320px) {
+  .form_registro {
+    width: 98%;
+    padding: 10px;
+  }
 
-.botao_ver_pontos:hover {
-  background-color: #e6e6e6;
-}
-
-.modal_overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 999;
-}
-
-.modal {
-  background: white;
-  color: #225c25;
-  padding: 30px;
-  border-radius: 20px;
-  width: 90%;
-  max-width: 600px;
-  position: relative;
-}
-
-.fechar {
-  position: absolute;
-  top: 15px;
-  right: 20px;
-  border: none;
-  background: transparent;
-  font-size: 20px;
-  font-weight: bold;
-  cursor: pointer;
-  color: #225c25;
-}
-
-.item_ponto {
-  background-color: #f9f9f9;
-  border: 1px solid #ddd;
-  padding: 12px 16px;
-  border-radius: 10px;
-  margin-top: 10px;
+  input,
+  textarea {
+    font-size: 13px;
+  }
 }

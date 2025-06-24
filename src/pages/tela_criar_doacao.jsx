@@ -15,12 +15,14 @@ function TelaCriarDoacao() {
   const [descricao, setDescricao] = useState("");
   const [observacao, setObservacao] = useState("");
   const [condicao, setCondicao] = useState("");
+  const [endereco, setEndereco] = useState("");
   const [imagens, setImagens] = useState([]);
   const [erroNome, setErroNome] = useState("");
   const [erroEspecificacao, setErroEspecificacao] = useState("");
   const [erroDescricao, setErroDescricao] = useState("");
   const [erroObservacao, setErroObservacao] = useState("");
   const [erroCondicao, setErroCondicao] = useState("");
+  const [erroEndereco, setErroEndereco] = useState("");
   const [erroImagens, setErroImagens] = useState("");
 
   function enviarDoacao(evento) {
@@ -31,6 +33,7 @@ function TelaCriarDoacao() {
       !descricao.trim() ||
       !observacao.trim() ||
       !condicao.trim() ||
+      !endereco.trim() ||
       imagens.length === 0
     ) {
       setErroNome(!nome.trim() ? "Preencha o nome do eletrônico!" : "");
@@ -42,9 +45,8 @@ function TelaCriarDoacao() {
       setErroCondicao(
         !condicao.trim() ? "Preencha a condição do eletrônico!" : ""
       );
-      setErroImagens(
-        imagens.length === 0 ? "Adicione pelo menos uma imagem!" : ""
-      );
+      setErroEndereco(!condicao.trim() ? "Preencha o seu endereço!" : "");
+      setErroImagens(imagens.length === 0 ? "Adicione uma imagem!" : "");
       return;
     }
     setErroNome("");
@@ -52,6 +54,7 @@ function TelaCriarDoacao() {
     setErroDescricao("");
     setErroObservacao("");
     setErroCondicao("");
+    setErroEndereco("");
     setErroImagens("");
 
     navigate("/doacao/pendente", {
@@ -61,6 +64,7 @@ function TelaCriarDoacao() {
         descricao,
         observacao,
         condicao,
+        endereco,
         imagens,
       },
     });
@@ -72,6 +76,7 @@ function TelaCriarDoacao() {
     setDescricao("");
     setObservacao("");
     setCondicao("");
+    setEndereco("");
     setImagens([]);
     if (inputImagemRef.current) {
       inputImagemRef.current.value = "";
@@ -95,15 +100,12 @@ function TelaCriarDoacao() {
 
       <div className={styles.form_doacao}>
         <h2>Criar doação</h2>
-        <p className={styles.subtitulo}>
-          Preencha os campos abaixo para criar a sua doação!
-        </p>
 
         <form onSubmit={enviarDoacao}>
           <div className={styles.form_campos}>
             <div className={styles.coluna_esquerda}>
               <div className={styles.campo}>
-                <label>Nome</label>
+                <label className={styles.label_formulario}>Nome</label>
                 <input
                   className={`${styles.input} ${
                     erroNome ? styles.erro_input : ""
@@ -117,7 +119,7 @@ function TelaCriarDoacao() {
               </div>
 
               <div className={styles.campo}>
-                <label>Especificação</label>
+                <label className={styles.label_formulario}>Especificação</label>
                 <input
                   className={`${styles.input} ${
                     erroEspecificacao ? styles.erro_input : ""
@@ -131,16 +133,31 @@ function TelaCriarDoacao() {
                   <p className={styles.erro}>{erroEspecificacao}</p>
                 )}
               </div>
+              <div className={styles.campo}>
+                <label className={styles.label_formulario}>Endereço</label>
+                <input
+                  className={`${styles.input} ${
+                    erroEndereco ? styles.erro_input : ""
+                  }`}
+                  value={endereco}
+                  onChange={(e) => setEndereco(e.target.value)}
+                  type="text"
+                  placeholder="Ex: Rua João Dantas."
+                />
+                {erroEndereco && <p className={styles.erro}>{erroEndereco}</p>}
+              </div>
 
               <div className={styles.campo}>
-                <label>Descrição geral do eletrônico</label>
+                <label className={styles.label_formulario}>
+                  Descrição geral do eletrônico
+                </label>
                 <textarea
                   className={`${styles.input} ${
                     erroDescricao ? styles.erro_input : ""
                   }`}
                   value={descricao}
                   onChange={(e) => setDescricao(e.target.value)}
-                  placeholder="Ex: Ideal para empresas que desejam reciclar eletrônicos ou entusiastas que queiram reaproveitar peças."
+                  placeholder="Ex: Ideal para empresas que desejam reciclar eletrônicos."
                 />
                 {erroDescricao && (
                   <p className={styles.erro}>{erroDescricao}</p>
@@ -152,7 +169,9 @@ function TelaCriarDoacao() {
 
             <div className={styles.coluna_direita}>
               <div className={styles.campo}>
-                <label>Condição do eletrônico</label>
+                <label className={styles.label_formulario}>
+                  Condição do eletrônico
+                </label>
                 <input
                   className={`${styles.input} ${
                     erroCondicao ? styles.erro_input : ""
@@ -166,7 +185,7 @@ function TelaCriarDoacao() {
               </div>
 
               <div className={styles.campo}>
-                <label>Observação</label>
+                <label className={styles.label_formulario}>Observação</label>
                 <input
                   className={`${styles.input} ${
                     erroObservacao ? styles.erro_input : ""
@@ -182,13 +201,14 @@ function TelaCriarDoacao() {
               </div>
 
               <div className={styles.campo}>
-                <label>Insira as fotos do eletrônico</label>
+                <label className={styles.label_formulario}>
+                  Insira as fotos do eletrônico
+                </label>
                 <input
                   type="file"
                   accept="image/*"
-                  multiple
                   className={`${styles.input} ${
-                    erroImagens ? styles.inputErro : ""
+                    erroImagens ? styles.erro_input : ""
                   }`}
                   onChange={(e) => setImagens(Array.from(e.target.files))}
                   ref={inputImagemRef}

@@ -9,12 +9,14 @@ function TelaRegistroPontosColeta() {
   const [rua, setRua] = useState("");
   const [bairro, setBairro] = useState("");
   const [cep, setCep] = useState("");
-  const [observacao, setObservacao] = useState("");
+  const [telefone, setTelefone] = useState("");
+  const [horario, setHorario] = useState("");
   const [numero, setNumero] = useState("");
   const [erroRua, setErroRua] = useState("");
   const [erroBairro, setErroBairro] = useState("");
   const [erroCep, setErroCep] = useState("");
-  const [erroObservacao, setErroObservacao] = useState("");
+  const [erroTelefone, setErroTelefone] = useState("");
+  const [erroHorario, setErroHorario] = useState("");
   const [erroNumero, setErroNumero] = useState("");
   const [mensagemSucesso, setMensagemSucesso] = useState(null);
   const [mostrarModal, setMostrarModal] = useState(false);
@@ -51,25 +53,32 @@ function TelaRegistroPontosColeta() {
       erro = true;
     } else setErroNumero("");
 
-    if (!observacao.trim()) {
-      setErroObservacao("Preencha a observação!");
+    if (!telefone.trim()) {
+      setErroTelefone("Preencha com o número de telefone!");
       erro = true;
-    } else setErroObservacao("");
+    } else setErroTelefone("");
+
+    if (!horario.trim()) {
+      setErroHorario("Preencha com o horário de funcionamento!");
+      erro = true;
+    } else setErroHorario("");
 
     if (erro) return;
 
     setErroRua("");
     setErroBairro("");
     setErroCep("");
-    setErroObservacao("");
+    setErroTelefone("");
+    setErroHorario("");
     setErroNumero("");
 
     console.log("Ponto de coleta registrado com sucesso!", {
       rua,
       bairro,
       cep,
-      observacao,
+      telefone,
       numero,
+      horario,
     });
     setMensagemSucesso("Ponto de coleta registrado com sucesso!");
     setTimeout(() => {
@@ -83,15 +92,17 @@ function TelaRegistroPontosColeta() {
         bairro,
         cep,
         numero,
-        obs: observacao,
+        obs: telefone,
+        horario,
       },
     ]);
 
     setRua("");
     setBairro("");
     setCep("");
-    setObservacao("");
+    setTelefone("");
     setNumero("");
+    setHorario("");
   }
 
   return (
@@ -111,14 +122,18 @@ function TelaRegistroPontosColeta() {
       </div>
 
       <div className={styles.form_registro}>
-        <h2>Registrar Ponto de Coleta</h2>
+        <h2>
+          <i className="fa-solid fa-recycle"></i> Registrar Ponto de Coleta
+        </h2>
         <form onSubmit={registrarPonto}>
           <div className={styles.form_campos}>
             <div className={styles.coluna}>
               <div className={styles.campo}>
-                <label>Rua</label>
+                <label className={styles.label_formulario}>Rua</label>
                 <input
-                  className={erroRua ? styles.erro_input : ""}
+                  className={`${styles.input} ${
+                    erroRua ? styles.erro_input : ""
+                  }`}
                   value={rua}
                   onChange={(e) => setRua(e.target.value)}
                   placeholder="Ex: Rua das Flores"
@@ -127,9 +142,11 @@ function TelaRegistroPontosColeta() {
               </div>
 
               <div className={styles.campo}>
-                <label>Bairro</label>
+                <label className={styles.label_formulario}>Bairro</label>
                 <input
-                  className={erroBairro ? styles.erro_input : ""}
+                  className={`${styles.input} ${
+                    erroBairro ? styles.erro_input : ""
+                  }`}
                   value={bairro}
                   onChange={(e) => setBairro(e.target.value)}
                   placeholder="Ex: Centro"
@@ -138,9 +155,11 @@ function TelaRegistroPontosColeta() {
               </div>
 
               <div className={styles.campo}>
-                <label>CEP</label>
+                <label className={styles.label_formulario}>CEP</label>
                 <input
-                  className={erroCep ? styles.erro_input : ""}
+                  className={`${styles.input} ${
+                    erroCep ? styles.erro_input : ""
+                  }`}
                   value={cep}
                   onChange={(e) => setCep(e.target.value)}
                   placeholder="00000-000"
@@ -151,9 +170,11 @@ function TelaRegistroPontosColeta() {
 
             <div className={styles.coluna}>
               <div className={styles.campo}>
-                <label>Número</label>
+                <label className={styles.label_formulario}>Número</label>
                 <input
-                  className={erroNumero ? styles.erro_input : ""}
+                  className={`${styles.input} ${
+                    erroNumero ? styles.erro_input : ""
+                  }`}
                   value={numero}
                   onChange={(e) => setNumero(e.target.value)}
                   placeholder="Ex: 123"
@@ -162,16 +183,31 @@ function TelaRegistroPontosColeta() {
               </div>
 
               <div className={styles.campo}>
-                <label>Observação</label>
-                <textarea
-                  className={erroObservacao ? styles.erro_input : ""}
-                  value={observacao}
-                  onChange={(e) => setObservacao(e.target.value)}
-                  placeholder="Ex: Próximo à escola"
+                <label className={styles.label_formulario}>Telefone</label>
+                <input
+                  className={`${styles.input} ${
+                    erroTelefone ? styles.erro_input : ""
+                  }`}
+                  value={telefone}
+                  onChange={(e) => setTelefone(e.target.value)}
+                  placeholder="Ex: Telefone para contato"
                 />
-                {erroObservacao && (
-                  <p className={styles.erro}>{erroObservacao}</p>
-                )}
+                {erroTelefone && <p className={styles.erro}>{erroTelefone}</p>}
+              </div>
+
+              <div className={styles.campo}>
+                <label className={styles.label_formulario}>
+                  Horário de funcionamento
+                </label>
+                <input
+                  className={`${styles.input} ${
+                    erroHorario ? styles.erro_input : ""
+                  }`}
+                  value={horario}
+                  onChange={(e) => setHorario(e.target.value)}
+                  placeholder="Ex: Segunda a sexta: 8:00 às 18:00"
+                />
+                {erroHorario && <p className={styles.erro}>{erroHorario}</p>}
               </div>
             </div>
           </div>
@@ -181,12 +217,12 @@ function TelaRegistroPontosColeta() {
           </button>
         </form>
 
-        <button
+        {/* <button
           className={styles.botao_ver_pontos}
           onClick={() => setMostrarModal(true)}
         >
-          Ver Meus Pontos de Coleta
-        </button>
+        Meus Pontos de Coleta
+        </button> */}
       </div>
 
       {mostrarModal && (
