@@ -103,7 +103,7 @@ function TelaDoacaoPendente() {
       <img
         src={fundo_login_cadastro}
         alt="imagem_de_fundo"
-        className={styles.background_tela}
+        className={styles.background_info_doacao}
       />
       <button onClick={() => navigate(-1)} className={styles.voltar} to="/">
         <img className={styles.icone_voltar} src={icon_voltar} alt="Voltar" />
@@ -150,217 +150,28 @@ function TelaDoacaoPendente() {
                       <p className={styles.dataHoraPublicacao}>
                         {doacao.endereco}
                       </p>
-                      <div className={styles.botao_entrar_em_contato}>
-                        <div className={styles.botoes_acoes}>
-                          <button
-                            onClick={abrirModalEditar}
-                            className={styles.botoes_doacao}
-                          >
-                            <i
-                              className={`${styles.pincel} fa-solid fa-pencil`}
-                            ></i>
-                            Editar
-                          </button>
+                      <div className={styles.botoes_acoes}>
+                        <button
+                          onClick={abrirModalEditar}
+                          className={styles.botoes_doacao}
+                        >
+                          <i
+                            className={`${styles.pincel} fa-solid fa-pencil`}
+                          ></i>
+                          Editar
+                        </button>
 
-                          {isEditarModalOpen && (
-                            <div className={styles.popUp_overlay}>
-                              <div className={styles.popUp}>
-                                <div className={styles.popUp_inicio}>
-                                  <h3 className={styles.titulo_popUp}>
-                                    Editar informações
-                                  </h3>
-                                  <button
-                                    className={styles.popUpBotaoFechar}
-                                    onClick={fecharModalEditar}
-                                  >
-                                    &times;
-                                  </button>
-                                </div>
-                                <div className={styles.popUp_conteudo}>
-                                  <div className={styles.inputs}>
-                                    <div className={styles.campo}>
-                                      <label className={styles.label_modal}>
-                                        Nome
-                                      </label>
-                                      <input
-                                        className={styles.input}
-                                        type="text"
-                                        value={nomeEletronico}
-                                        placeholder="Insira o novo nome do eletrônico"
-                                        onChange={(e) =>
-                                          setNomeEletronico(e.target.value)
-                                        }
-                                        required
-                                      />
-                                    </div>
-                                    <div className={styles.campo}>
-                                      <label className={styles.label_modal}>
-                                        Especificação
-                                      </label>
-                                      <input
-                                        className={styles.input}
-                                        type="text"
-                                        value={especificacao}
-                                        placeholder="Insira a nova especificação"
-                                        onChange={(e) =>
-                                          setEspecificacao(e.target.value)
-                                        }
-                                        required
-                                      />
-                                    </div>
-                                    <div className={styles.campo}>
-                                      <label className={styles.label_modal}>
-                                        Endereco
-                                      </label>
-                                      <input
-                                        className={styles.input}
-                                        type="text"
-                                        value={endereco}
-                                        placeholder="Insira o novo endereco"
-                                        onChange={(e) =>
-                                          setEndereco(e.target.value)
-                                        }
-                                        required
-                                      />
-                                    </div>
-                                    <div className={styles.campo}>
-                                      <label className={styles.label_modal}>
-                                        Informação do produto
-                                      </label>
-                                      <input
-                                        className={styles.input}
-                                        type="text"
-                                        value={infoProduto}
-                                        placeholder="Insira a nova informação do produto"
-                                        onChange={(e) =>
-                                          setInfoProduto(e.target.value)
-                                        }
-                                        required
-                                      />
-                                    </div>
-                                    <div className={styles.campo}>
-                                      <label className={styles.label_modal}>
-                                        Condição do produto
-                                      </label>
-                                      <input
-                                        className={styles.input}
-                                        type="text"
-                                        value={condicao}
-                                        placeholder="Insira a nova condição do produto"
-                                        onChange={(e) =>
-                                          setCondicao(e.target.value)
-                                        }
-                                        required
-                                      />
-                                    </div>
-                                    <div className={styles.campo}>
-                                      <label className={styles.label_modal}>
-                                        Observação
-                                      </label>
-                                      <input
-                                        className={styles.input}
-                                        type="text"
-                                        value={observacao}
-                                        placeholder="Insira a nova observação"
-                                        onChange={(e) =>
-                                          setObservacao(e.target.value)
-                                        }
-                                        required
-                                      />
-                                    </div>
-                                    <div className={styles.campo}>
-                                      <label className={styles.label_modal}>
-                                        Insira a foto do eletrônico
-                                      </label>
-                                      <input
-                                        type="file"
-                                        accept="image/*"
-                                        multiple={false}
-                                        className={styles.input}
-                                        onChange={(e) => {
-                                          const file = e.target.files[0];
-                                          if (file) {
-                                            setImagem(file);
-                                            setImagem(
-                                              URL.createObjectURL(file)
-                                            );
-                                          }
-                                        }}
-                                      />
-                                    </div>
-                                  </div>
-                                  <div className={styles.popUp_botoes}>
-                                    <button
-                                      className={
-                                        styles.botao_cancelar_agendamento
-                                      }
-                                      onClick={fecharModalEditar}
-                                    >
-                                      Cancelar
-                                    </button>
-                                    <button
-                                      className={
-                                        styles.botao_confirmar_agendamento
-                                      }
-                                      onClick={editarPerfil}
-                                    >
-                                      Confirmar
-                                    </button>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          )}
-
-                          <button
-                            onClick={() => abrirModal()}
-                            className={styles.botoes_doacao}
-                          >
-                            <img
-                              className={styles.icon_lixeira}
-                              src={icon_lixeira}
-                              alt="excluir"
-                            />
-                            Excluir
-                          </button>
-
-                          {isModalOpen && (
-                            <div className={styles.popUpSair}>
-                              <div className={styles.popUp}>
-                                <i
-                                  className={`${styles.botao_sair} fa-solid fa-x`}
-                                  onClick={fecharModal}
-                                ></i>
-                                <p className={styles.popUp_p}>
-                                  Tem certeza de que deseja excluir essa doação?
-                                </p>
-                                <div className={styles.botaoPopUp}>
-                                  <button
-                                    onClick={fecharModal}
-                                    className={styles.botoes}
-                                  >
-                                    Cancelar
-                                    <i
-                                      className={`${styles.icone_cancelar} fa-solid fa-circle-xmark`}
-                                    ></i>
-                                  </button>
-
-                                  <button
-                                    onClick={() => navigate(-1)}
-                                    className={styles.botoes}
-                                  >
-                                    Confirmo!
-                                    <img
-                                      className={styles.icone_sucesso}
-                                      src={icon_sucesso}
-                                      alt=""
-                                    />
-                                  </button>
-                                </div>
-                              </div>
-                            </div>
-                          )}
-                        </div>
+                        <button
+                          onClick={() => abrirModal()}
+                          className={styles.botoes_doacao}
+                        >
+                          <img
+                            className={styles.icon_lixeira}
+                            src={icon_lixeira}
+                            alt="excluir"
+                          />
+                          Excluir
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -398,6 +209,158 @@ function TelaDoacaoPendente() {
           </div>
         </div>
       </main>
+      {isEditarModalOpen && (
+        <div className={styles.popUp_overlay}>
+          <div className={styles.popUp}>
+            <div className={styles.popUp_inicio}>
+              <h3 className={styles.titulo_popUp}>Editar informações</h3>
+              <button
+                className={styles.popUpBotaoFechar}
+                onClick={fecharModalEditar}
+              >
+                &times;
+              </button>
+            </div>
+            <div className={styles.popUp_conteudo}>
+              <div className={styles.inputs}>
+                <div className={styles.campo}>
+                  <label className={styles.label_modal}>Nome</label>
+                  <input
+                    className={styles.input}
+                    type="text"
+                    value={nomeEletronico}
+                    placeholder="Insira o novo nome do eletrônico"
+                    onChange={(e) => setNomeEletronico(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className={styles.campo}>
+                  <label className={styles.label_modal}>Especificação</label>
+                  <input
+                    className={styles.input}
+                    type="text"
+                    value={especificacao}
+                    placeholder="Insira a nova especificação"
+                    onChange={(e) => setEspecificacao(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className={styles.campo}>
+                  <label className={styles.label_modal}>Endereco</label>
+                  <input
+                    className={styles.input}
+                    type="text"
+                    value={endereco}
+                    placeholder="Insira o novo endereco"
+                    onChange={(e) => setEndereco(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className={styles.campo}>
+                  <label className={styles.label_modal}>
+                    Informação do produto
+                  </label>
+                  <input
+                    className={styles.input}
+                    type="text"
+                    value={infoProduto}
+                    placeholder="Insira a nova informação do produto"
+                    onChange={(e) => setInfoProduto(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className={styles.campo}>
+                  <label className={styles.label_modal}>
+                    Condição do produto
+                  </label>
+                  <input
+                    className={styles.input}
+                    type="text"
+                    value={condicao}
+                    placeholder="Insira a nova condição do produto"
+                    onChange={(e) => setCondicao(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className={styles.campo}>
+                  <label className={styles.label_modal}>Observação</label>
+                  <input
+                    className={styles.input}
+                    type="text"
+                    value={observacao}
+                    placeholder="Insira a nova observação"
+                    onChange={(e) => setObservacao(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className={styles.campo}>
+                  <label className={styles.label_modal}>
+                    Insira a foto do eletrônico
+                  </label>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    multiple={false}
+                    className={styles.input}
+                    onChange={(e) => {
+                      const file = e.target.files[0];
+                      if (file) {
+                        setImagem(file);
+                        setImagem(URL.createObjectURL(file));
+                      }
+                    }}
+                  />
+                </div>
+              </div>
+              <div className={styles.popUp_botoes}>
+                <button
+                  className={styles.botao_cancelar_agendamento}
+                  onClick={fecharModalEditar}
+                >
+                  Cancelar
+                </button>
+                <button
+                  className={styles.botao_confirmar_agendamento}
+                  onClick={editarPerfil}
+                >
+                  Confirmar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {isModalOpen && (
+        <div className={styles.popUpSair}>
+          <div className={styles.popUpSair_div}>
+            <i
+              className={`${styles.botao_sair} fa-solid fa-x`}
+              onClick={fecharModal}
+            ></i>
+            <p className={styles.popUp_p}>
+              Tem certeza de que deseja excluir essa doação?
+            </p>
+            <div className={styles.botaoPopUp}>
+              <button onClick={fecharModal} className={styles.botoes}>
+                Cancelar
+                <i
+                  className={`${styles.icone_cancelar} fa-solid fa-circle-xmark`}
+                ></i>
+              </button>
+
+              <button onClick={() => navigate(-1)} className={styles.botoes}>
+                Confirmo!
+                <img
+                  className={styles.icone_sucesso}
+                  src={icon_sucesso}
+                  alt=""
+                />
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -231,7 +231,7 @@
   border: 1px solid #e0f2f1;
 }
 
-.popUpActions {
+.popUp_botoes {
   display: flex;
   gap: 20px;
   margin-top: 30px;
