@@ -5,7 +5,7 @@ import icon_aguardando from "../assets/imagens/icon_aguardando.png";
 import icon_cancelar from "../assets/imagens/icon_cancelar.png";
 import icon_pendente from "../assets/imagens/icon_pendente.png";
 import icon_concluido from "../assets/imagens/icon_concluido.png";
-import icon_verificar from "../assets/imagens/icon_verificar.png";
+//import icon_verificar from "../assets/imagens/icon_verificar.png";
 import { Link } from "react-router-dom";
 
 function TelaHistoricoDoacoes() {
@@ -16,12 +16,13 @@ function TelaHistoricoDoacoes() {
         alt="imagem_de_fundo"
         className={styles.background_tela}
       />
-      <Link to="/" className={styles.voltar}>
-        <img src={icon_voltar} alt="voltar" className={styles.icone_voltar} />
-        VOLTAR
-      </Link>
-
-      <div className={styles.container_verde}>
+      <div className={styles.barra_voltar}>
+              <Link className={styles.link_voltar} to="/">
+                <img className={styles.icon_voltar} src={icon_voltar} alt="voltar" />
+                <p className={styles.nav_p}>VOLTAR</p>
+              </Link>
+            </div>
+            <div className={styles.container_verde}>
         <div className={styles.header_container}>
           <h2 className={styles.titulo}>Histórico de Doações</h2>
           <p className={styles.subtitulo}>
@@ -121,15 +122,10 @@ function TelaHistoricoDoacoes() {
         </div>
 
         <Link to="/doacao/pendente">
-          <button className={styles.botao_pendentes}>
-            <img
-              src={icon_verificar}
-              alt="verificar"
-              className={styles.icon_verificar}
-            />
-            Visualizar doações pendentes
+        <button className={styles.botao_pendentes}>
+          Visualizar doações pendentes
           </button>
-        </Link>
+          </Link>
       </div>
     </div>
   );

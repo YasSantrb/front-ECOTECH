@@ -25,35 +25,42 @@ body{
 .container_verde {
   position: relative;
   z-index: 1;
-  background-color: #225c25;
-  border-radius: 28px;
+  background-color: #fff;
+  border-radius: 12px;
   padding: 20px 40px 40px;
-  margin: 40px auto;
+  margin: 80px auto 40px auto;
   width: 90%;
   max-width: 1100px;
   box-sizing: border-box;
-  color: white;
-  text-align: center;
+  color: #225c25;
+  text-align: center;box-shadow: 0 0 8px 4px rgba(34, 92, 37, 0.4); 
 }
 
-.voltar {
+.link_voltar {
   display: flex;
-  align-items: center;
-  gap: 10px;
-  color: #225c25;
-  font-weight: bold;
-  font-size: 16px;
+  gap: 5px;
   text-decoration: none;
-  margin: 20px 0 0 60px;
-  position: relative;
+  padding-left: 5px;
+  align-items: center;
+  border: none;
+  cursor: pointer;
+}
+
+.icon_voltar {
+  width: 26px;
+  height: 26px;
+}
+.barra_voltar {
+  position: absolute;
+  top: 15px;
+  left: 15px;
   z-index: 2;
 }
-
-.icone_voltar {
-  width: 24px;
-  height: 24px;
+.nav_p {
+  font-size: 20px;
+  color: #225c25;
+  font-weight: 500;
 }
-
 .titulo {
   font-size: 28px;
   font-weight: bold;
@@ -63,96 +70,97 @@ body{
 
 .subtitulo {
   font-size: 15px;
-  color: #e0e0e0;
+  color: #225C25;
   margin-bottom: 25px;
 }
 
 .tabela_container {
   overflow-x: auto;
+  margin-top: 20px;
 }
 
 .tabela_doacoes {
   width: 100%;
-  border-collapse: collapse;
-  background-color: #edf4dc;
-  border-radius: 10px;
-  overflow: hidden;
+  border-collapse: separate;
+  border-spacing: 0 6px; 
 }
 
-.tabela_doacoes th {
-  background-color: #d4e4b5;
-  color: #222;
-  padding: 12px;
+.tabela_doacoes thead th {
+    color: #000000;
+  padding: 10px 12px;
   text-align: left;
+  font-weight: 600;
+  border: 2px solid #ccc;
 }
 
-.tabela_doacoes td {
-  padding: 12px;
-  border-bottom: 1px solid #ccc;
-  font-size: 14px;
-  color: #222;
+.tabela_doacoes tbody tr {
+  background-color: #ffffff;
 }
 
-.tabela_doacoes tr:last-child td {
-  border-bottom: none;
+.tabela_doacoes tbody td {
+  background-color: #ffffff;
+  padding: 10px 12px;
+  font-size: 13px;
+  color: #333;
+  border: 1px solid #ccc;
+}
+
+
+.tabela_doacoes tbody td:first-child,
+.tabela_doacoes tbody td:last-child {
+  border-radius: 0;
 }
 
 .status_badge {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 6px 12px;
-  border-radius: 20px;
-  font-weight: bold;
-  font-size: 13px;
+  gap: 6px;
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 500;
 }
 
 .status_icon {
-  width: 16px;
-  height: 16px;
+  width: 14px;
+  height: 14px;
 }
 
 .concluida {
-  background-color: #d4f8d4;
-  color: #228b22;
+  background-color: #e4fbe4;
+  color: #218838;border-radius: 10px
 }
 
 .pendente {
-  background-color: #ffe9a9;
-  color: #c59b00;
+  background-color: #fff3cd;
+  color: #c59b00;border-radius: 10px
 }
 
 .cancelada {
-  background-color: #ffd5d5;
-  color: #c0392b;
+  background-color: #f8d7da;
+  color: #c0392b;border-radius: 10px
 }
 
 .aguardando {
-  background-color: #f9e4b3;
-  color: #c47f17;
+  background-color: #ffeeba;
+  color: #c47f17;border-radius: 10px;
 }
-
 .botao_pendentes {
-  margin-top: 30px;
+  margin-top: 25px;
   padding: 12px 24px;
-  background-color: white;
-  color: #225c25;
+  border: none;
+  border-radius: 12px;
+  background-color:#225C25 ;
+  color: white;
   font-weight: bold;
   font-size: 15px;
-  border: none;
-  border-radius: 14px;
   cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
+  align-self: center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
   transition: background-color 0.3s ease;
+  
 }
-
-.botao_pendentes:hover {
-  background-color: #d7f2dc;
-}
-
-.icon_verificar {
-  width: 20px;
-  height: 20px;
+a {
+  text-decoration: none;
 }
