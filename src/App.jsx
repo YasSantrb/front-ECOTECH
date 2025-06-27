@@ -17,6 +17,7 @@ import TelaDoacaoPendente from "./pages/tela_doacao_pendente";
 import TelaRegistroPontosColeta from "./pages/tela_registro_pontos_coleta";
 import TelaHistoricoAgendamentos from "./pages/tela_historico_agendamentos";
 import TelaPontosColeta from "./pages/tela_pontos_coleta";
+import TelaEsqueciMinhaSenha from "./pages/tela_esqueci_minha_senha";
 
 function App(){
     return(
@@ -41,6 +42,7 @@ function App(){
                     <Route path="/sistema/pontos" element={<TelaSistemaPontos/>}/>
                     <Route path="/doacao/pendente" element={<TelaDoacaoPendente/>}/>
                     <Route path="/registro/pontos/coleta" element={<TelaRegistroPontosColeta/>}/>
+                    <Route path="/esqueci/minha/senha" element={<TelaEsqueciMinhaSenha/>}/>
                 </Routes>
             </div>
         </Router>

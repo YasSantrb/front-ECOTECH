@@ -2,13 +2,12 @@ import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { useEffect, useRef } from 'react';
 
-mapboxgl.accessToken = 'pk.eyJ1IjoieWFzbWltc2FudHJiMTkwNSIsImEiOiJjbWJjcmZzcDkwem1jMmpxMTRhMHA2bm55In0.xsxvsypQ90PrNKEFEQcTWQ';
-
 function Mapa({ latitude, longitude }) {
   const mapContainer = useRef(null);
   const map = useRef(null);
 
   useEffect(() => {
+    mapboxgl.accessToken = 'pk.eyJ1IjoieWFzbWltc2FudHJiMTkwNSIsImEiOiJjbWJjcmZzcDkwem1jMmpxMTRhMHA2bm55In0.xsxvsypQ90PrNKEFEQcTWQ';
     if (map.current) return;
 
     map.current = new mapboxgl.Map({
@@ -28,8 +27,11 @@ function Mapa({ latitude, longitude }) {
       });
 
       new mapboxgl.Marker().setLngLat([longitude, latitude]).addTo(map.current);
+      
     }
+    
   }, [latitude, longitude]);
+  
 
   console.log("Longitude", longitude, "Latitude", latitude)
 

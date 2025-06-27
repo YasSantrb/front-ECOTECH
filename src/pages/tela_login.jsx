@@ -26,31 +26,26 @@ function TelaLogin() {
 
     let valido = true;
 
+    setErroEmail("");
+    setErroCpf("");
+    setErroSenha("");
+
     if (!email.trim()) {
       setErroEmail("Preencha o campo de email.");
       valido = false;
-    } else {
-      setErroEmail("");
     }
 
     if (!cpf.trim()) {
       setErroCpf("Preencha o campo de CPF ou CNPJ.");
       valido = false;
-    } else {
-      setErroCpf("");
     }
 
     if (!senha.trim()) {
       setErroSenha("Preencha o campo de senha.");
       valido = false;
-    } else {
-      setErroSenha("");
     }
 
     if (!valido) return;
-    setEmail("");
-    setCpf("");
-    setSenha("");
 
     const cpfNumeros = cpf.replace(/\D/g, "");
 
@@ -64,6 +59,10 @@ function TelaLogin() {
     }
 
     localStorage.setItem("logado", "true");
+
+    setEmail("");
+    setCpf("");
+    setSenha("");
 
     navigate("/");
   }
@@ -91,9 +90,11 @@ function TelaLogin() {
             <div className={styles.logo_cent}>
               <img src={logo} alt="logo_ecotech" className={styles.logo} />
             </div>
+
             <div className={styles.input_container}>
-              <label>Email</label>
+              <label htmlFor="emailInput">Email</label>
               <input
+                id="emailInput"
                 type="email"
                 placeholder="Insira seu email*"
                 value={email}
@@ -105,8 +106,9 @@ function TelaLogin() {
             </div>
 
             <div className={styles.input_container}>
-              <label>CPF ou CNPJ</label>
+              <label htmlFor="cpfCnpjInput">CPF ou CNPJ</label>
               <input
+                id="cpfCnpjInput"
                 type="text"
                 placeholder="Insira seu CPF ou CNPJ"
                 value={cpf}
@@ -117,8 +119,9 @@ function TelaLogin() {
             </div>
 
             <div className={styles.input_container}>
-              <label>Senha</label>
+              <label htmlFor="senhaInput">Senha</label>
               <input
+                id="senhaInput"
                 type={mostrarSenha ? "text" : "password"}
                 placeholder="Insira sua senha*"
                 value={senha}
@@ -135,12 +138,21 @@ function TelaLogin() {
               {erroSenha && <span className={styles.erro}>{erroSenha}</span>}
             </div>
 
+            <div className={styles.esqueci_a_senha}>
+              <Link className={styles.link} to="/esqueci/minha/senha">
+                Esqueceu a senha?
+              </Link>
+            </div>
+
             <button className={styles.botao_login} type="submit">
               Entrar
             </button>
           </form>
           <p className={styles.Cadastro}>
-            Ainda não é cadastrado? <Link className={styles.link} to="/cadastro">Cadastre-se</Link>
+            Ainda não é cadastrado?{" "}
+            <Link className={styles.link} to="/cadastro">
+              Cadastre-se
+            </Link>
           </p>
         </div>
 
