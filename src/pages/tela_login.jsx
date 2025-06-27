@@ -12,12 +12,18 @@ function TelaLogin() {
   const [email, setEmail] = useState("");
   const [cpf, setCpf] = useState("");
   const [senha, setSenha] = useState("");
+  const [mostrarSenha, setMostrarSenha] = useState(false);
 
   const [erroEmail, setErroEmail] = useState("");
   const [erroCpf, setErroCpf] = useState("");
   const [erroSenha, setErroSenha] = useState("");
 
   const navigate = useNavigate();
+
+  function validarCpf(cpf) {
+    const cpfNumeros = cpf.replace(/\D/g, "");
+    return cpfNumeros.length === 11;
+  }
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -34,6 +40,9 @@ function TelaLogin() {
     if (!cpf.trim()) {
       setErroCpf("Preencha o campo de CPF.");
       valido = false;
+    } else if (!validarCpf(cpf)) {
+      setErroCpf("CPF inválido.");
+      valido = false;
     } else {
       setErroCpf("");
     }
@@ -46,12 +55,8 @@ function TelaLogin() {
     }
 
     if (!valido) return;
-    setEmail("");
-    setCpf("");
-    setSenha("");
 
     const cpfNumeros = cpf.replace(/\D/g, "");
-
     if (cpfNumeros.length === 11) {
       localStorage.setItem("tipoUsuario", "doador");
     } else if (cpfNumeros.length === 14) {
@@ -64,6 +69,9 @@ function TelaLogin() {
     localStorage.setItem("logado", "true");
 
     navigate("/");
+    setEmail("");
+    setCpf("");
+    setSenha("");
   }
 
   return (
@@ -73,23 +81,19 @@ function TelaLogin() {
         alt="imagem_de_fundo"
         className={styles.background_tela}
       />
-
       <div className={styles.barra_voltar}>
-        <button
-          className={styles.link_chat_voltar}
-          onClick={() => navigate(-1)}
-        >
+        <button className={styles.link_chat_voltar} onClick={() => navigate(-1)}>
           <img className={styles.icon_voltar_chat} src={icon_voltar} alt="" />
           <p className={styles.nav_chat_p}>VOLTAR</p>
         </button>
       </div>
-
+      
       <div className={styles.login_box}>
+        
         <div className={styles.formulario}>
-          <div className={styles.logo_container}>
-            <img src={logo} alt="logo_ecotech" className={styles.logo} />
-          </div>
-
+          <div className={styles.logo_cent}>
+        <img src={logo} alt="logo_ecotech" className={styles.logo} />
+        </div>
           <form className={styles.form_login} onSubmit={handleSubmit}>
             <label>Email</label>
             <div className={styles.input_container}>
@@ -103,11 +107,12 @@ function TelaLogin() {
               <img src={iconEmail} alt="" className={styles.input_icon} />
             </div>
             {erroEmail && <span className={styles.erro}>{erroEmail}</span>}
-            <label>CPF ou CNPJ</label>
+
+            <label>CPF</label>
             <div className={styles.input_container}>
               <input
                 type="text"
-                placeholder="Insira seu CPF ou CNPJ*"
+                placeholder="Insira seu CPF*"
                 value={cpf}
                 onChange={(e) => setCpf(e.target.value)}
                 className={erroCpf ? styles.erroBorda : ""}
@@ -118,20 +123,26 @@ function TelaLogin() {
             <label>Senha</label>
             <div className={styles.input_container}>
               <input
-                type="password"
+                type={mostrarSenha ? "text" : "password"}
                 placeholder="Insira sua senha*"
                 value={senha}
                 onChange={(e) => setSenha(e.target.value)}
                 className={erroSenha ? styles.erroBorda : ""}
               />
-              <img src={iconSenha} alt="" className={styles.input_icon} />
+              <img
+                src={iconSenha}
+                alt="Mostrar senha"
+                className={styles.input_icon}
+                onClick={() => setMostrarSenha(!mostrarSenha)}
+                style={{ cursor: "pointer" }}
+              />
             </div>
             {erroSenha && <span className={styles.erro}>{erroSenha}</span>}
+
             <button className={styles.botao_login} type="submit">
-              Enviar
+              Entrar
             </button>
           </form>
-
           <p className={styles.Cadastro}>
             Ainda não é cadastrado? <a href="/cadastro">Cadastre-se</a>
           </p>
@@ -142,7 +153,8 @@ function TelaLogin() {
         <div className={styles.texto_direita}>
           <p className={styles.frase}>
             Doe seu lixo eletrônico
-            <br />e cuide do planeta!
+            <br />
+            e cuide do planeta!
           </p>
           <img src={planeta} alt="planeta" className={styles.img_planeta} />
         </div>
