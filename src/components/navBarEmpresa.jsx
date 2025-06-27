@@ -95,7 +95,7 @@ function BarraNavegacaoEmpresa() {
                         </li>
                         <li>
                           <Link
-                            to="historico/doacoes"
+                            to="/historico/agendamentos"
                             className={`${styles.link_dropdown} ${styles.meu_historico}`}
                           >
                             Meu histórico
@@ -111,10 +111,18 @@ function BarraNavegacaoEmpresa() {
                         </li>
                         <li>
                           <Link
+                            to="/meus/pontos/coleta"
+                            className={`${styles.link_dropdown} ${styles.meus_pontos}`}
+                          >
+                            Meus pontos
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
                             to="/registro/pontos/coleta"
                             className={`${styles.link_dropdown} ${styles.registro_pontos}`}
                           >
-                            Meus pontos
+                            Criar pontos
                           </Link>
                         </li>
                         <li>

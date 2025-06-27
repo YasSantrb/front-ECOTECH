@@ -123,7 +123,7 @@ function TelaRegistroPontosColeta() {
 
       <div className={styles.form_registro}>
         <h2>
-          <i className="fa-solid fa-recycle"></i> Registrar Ponto de Coleta
+          Registrar ponto de coleta
         </h2>
         <form onSubmit={registrarPonto}>
           <div className={styles.form_campos}>
@@ -216,13 +216,6 @@ function TelaRegistroPontosColeta() {
             Registrar Ponto
           </button>
         </form>
-
-        {/* <button
-          className={styles.botao_ver_pontos}
-          onClick={() => setMostrarModal(true)}
-        >
-        Meus Pontos de Coleta
-        </button> */}
       </div>
 
       {mostrarModal && (

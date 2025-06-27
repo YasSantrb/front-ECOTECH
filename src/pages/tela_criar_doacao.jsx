@@ -169,22 +169,6 @@ function TelaCriarDoacao() {
 
             <div className={styles.coluna_direita}>
               <div className={styles.campo}>
-                <label className={styles.label_formulario}>
-                  Condição do eletrônico
-                </label>
-                <input
-                  className={`${styles.input} ${
-                    erroCondicao ? styles.erro_input : ""
-                  }`}
-                  value={condicao}
-                  onChange={(e) => setCondicao(e.target.value)}
-                  type="text"
-                  placeholder="Insira a condição do eletrônico*"
-                />
-                {erroCondicao && <p className={styles.erro}>{erroCondicao}</p>}
-              </div>
-
-              <div className={styles.campo}>
                 <label className={styles.label_formulario}>Observação</label>
                 <input
                   className={`${styles.input} ${
@@ -199,7 +183,6 @@ function TelaCriarDoacao() {
                   <p className={styles.erro}>{erroObservacao}</p>
                 )}
               </div>
-
               <div className={styles.campo}>
                 <label className={styles.label_formulario}>
                   Insira as fotos do eletrônico
@@ -215,6 +198,26 @@ function TelaCriarDoacao() {
                 />
                 {erroImagens && <p className={styles.erro}>{erroImagens}</p>}
               </div>
+                <div className={styles.campo}>
+                  <label className={styles.label_formulario}>
+                    Condição do eletrônico
+                  </label>
+                  <select
+                    className={`${styles.input_select} ${
+                      erroCondicao ? styles.erro_input : ""
+                    }`}
+                    value={condicao}
+                    onChange={(e) => setCondicao(e.target.value)}
+                  >
+                    <option value="">Selecione uma opção</option>
+                    <option value="Novo">Novo</option>
+                    <option value="Usado">Usado</option>
+                    <option value="Peças">Para peças</option>
+                  </select>
+                  {erroCondicao && (
+                    <p className={styles.erro}>{erroCondicao}</p>
+                  )}
+                </div>
             </div>
           </div>
 

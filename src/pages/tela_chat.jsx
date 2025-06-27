@@ -7,18 +7,24 @@ import { useState } from "react";
 
 function TelaChat() {
   const navigate = useNavigate();
+  const tipoUsuario = localStorage.getItem("tipoUsuario");
   const contatos = [
     {
       id: 1,
       imagem: "src/assets/imagens/logo_ecotech_chat.PNG",
       nome: "EcoTech",
       status: "Online",
-      mensagemContato: "-João Ribeiro agendou a colet...",
+      mensagemContato:
+        tipoUsuario === "doador"
+          ? "-A empresa Amazon agendou..."
+          : "-Você agendou a coleta do no...",
       mensagensChat: [
         { texto: "15/05/2025", tipo: "data" },
         {
           texto:
-            "João Ribeiro agendou a coleta do notebook Dell Inspiron para o dia 26/05/2025, às 16:00, na cidade de Floriano-PI.",
+            tipoUsuario === "doador"
+              ? "A empresa Amazon agendou a coleta do seu notebook Dell Inspiron para o dia 26/05/2025, às 16:00, na cidade de Floriano-PI."
+              : "Você agendou a coleta do notebook Dell Inspiron para o dia 26/05/2025, às 16:00, na cidade de Floriano-PI.",
           tipo: "notificacao",
           hora_mensagem: "10:05",
         },
@@ -260,8 +266,15 @@ function TelaChat() {
         <div className={styles.container_chat}>
           <div className={styles.chat_contatos}>
             <nav className={styles.nav_chat}>
-              <button className={styles.link_chat_voltar} onClick={() => navigate(-1)}>
-                <img className={styles.icon_voltar_chat} src={icon_voltar} alt="" />
+              <button
+                className={styles.link_chat_voltar}
+                onClick={() => navigate(-1)}
+              >
+                <img
+                  className={styles.icon_voltar_chat}
+                  src={icon_voltar}
+                  alt=""
+                />
                 <p className={styles.nav_chat_p}>VOLTAR</p>
               </button>
             </nav>
@@ -271,7 +284,9 @@ function TelaChat() {
               </div>
               <div className={styles.filtros_chat}>
                 <div className={styles.pesquisar_contato}>
-                  <i className={`${styles.icone_pesquisar_chat} fa-solid fa-magnifying-glass`}></i>
+                  <i
+                    className={`${styles.icone_pesquisar_chat} fa-solid fa-magnifying-glass`}
+                  ></i>
                   <input
                     className={styles.filtro_input_chat}
                     type="text"
@@ -283,17 +298,17 @@ function TelaChat() {
                 <div className={styles.botoes_filtros_chat}>
                   <button
                     onClick={() => setStatusFiltro("todos")}
-                    className={` ${styles.botao_chat} ${styles.botao_todas_chat} ${
-                      statusFiltro === "todos" ? "ativo" : ""
-                    }`}
+                    className={` ${styles.botao_chat} ${
+                      styles.botao_todas_chat
+                    } ${statusFiltro === "todos" ? "ativo" : ""}`}
                   >
                     Todas
                   </button>
                   <button
                     onClick={() => setStatusFiltro("nao_lidas")}
-                    className={`${styles.botao_chat} ${styles.botao_nao_lidas_chat} ${
-                      statusFiltro === "nao_lidas" ? "ativo" : ""
-                    }`}
+                    className={`${styles.botao_chat} ${
+                      styles.botao_nao_lidas_chat
+                    } ${statusFiltro === "nao_lidas" ? "ativo" : ""}`}
                   >
                     Não lidas
                   </button>
@@ -340,7 +355,7 @@ function TelaChat() {
                     alt=""
                     className={styles.contato_selecionado_icone}
                   />
-                  <div className={styles.texto_contato .selecionado}>
+                  <div className={styles.texto_contato.selecionado}>
                     <p className={styles.nome_contato_nav_chat}>
                       {contatos[contatoSelecionado].nome}
                     </p>
@@ -380,7 +395,9 @@ function TelaChat() {
             {!contatoSelecionado?.isNotificacao && (
               <div className={styles.div_enviar_mensagem}>
                 <div className={styles.elementos_enviar_mensagem}>
-                  <i className={`${styles.icone_camera} fa-solid fa-camera`}></i>
+                  <i
+                    className={`${styles.icone_camera} fa-solid fa-camera`}
+                  ></i>
                   <input
                     className={styles.input_enviar_mensagem}
                     value={mensagem}

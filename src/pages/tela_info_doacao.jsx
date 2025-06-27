@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import styles from "../styles/tela_info_doacao.module.css";
 import fundo_login_cadastro from "../assets/imagens/fundo_login_cadastro.jpg";
 import icon_voltar from "../assets/imagens/icon_voltar.png";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import InformacoesDoacaoComponente from "../components/detalhes_doacoes";
 import televisao from "../assets/imagens/download 1 (1).png";
 import placa_mae from "../assets/imagens/download 3.png";
@@ -12,6 +12,7 @@ import mulher1 from "../assets/imagens/woman (1).png";
 import mulher2 from "../assets/imagens/woman.png";
 import homem1 from "../assets/imagens/ceo.png";
 import homem2 from "../assets/imagens/businessman.png";
+import { useLocation } from "react-router-dom";
 
 const todasAsDoacoes = [
   {
@@ -99,6 +100,8 @@ function TelaInfoDoacao() {
   const { id } = useParams();
   const [doacaoAtual, setDoacaoAtual] = useState(null);
   const [loading, setLoading] = useState(true);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const buscarDetalhesDoacao = async () => {
@@ -144,6 +147,9 @@ function TelaInfoDoacao() {
     );
   }
 
+  
+const modo = location.state?.modo || "visualizacao";
+
   return (
     <div className={styles.tela_info_doacao}>
       <img
@@ -153,16 +159,15 @@ function TelaInfoDoacao() {
       />
       <div className={styles.info_doacao_div}>
         <nav className={styles.nav_info_doacao}>
-          <Link className={styles.link_voltar_info_doacao} to="/">
+          <button className={styles.link_voltar_info_doacao} onClick={() => navigate(-1)}>
             <img
               className={styles.icon_voltar_info_doacao}
               src={icon_voltar}
               alt="Voltar"
             />
             <p className={styles.nav_info_doacao_p}>VOLTAR</p>
-          </Link>
+          </button>
         </nav>
-
         <main className={styles.info_doacao_main}>
           <InformacoesDoacaoComponente
             nomeDoador={doacaoAtual.nomeDoador}
@@ -174,6 +179,7 @@ function TelaInfoDoacao() {
             endereco={doacaoAtual.endereco}
             imagem_user={doacaoAtual.imagem_user}
             imagem={doacaoAtual.imagem}
+            modo={modo}
           />
         </main>
       </div>

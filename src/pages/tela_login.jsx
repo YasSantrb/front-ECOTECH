@@ -7,11 +7,13 @@ import iconEmail from "../assets/imagens/icon-email.png";
 import iconSenha from "../assets/imagens/icon-senha.png";
 import icon_voltar from "../assets/imagens/icon_voltar.png";
 import fundo_login_cadastro from "../assets/imagens/fundo_login_cadastro.jpg";
+import { Link } from "react-router-dom";
 
 function TelaLogin() {
   const [email, setEmail] = useState("");
   const [cpf, setCpf] = useState("");
   const [senha, setSenha] = useState("");
+  const [mostrarSenha, setMostrarSenha] = useState(false);
 
   const [erroEmail, setErroEmail] = useState("");
   const [erroCpf, setErroCpf] = useState("");
@@ -32,7 +34,7 @@ function TelaLogin() {
     }
 
     if (!cpf.trim()) {
-      setErroCpf("Preencha o campo de CPF.");
+      setErroCpf("Preencha o campo de CPF ou CNPJ.");
       valido = false;
     } else {
       setErroCpf("");
@@ -73,7 +75,6 @@ function TelaLogin() {
         alt="imagem_de_fundo"
         className={styles.background_tela}
       />
-
       <div className={styles.barra_voltar}>
         <button
           className={styles.link_chat_voltar}
@@ -86,13 +87,12 @@ function TelaLogin() {
 
       <div className={styles.login_box}>
         <div className={styles.formulario}>
-          <div className={styles.logo_container}>
-            <img src={logo} alt="logo_ecotech" className={styles.logo} />
-          </div>
-
           <form className={styles.form_login} onSubmit={handleSubmit}>
-            <label>Email</label>
+            <div className={styles.logo_cent}>
+              <img src={logo} alt="logo_ecotech" className={styles.logo} />
+            </div>
             <div className={styles.input_container}>
+              <label>Email</label>
               <input
                 type="email"
                 placeholder="Insira seu email*"
@@ -101,39 +101,46 @@ function TelaLogin() {
                 className={erroEmail ? styles.erroBorda : ""}
               />
               <img src={iconEmail} alt="" className={styles.input_icon} />
+              {erroEmail && <span className={styles.erro}>{erroEmail}</span>}
             </div>
-            {erroEmail && <span className={styles.erro}>{erroEmail}</span>}
-            <label>CPF ou CNPJ</label>
+
             <div className={styles.input_container}>
+              <label>CPF ou CNPJ</label>
               <input
                 type="text"
-                placeholder="Insira seu CPF ou CNPJ*"
+                placeholder="Insira seu CPF ou CNPJ"
                 value={cpf}
                 onChange={(e) => setCpf(e.target.value)}
                 className={erroCpf ? styles.erroBorda : ""}
               />
+              {erroCpf && <span className={styles.erro}>{erroCpf}</span>}
             </div>
-            {erroCpf && <span className={styles.erro}>{erroCpf}</span>}
 
-            <label>Senha</label>
             <div className={styles.input_container}>
+              <label>Senha</label>
               <input
-                type="password"
+                type={mostrarSenha ? "text" : "password"}
                 placeholder="Insira sua senha*"
                 value={senha}
                 onChange={(e) => setSenha(e.target.value)}
                 className={erroSenha ? styles.erroBorda : ""}
               />
-              <img src={iconSenha} alt="" className={styles.input_icon} />
+              <img
+                src={iconSenha}
+                alt="Mostrar senha"
+                className={styles.input_icon}
+                onClick={() => setMostrarSenha(!mostrarSenha)}
+                style={{ cursor: "pointer" }}
+              />
+              {erroSenha && <span className={styles.erro}>{erroSenha}</span>}
             </div>
-            {erroSenha && <span className={styles.erro}>{erroSenha}</span>}
+
             <button className={styles.botao_login} type="submit">
-              Enviar
+              Entrar
             </button>
           </form>
-
           <p className={styles.Cadastro}>
-            Ainda não é cadastrado? <a href="/cadastro">Cadastre-se</a>
+            Ainda não é cadastrado? <Link className={styles.link} to="/cadastro">Cadastre-se</Link>
           </p>
         </div>
 

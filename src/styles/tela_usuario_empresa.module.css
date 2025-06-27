@@ -61,7 +61,6 @@
   width: 90%;
   padding: 20px 30px;
   box-shadow: 0 0 8px 4px rgba(34, 92, 37, 0.4);
-  margin-top: 30px;
   border: 1px solid rgba(45, 90, 45, 0.08);
   color: #225c25;
   overflow-x: hidden;
@@ -227,6 +226,49 @@
   font-weight: 500;
 }
 
+.metricas_usuario {
+  display: flex;
+  gap: 30px;
+  margin: 15px 0 10px 0;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.metricas_box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  border-left: 4px solid #225c25;
+  box-shadow: 0 2px 8px rgba(34, 92, 37, 0.2);
+  transition: all 0.2s ease;
+}
+
+.metricas_box:hover {
+  background-color: rgba(34, 92, 37, 0.05);
+  transform: translateX(2px);
+}
+
+.metricas_box i {
+  color: #225c25;
+  font-size: 22px;
+}
+
+.metricas_titulo {
+  font-size: 14px;
+  color: #64748b;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.metricas_valor {
+  font-size: 20px;
+  color: #1e293b;
+  font-weight: 500;
+}
+
 .popUp_overlay {
   position: fixed;
   top: 0;
@@ -354,14 +396,13 @@
 .input {
   padding: 12px 14px;
   border-radius: 12px;
-  border: 2px solid #e8f5e8;
+  border: 2px solid #d4edda;
   font-size: 15px;
   outline: none;
   width: 100%;
-  background: #ffffff;
+  background-color: #f8fff8;
   color: #2c3e50;
   transition: all 0.3s ease;
-  margin-bottom: 10px;
 }
 
 .input::placeholder {

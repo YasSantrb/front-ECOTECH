@@ -364,7 +364,7 @@ function TelaFeed() {
                       className={styles.link_card_feed}
                       to={`/info/doacao/${doacao.id}`}
                     >
-                      <button className={styles.botao_card}>Eu quero!</button>
+                      <button className={styles.botao_card}>{tipoUsuario === "doador" ? "Ver mais" : "Eu quero!"}</button>
                     </Link>
                   </div>
                 </div>
@@ -478,7 +478,7 @@ function TelaFeed() {
                     className={styles.link_card_feed}
                     to={`/info/doacao/${doacao.id}`}
                   >
-                    <button className={styles.botao_card}>Eu quero!</button>
+                    <button className={styles.botao_card}>{tipoUsuario === "doador" ? "Ver mais" : "Eu quero!"}</button>
                   </Link>
                 </div>
               </div>

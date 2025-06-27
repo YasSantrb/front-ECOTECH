@@ -104,11 +104,11 @@
 .input_agendamento {
   padding: 12px 14px;
   border-radius: 12px;
-  border: 2px solid #e8f5e8;
+  border: 2px solid #d4edda;
   font-size: 15px;
   outline: none;
   width: 100%;
-  background: #ffffff;
+  background-color: #f8fff8;
   color: #2c3e50;
   transition: all 0.3s ease;
 }
@@ -154,7 +154,7 @@
 }
 
 .erro_input {
-  border: 1px solid red;
+  border: 2px solid #e74c3c;
 }
 
 .popUpOverlay {

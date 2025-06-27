@@ -1,3 +1,4 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital@1&display=swap');
 
 .tela_login {
@@ -40,29 +41,32 @@
   color: #225c25;
   font-weight: 500;
 }
+
 .barra_voltar {
   position: absolute;
   top: 15px;
   left: 15px;
   z-index: 2;
 }
+
 .nav_p {
   font-size: 20px;
   color: #225c25;
   font-weight: 500;
 }
+
 .login_box {
   position: relative;
   z-index: 1;
-  background-color: #225C25;
+  background-color: #fff;
   border-radius: 20px;
   width: 780px;
   display: flex;
   align-items: center;
-  padding: 30px 20px;
+  padding: 40px 20px 40px 20px;
   gap: 20px;
-  color: white;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  color: #225C25;
+  box-shadow: 0 0 8px 4px rgba(34, 92, 37, 0.4); 
 }
 
 .formulario {
@@ -73,10 +77,18 @@
   align-items: center;
 }
 
-.logo_container {
+/*.logo_container {
+  
+  width: 100%;
   display: flex;
   justify-content: center;
-  width: 100%;
+  align-items: center;
+  margin-bottom: 10px;
+}*/
+.logo_cent{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .logo {
@@ -92,11 +104,11 @@
 }
 
 .form_login label {
-  font-weight: bold;
-  font-style: italic;
-  font-size: 14px;
-  color: white;
-  margin-bottom: -5px;
+  color: #225c25;
+  font-weight: 600;
+  margin-bottom: 8px;
+  font-size: 15px;
+  letter-spacing: 0.5px;
 }
 
 .input_container {
@@ -105,57 +117,54 @@
 }
 
 .input_container input {
-  width: 100%;
-  padding: 10px 40px 10px 15px;
-  border-radius: 20px;
-  border: none;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 2px solid #d4edda;
+  font-size: 15px;
   outline: none;
-  font-family: 'Poppins', sans-serif;
-  font-size: 14px;
+  width: 100%;
+  background-color: #f8fff8;
+  color: #2c3e50;
+  transition: all 0.3s ease;
 }
 
 .input_icon {
   position: absolute;
   right: 12px;
-  top: 50%;
+  top: 65%;
   transform: translateY(-50%);
   width: 18px;
   height: 18px;
   opacity: 0.8;
+  cursor: pointer;
 }
 
 .botao_login {
-  margin: 20px auto 0;
-  padding: 10px 30px;
-  border-radius: 20px;
+  margin-top: 32px;
+  padding: 12px 15px;
+  border-radius: 25px;
   border: none;
-  background-color: white;
-  color: #225C25;
-  font-weight: bold;
-  font-size: 15px;
+  background-color: #225c25;
+  color: #fff;
+  font-weight: 500;
+  font-size: 16px;
   cursor: pointer;
-  transition: 0.3s ease;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 12px rgba(45, 90, 45, 0.2);
+  letter-spacing: 0.5px;
 }
-
-.botao_login:hover {
-  background-color: #a4e2b4;
-}
-
-.Cadastro {
-  font-size: 13px;
-  margin-top: 15px;
-  text-align: center;
-}
-
-.Cadastro a {
-  color: #cfc2f2;
-  text-decoration: none;
+.botao_enviar:hover {
+  background-color: #225c25;
+  transform: translateY(-2px);
 }
 
 .linha_vertical {
   width: 2px;
   height: 280px;
-  background-color: white;
+  background-color: #225C25;
   opacity: 0.4;
 }
 
@@ -171,7 +180,7 @@
 .frase {
   font-style: italic;
   font-size: 25px;
-  color: white;
+  color: #225C25;
   margin-bottom: 20px;
   line-height: 1.5;
 }
@@ -180,11 +189,26 @@
   width: 150px;
   height: auto;
 }
-.erro{
+
+.erro {
   color: red;
   font-size: 13px;
   margin-top: 2px;
 }
+
 .erroBorda {
   border: 2px solid #e53935 !important;
-  }
+}
+
+.Cadastro {
+  text-align: center;
+  margin-top: 16px;
+  font-weight: 500;
+  font-size: 16px;
+  color: #225c25;
+}
+
+.link{
+  text-decoration: none;
+  color: #000;
+}

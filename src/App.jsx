@@ -15,6 +15,8 @@ import TelaHistoricoDoacoes from "./pages/tela_historico_doacoes";
 import TelaSistemaPontos from "./pages/tela_sistema_de_pontos";
 import TelaDoacaoPendente from "./pages/tela_doacao_pendente";
 import TelaRegistroPontosColeta from "./pages/tela_registro_pontos_coleta";
+import TelaHistoricoAgendamentos from "./pages/tela_historico_agendamentos";
+import TelaPontosColeta from "./pages/tela_pontos_coleta";
 
 function App(){
     return(
@@ -32,7 +34,9 @@ function App(){
                     <Route path="/info/doacao/:id" element={<TelaInfoDoacao/>}/>
                     <Route path="/criar/doacao" element={<TelaCriarDoacao/>}/>
                     <Route path="/localizacao/pontos/coleta" element={<TelaLocalizacaoPontosColeta/>}/>
+                    <Route path="/meus/pontos/coleta" element={<TelaPontosColeta/>}/>
                     <Route path="/historico/doacoes" element={<TelaHistoricoDoacoes/>}/>
+                    <Route path="/historico/agendamentos" element={<TelaHistoricoAgendamentos/>}/>
                     <Route path="/sobre/nos" element={<TelaSobreNos/>}/>
                     <Route path="/sistema/pontos" element={<TelaSistemaPontos/>}/>
                     <Route path="/doacao/pendente" element={<TelaDoacaoPendente/>}/>

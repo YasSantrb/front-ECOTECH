@@ -1,9 +1,7 @@
 import styles from "../styles/tela_doacao_pendente.module.css";
 import fundo_login_cadastro from "../assets/imagens/fundo_login_cadastro.jpg";
 import icon_voltar from "../assets/imagens/icon_voltar.png";
-import icon_lixeira from "../assets/imagens/icon_lixeira.png";
 import icon_user from "../assets/imagens/woman (1).png";
-import icon_sucesso from "../assets/imagens/checked 2.png";
 import televisao from "../assets/imagens/tv_tubo.png";
 import { useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
@@ -88,16 +86,6 @@ function TelaDoacaoPendente() {
     }
   }, [location.state]);
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  function abrirModal() {
-    setIsModalOpen(true);
-  }
-
-  function fecharModal() {
-    setIsModalOpen(false);
-  }
-
   return (
     <div className={styles.tela_doacao_pendente}>
       <img
@@ -126,17 +114,6 @@ function TelaDoacaoPendente() {
                 alt={nomeEletronico}
               />
               <div className={styles.informacoes_esquerda}>
-                <div className={styles.doador_info_esquerda}>
-                  <h3 className={styles.info_esquerda_h3}>Status:</h3>
-                  <div className={styles.info_status}>
-                    <img
-                      className={styles.img_sucesso}
-                      src={icon_sucesso}
-                      alt=""
-                    />
-                    <p className={styles.nome_doador}>Disponível</p>
-                  </div>
-                </div>
 
                 <div className={styles.doador_info_esquerda}>
                   <h3 className={styles.info_esquerda_h3}>Doado por:</h3>
@@ -158,19 +135,8 @@ function TelaDoacaoPendente() {
                           <i
                             className={`${styles.pincel} fa-solid fa-pencil`}
                           ></i>
-                          Editar
-                        </button>
 
-                        <button
-                          onClick={() => abrirModal()}
-                          className={styles.botoes_doacao}
-                        >
-                          <img
-                            className={styles.icon_lixeira}
-                            src={icon_lixeira}
-                            alt="excluir"
-                          />
-                          Excluir
+                          Editar
                         </button>
                       </div>
                     </div>
@@ -326,37 +292,6 @@ function TelaDoacaoPendente() {
                   Confirmar
                 </button>
               </div>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {isModalOpen && (
-        <div className={styles.popUpSair}>
-          <div className={styles.popUpSair_div}>
-            <i
-              className={`${styles.botao_sair} fa-solid fa-x`}
-              onClick={fecharModal}
-            ></i>
-            <p className={styles.popUp_p}>
-              Tem certeza de que deseja excluir essa doação?
-            </p>
-            <div className={styles.botaoPopUp}>
-              <button onClick={fecharModal} className={styles.botoes}>
-                Cancelar
-                <i
-                  className={`${styles.icone_cancelar} fa-solid fa-circle-xmark`}
-                ></i>
-              </button>
-
-              <button onClick={() => navigate(-1)} className={styles.botoes}>
-                Confirmo!
-                <img
-                  className={styles.icone_sucesso}
-                  src={icon_sucesso}
-                  alt=""
-                />
-              </button>
             </div>
           </div>
         </div>

@@ -115,7 +115,16 @@ function TelaUsuarioEmpresa() {
         </div>
 
         <div className={styles.secao_informacoes}>
-          <h2 className={styles.titulo_secao}>Acesso rápido</h2>
+          <h2 className={styles.titulo_secao}>Minhas estatísticas</h2>
+          <div className={styles.metricas_usuario}>
+            <div className={styles.metricas_box}>
+              <i class="fa-solid fa-recycle"></i>
+              <div>
+                <p className={styles.metricas_titulo}>Coletas realizadas</p>
+                <p className={styles.metricas_valor}>12</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 

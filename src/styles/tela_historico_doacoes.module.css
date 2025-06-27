@@ -1,10 +1,3 @@
-body{
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
-  font-family: 'Poppins', sans-serif;
-}
-
 .tela_historico_doacoes {
   position: relative;
   min-height: 100vh;
@@ -16,44 +9,53 @@ body{
   position: absolute;
   top: 0;
   left: 0;
-  width: 114%;
+  width: 100%;
   height: 100%;
   object-fit: cover;
   z-index: 0;
+  opacity: 0.1;
+  filter: blur(1px);
 }
 
 .container_verde {
   position: relative;
   z-index: 1;
-  background-color: #225c25;
-  border-radius: 28px;
+  background-color: #fff;
+  border-radius: 12px;
   padding: 20px 40px 40px;
-  margin: 40px auto;
+  margin: 80px auto 40px auto;
   width: 90%;
   max-width: 1100px;
   box-sizing: border-box;
-  color: white;
-  text-align: center;
+  color: #225c25;
+  text-align: center;box-shadow: 0 0 8px 4px rgba(34, 92, 37, 0.4); 
 }
 
-.voltar {
+.link_voltar {
   display: flex;
-  align-items: center;
-  gap: 10px;
-  color: #225c25;
-  font-weight: bold;
-  font-size: 16px;
+  gap: 5px;
   text-decoration: none;
-  margin: 20px 0 0 60px;
-  position: relative;
+  padding-left: 5px;
+  align-items: center;
+  border: none;
+  cursor: pointer;
+}
+
+.icon_voltar {
+  width: 26px;
+  height: 26px;
+}
+.barra_voltar {
+  position: absolute;
+  top: 15px;
+  left: 15px;
   z-index: 2;
 }
-
-.icone_voltar {
-  width: 24px;
-  height: 24px;
+.nav_p {
+  font-size: 20px;
+  color: #225c25;
+  font-weight: 500;
 }
-
 .titulo {
   font-size: 28px;
   font-weight: bold;
@@ -63,96 +65,286 @@ body{
 
 .subtitulo {
   font-size: 15px;
-  color: #e0e0e0;
+  color: #225C25;
   margin-bottom: 25px;
 }
 
 .tabela_container {
   overflow-x: auto;
+  margin-top: 20px;
 }
 
 .tabela_doacoes {
   width: 100%;
-  border-collapse: collapse;
-  background-color: #edf4dc;
-  border-radius: 10px;
-  overflow: hidden;
+  border-collapse: separate;
+  border-spacing: 0 6px; 
 }
 
-.tabela_doacoes th {
-  background-color: #d4e4b5;
-  color: #222;
-  padding: 12px;
+.tabela_doacoes thead th {
+  color: #225c25;
+  padding: 10px 12px;
   text-align: left;
+  font-weight: 600;
+  border: 2px solid #ccc;
 }
 
-.tabela_doacoes td {
-  padding: 12px;
-  border-bottom: 1px solid #ccc;
-  font-size: 14px;
-  color: #222;
+.tabela_doacoes tbody tr {
+  background-color: #ffffff;
 }
 
-.tabela_doacoes tr:last-child td {
-  border-bottom: none;
+.tabela_doacoes tbody td {
+  background-color: #ffffff;
+  padding: 10px 12px;
+  font-size: 15px;
+  color: #225c25;
+  font-weight: 500;
+  border: 1px solid #ccc;
+}
+
+
+.tabela_doacoes tbody td:first-child,
+.tabela_doacoes tbody td:last-child {
+  border-radius: 0;
 }
 
 .status_badge {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 6px 12px;
-  border-radius: 20px;
-  font-weight: bold;
-  font-size: 13px;
+  gap: 6px;
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 500;
 }
 
 .status_icon {
-  width: 16px;
-  height: 16px;
+  width: 14px;
+  height: 14px;
 }
 
 .concluida {
-  background-color: #d4f8d4;
-  color: #228b22;
+  background-color: #e4fbe4;
+  color: #218838;border-radius: 10px
 }
 
 .pendente {
-  background-color: #ffe9a9;
-  color: #c59b00;
+  background-color: #fff3cd;
+  color: #c59b00;border-radius: 10px
 }
 
 .cancelada {
-  background-color: #ffd5d5;
-  color: #c0392b;
+  background-color: #f8d7da;
+  color: #c0392b;border-radius: 10px
 }
 
 .aguardando {
-  background-color: #f9e4b3;
-  color: #c47f17;
+  background-color: #ffeeba;
+  color: #c47f17;border-radius: 10px;
 }
-
 .botao_pendentes {
-  margin-top: 30px;
+  margin-top: 25px;
   padding: 12px 24px;
-  background-color: white;
-  color: #225c25;
+  border: none;
+  border-radius: 12px;
+  background-color:#225C25 ;
+  color: white;
   font-weight: bold;
   font-size: 15px;
-  border: none;
-  border-radius: 14px;
   cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
+  align-self: center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
   transition: background-color 0.3s ease;
+  
+}
+a {
+  text-decoration: none;
 }
 
-.botao_pendentes:hover {
-  background-color: #d7f2dc;
+.botao_detalhes {
+  padding: 8px 8px;
+  border-radius: 25px;
+  border: none;
+  background-color: #225c25;
+  color: #fff;
+  font-weight: 500;
+  font-size: 16px;
+  cursor: pointer;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 12px rgba(45, 90, 45, 0.2);
+  letter-spacing: 0.5px;
 }
 
-.icon_verificar {
-  width: 20px;
-  height: 20px;
+.botao_detalhes:hover {
+  background-color: #225c25;
+  transform: translateY(-2px);
+}
+
+.popUpOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.popUpCard {
+  background-color: #fff;
+  color: #225c25;
+  width: 90%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2), 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  animation: slideInUp 0.3s ease-out;
+}
+
+.popUpCard::-webkit-scrollbar {
+  width: 8px;
+}
+
+.popUpCard::-webkit-scrollbar-thumb {
+  background-color: rgba(34, 92, 37, 0.8);
+  border-radius: 4px;
+}
+
+.popUpHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 15px;
+}
+
+.popUpTitulo {
+  font-size: 24px;
+  font-weight: 700;
+  color: #225c25;
+  margin: 0;
+}
+
+.popUpContent{
+  text-align: start;
+}
+
+.popUpBotaoFechar {
+  background: none;
+  border: none;
+  font-size: 30px;
+  color: #666;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.popUpBotaoFechar:hover {
+  color: #d32f2f;
+}
+
+.popUpContent p {
+  margin-bottom: 12px;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #333;
+}
+
+.popUpContent strong {
+  color: #225c25;
+  font-weight: 600;
+}
+
+.info_modal {
+  margin-bottom: 30px;
+  padding: 15px;
+  background-color: #f7fcf7;
+  border-radius: 8px;
+  border: 1px solid #e0f2f1;
+}
+
+.popUp_botoes {
+  display: flex;
+  gap: 20px;
+  margin-top: 30px;
+  justify-content: center;
+}
+
+.botao_confirmar_agendamento,
+.botao_cancelar_agendamento {
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-size: 17px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  text-align: center;
+}
+
+.botao_confirmar_agendamento {
+  background-color: #225c25;
+  color: #fff;
+  border: 1px solid #225c25;
+  box-shadow: 0 4px 10px rgba(76, 175, 80, 0.2);
+}
+
+.botao_confirmar_agendamento:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(76, 175, 80, 0.3);
+}
+
+.botao_cancelar_agendamento {
+  background-color: transparent;
+  color: #225c25;
+  border: 1px solid #225c25;
+  box-shadow: none;
+}
+
+.botao_cancelar_agendamento:hover {
+  background-color: #f0f4f8;
+  transform: translateY(-2px);
+  border-color: #225c25;
+  color: #225c25;
+}
+
+.label_modal {
+  font-weight: 600;
+  margin-bottom: 8px;
+  font-size: 16px;
+  letter-spacing: 0.5px;
+}
+
+.input {
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 2px solid #d4edda;
+  font-size: 15px;
+  outline: none;
+  width: 100%;
+  background-color: #f8fff8;
+  color: #2c3e50;
+  transition: all 0.3s ease;
+}
+
+.input::placeholder {
+  color: #95a5a6;
+  font-weight: 400;
+}
+
+.span_popUpSucesso {
+  display: flex;
+  gap: 5px;
+}
+
+.icone_sucesso {
+  width: 30px;
 }
