@@ -8,7 +8,7 @@
   background-color: rgba(0, 0, 0, 0.5);
   align-items: center;
   justify-content: center;
-  z-index: 50;
+  z-index: 1000;
 }
 
 .popUpInfo {
@@ -20,6 +20,19 @@
   border-radius: 20px;
 }
 
+.popUpContent {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.iconSuccess {
+  color: #225c25;
+  font-size: 30px;
+  flex-shrink: 0;
+}
+
 .popUp_p {
   font-size: 20px;
+  margin: 0;
 }

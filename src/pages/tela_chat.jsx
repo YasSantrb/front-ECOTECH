@@ -28,6 +28,15 @@ function TelaChat() {
           tipo: "notificacao",
           hora_mensagem: "10:05",
         },
+        { texto: "26/05/2025", tipo: "data" },
+        {
+          texto:
+            tipoUsuario === "doador"
+              ? "A empresa Amazon confirmou a coleta do seu notebook Dell Inspiron e você ganhou 10 pontos!."
+              : "Você confirmou a coleta do notebook Dell Inspiron no dia 26/05/2025!",
+          tipo: "notificacao",
+          hora_mensagem: "16:00",
+        },
       ],
       lida: true,
       isNotificacao: true,

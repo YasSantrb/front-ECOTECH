@@ -1,9 +1,8 @@
 import styles from "../styles/tela_feed.module.css";
 import { useState } from "react";
-import icone_sucesso from "../assets/imagens/checked 2.png";
 import { Link, useNavigate } from "react-router-dom";
 
-function BarraNavegacaoDoador() {
+function BarraNavegacaoDoador({ pesquisa, setPesquisa }) {
   const navigate = useNavigate();
 
   const [menuAberto, setMenuAberto] = useState(false);
@@ -47,6 +46,8 @@ function BarraNavegacaoDoador() {
               className={styles.campo_pesquisa}
               type="text"
               placeholder="Pesquisar"
+              value={pesquisa}
+              onChange={(e) => setPesquisa(e.target.value)}
             />
           </div>
 
@@ -80,7 +81,10 @@ function BarraNavegacaoDoador() {
                   <ul className={styles.dropdown_menu}>
                     {!logado ? (
                       <li>
-                        <Link to="/login" className={`${styles.link_dropdown} ${styles.entrar}`}>
+                        <Link
+                          to="/login"
+                          className={`${styles.link_dropdown} ${styles.entrar}`}
+                        >
                           Entrar
                         </Link>
                       </li>
@@ -111,7 +115,10 @@ function BarraNavegacaoDoador() {
                           </Link>
                         </li>
                         <li>
-                          <Link to="/chat" className={`${styles.link_dropdown} ${styles.meu_chat}`}>
+                          <Link
+                            to="/chat"
+                            className={`${styles.link_dropdown} ${styles.meu_chat}`}
+                          >
                             Meu chat
                           </Link>
                         </li>
@@ -133,33 +140,41 @@ function BarraNavegacaoDoador() {
                         </li>
 
                         {isModalOpen && (
-                          <div className={styles.popUpSair}>
-                            <div className={styles.popUp}>
-                              <i
-                                className={`${styles.botao_sair} fa-solid fa-x`}
-                                onClick={fecharModal}
-                              ></i>
-                              <p className={styles.popUp_p}>
-                                Tem certeza de que deseja sair do site?
-                              </p>
-                              <div className={styles.botaoPopUp}>
+                          <div className={styles.popUpOverlay}>
+                            <div className={styles.popUpCard}>
+                              <div className={styles.popUpHeader}>
+                                <h3 className={styles.popUpTitulo}>
+                                  Sair da plataforma
+                                </h3>
                                 <button
+                                  className={styles.popUpBotaoFechar}
                                   onClick={fecharModal}
-                                  className={styles.botoes}
                                 >
-                                  Cancelar
-                                  <i
-                                    className={`${styles.icone_cancelar} fa-solid fa-circle-xmark`}
-                                  ></i>
+                                  &times;
                                 </button>
-                                  <button className={styles.botoes} onClick={sairPlataforma}>
-                                    Confirmo!
-                                    <img
-                                      className={styles.icone_sucesso}
-                                      src={icone_sucesso}
-                                      alt=""
-                                    />
+                              </div>
+                              <div className={styles.popUpContent}>
+                                <h4 className={styles.modal_informacoes_p}>
+                                  Tem certeza que deseja sair do ECOTECH?
+                                </h4>
+                                <div className={styles.popUp_botoes}>
+                                  <button
+                                    className={
+                                      styles.botao_cancelar_agendamento
+                                    }
+                                    onClick={fecharModal}
+                                  >
+                                    Cancelar
                                   </button>
+                                  <button
+                                    className={
+                                      styles.botao_confirmar_agendamento
+                                    }
+                                    onClick={sairPlataforma}
+                                  >
+                                    Confirmar
+                                  </button>
+                                </div>
                               </div>
                             </div>
                           </div>

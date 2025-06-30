@@ -19,6 +19,15 @@ function TelaLogin() {
   const [erroCpf, setErroCpf] = useState("");
   const [erroSenha, setErroSenha] = useState("");
 
+  function validarEmail(email) {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+  }
+
+  function validarSenha(senha) {
+    return senha.length >= 6;
+  }
+
   const navigate = useNavigate();
 
   function handleSubmit(e) {
@@ -31,8 +40,13 @@ function TelaLogin() {
     setErroSenha("");
 
     if (!email.trim()) {
-      setErroEmail("Preencha o campo de email.");
+      setErroEmail("Preencha o email.");
       valido = false;
+    } else if (!validarEmail(email)) {
+      setErroEmail("Email inválido.");
+      valido = false;
+    } else {
+      setErroEmail("");
     }
 
     if (!cpf.trim()) {
@@ -41,8 +55,13 @@ function TelaLogin() {
     }
 
     if (!senha.trim()) {
-      setErroSenha("Preencha o campo de senha.");
+      setErroSenha("Preencha a senha.");
       valido = false;
+    } else if (!validarSenha(senha)) {
+      setErroSenha("Senha deve ter pelo menos 6 caracteres.");
+      valido = false;
+    } else {
+      setErroSenha("");
     }
 
     if (!valido) return;

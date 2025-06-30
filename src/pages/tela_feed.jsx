@@ -235,6 +235,8 @@ function TelaFeed() {
     pecas: "Para peças",
   };
 
+  const [pesquisa, setPesquisa] = useState("");
+
   const doacoesFiltradas = doacoesDoFeed.filter((doacao) => {
     const categoria =
       filtros.categoria === "todos" ||
@@ -245,18 +247,34 @@ function TelaFeed() {
     const estado =
       filtros.estado === "todos" ||
       doacao.condicao === mapaCondicoes[filtros.estado];
+    const pesquisaMatch =
+      doacao.titulo.toLowerCase().includes(pesquisa.toLowerCase()) ||
+      doacao.descricao.toLowerCase().includes(pesquisa.toLowerCase());
 
-    return categoria && local && estado;
+    return categoria && local && estado && pesquisaMatch;
   });
 
-  const tipoUsuario = localStorage.getItem("tipoUsuario"); 
+  const doacoesFiltradasCarrossel = doacoesDoFeedCarrossel.filter((doacao) => {
+    const pesquisaMatch =
+      doacao.titulo.toLowerCase().includes(pesquisa.toLowerCase()) ||
+      doacao.descricao.toLowerCase().includes(pesquisa.toLowerCase());
+    return pesquisaMatch;
+  });
+
+  const tipoUsuario = localStorage.getItem("tipoUsuario");
   const logado = localStorage.getItem("logado") === "true";
 
   return (
     <>
-      {logado && tipoUsuario === "doador" && <BarraNavegacaoDoador />}
-      {logado && tipoUsuario === "empresa" && <BarraNavegacaoEmpresa />}
-      {!logado && <BarraNavegacaoDoador />}
+      {logado && tipoUsuario === "doador" && (
+        <BarraNavegacaoDoador pesquisa={pesquisa} setPesquisa={setPesquisa} />
+      )}
+      {logado && tipoUsuario === "empresa" && (
+        <BarraNavegacaoEmpresa pesquisa={pesquisa} setPesquisa={setPesquisa} />
+      )}
+      {!logado && (
+        <BarraNavegacaoDoador pesquisa={pesquisa} setPesquisa={setPesquisa} />
+      )}
 
       <main>
         <div className={styles.carrossel_container}>
@@ -345,7 +363,7 @@ function TelaFeed() {
               id="carrossel"
               style={estiloDeslizamento}
             >
-              {doacoesDoFeedCarrossel.map((doacao) => (
+              {doacoesFiltradasCarrossel.map((doacao) => (
                 <div className={styles.card_feed_carrossel}>
                   <img className={styles.card_img} src={doacao.imagem} alt="" />
                   <p className={styles.tipo_card}>{doacao.tipo}</p>
@@ -364,7 +382,9 @@ function TelaFeed() {
                       className={styles.link_card_feed}
                       to={`/info/doacao/${doacao.id}`}
                     >
-                      <button className={styles.botao_card}>{tipoUsuario === "doador" ? "Ver mais" : "Eu quero!"}</button>
+                      <button className={styles.botao_card}>
+                        {tipoUsuario === "doador" ? "Ver mais" : "Eu quero!"}
+                      </button>
                     </Link>
                   </div>
                 </div>
@@ -478,7 +498,9 @@ function TelaFeed() {
                     className={styles.link_card_feed}
                     to={`/info/doacao/${doacao.id}`}
                   >
-                    <button className={styles.botao_card}>{tipoUsuario === "doador" ? "Ver mais" : "Eu quero!"}</button>
+                    <button className={styles.botao_card}>
+                      {tipoUsuario === "doador" ? "Ver mais" : "Eu quero!"}
+                    </button>
                   </Link>
                 </div>
               </div>
@@ -551,17 +573,11 @@ function TelaFeed() {
           </ul>
 
           <div className={styles.footer_subscribe}>
-            <h3>Receba novidades</h3>
             <p className={styles.p_subscribe}>
-              Informe seu e-mail para receber dicas de descarte,
-              sustentabilidade e novidades da plataforma.
+              Descartar com consciência é cuidar do nosso planeta. Juntos,
+              podemos transformar lixo em oportunidade e garantir um futuro
+              sustentável para todos.
             </p>
-            <div className={styles.input_group}>
-              <input type="email" className={styles.email} />
-              <button className={styles.botao_footer_feed}>
-                <i class="fa-solid fa-envelope"></i>
-              </button>
-            </div>
           </div>
         </div>
         <div className={styles.footer_copyright}>

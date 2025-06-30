@@ -21,89 +21,66 @@ function TelaRegistroPontosColeta() {
   const [mensagemSucesso, setMensagemSucesso] = useState(null);
   const [mostrarModal, setMostrarModal] = useState(false);
 
-  const [pontos, setPontos] = useState([]);
 
-  function registrarPonto(evento) {
-    evento.preventDefault();
+  function abrirModalRevisao() {
+  const regexCep = /^[0-9]{5}-?[0-9]{3}$/;
 
-    const regexCep = /^[0-9]{5}-?[0-9]{3}$/;
+  let erro = false;
 
-    let erro = false;
+  if (!rua.trim()) {
+    setErroRua("Preencha o nome da rua!");
+    erro = true;
+  } else setErroRua("");
 
-    if (!rua.trim()) {
-      setErroRua("Preencha o nome da rua!");
-      erro = true;
-    } else setErroRua("");
+  if (!bairro.trim()) {
+    setErroBairro("Preencha o nome do bairro!");
+    erro = true;
+  } else setErroBairro("");
 
-    if (!bairro.trim()) {
-      setErroBairro("Preencha o nome do bairro!");
-      erro = true;
-    } else setErroBairro("");
+  if (!cep.trim()) {
+    setErroCep("Preencha com o CEP!");
+    erro = true;
+  } else if (!regexCep.test(cep)) {
+    setErroCep("CEP inválido! Use o formato 00000-000.");
+    erro = true;
+  } else setErroCep("");
 
-    if (!cep.trim()) {
-      setErroCep("Preencha com o CEP!");
-      erro = true;
-    } else if (!regexCep.test(cep)) {
-      setErroCep("CEP inválido! Use o formato 00000-000.");
-      erro = true;
-    } else setErroCep("");
+  if (!numero.trim()) {
+    setErroNumero("Preencha com o número do local!");
+    erro = true;
+  } else setErroNumero("");
 
-    if (!numero.trim()) {
-      setErroNumero("Preencha com o número do local!");
-      erro = true;
-    } else setErroNumero("");
+  if (!telefone.trim()) {
+    setErroTelefone("Preencha com o número de telefone!");
+    erro = true;
+  } else setErroTelefone("");
 
-    if (!telefone.trim()) {
-      setErroTelefone("Preencha com o número de telefone!");
-      erro = true;
-    } else setErroTelefone("");
+  if (!horario.trim()) {
+    setErroHorario("Preencha com o horário de funcionamento!");
+    erro = true;
+  } else setErroHorario("");
 
-    if (!horario.trim()) {
-      setErroHorario("Preencha com o horário de funcionamento!");
-      erro = true;
-    } else setErroHorario("");
+  if (!erro) setMostrarModal(true);
+    
 
-    if (erro) return;
-
-    setErroRua("");
-    setErroBairro("");
-    setErroCep("");
-    setErroTelefone("");
-    setErroHorario("");
-    setErroNumero("");
-
-    console.log("Ponto de coleta registrado com sucesso!", {
-      rua,
-      bairro,
-      cep,
-      telefone,
-      numero,
-      horario,
-    });
-    setMensagemSucesso("Ponto de coleta registrado com sucesso!");
-    setTimeout(() => {
-      setMensagemSucesso(null);
-    }, 2000);
-
-    setPontos((prevPontos) => [
-      ...prevPontos,
-      {
-        rua,
-        bairro,
-        cep,
-        numero,
-        obs: telefone,
-        horario,
-      },
-    ]);
-
-    setRua("");
-    setBairro("");
-    setCep("");
-    setTelefone("");
-    setNumero("");
-    setHorario("");
+    
   }
+
+  function confirmarRegistro() {
+  setMensagemSucesso("Ponto de coleta registrado com sucesso!");
+  setTimeout(() => {
+    setMensagemSucesso(null);
+  }, 2000);
+
+
+  setRua("");
+  setBairro("");
+  setCep("");
+  setTelefone("");
+  setNumero("");
+  setHorario("");
+  setMostrarModal(false);
+}
 
   return (
     <div className={styles.tela_registro_pontos_coleta}>
@@ -122,10 +99,8 @@ function TelaRegistroPontosColeta() {
       </div>
 
       <div className={styles.form_registro}>
-        <h2>
-          Registrar ponto de coleta
-        </h2>
-        <form onSubmit={registrarPonto}>
+        <h2>Registrar ponto de coleta</h2>
+        <form onSubmit={(e) => e.preventDefault()}>
           <div className={styles.form_campos}>
             <div className={styles.coluna}>
               <div className={styles.campo}>
@@ -212,37 +187,60 @@ function TelaRegistroPontosColeta() {
             </div>
           </div>
 
-          <button className={styles.botao_enviar} type="submit">
+          <button className={styles.botao_enviar} type="button" onClick={abrirModalRevisao}>
             Registrar Ponto
           </button>
         </form>
       </div>
 
       {mostrarModal && (
-        <div className={styles.modal_overlay}>
-          <div className={styles.modal}>
-            <h3>Meus Pontos de Coleta</h3>
-            <button
-              className={styles.fechar}
-              onClick={() => setMostrarModal(false)}
-            >
-              <i className={`${styles.botao_sair} fa-solid fa-x`}></i>
-            </button>
-            {pontos.length === 0 ? (
-              <p>Nenhum ponto registrado ainda.</p>
-            ) : (
-              pontos.map((ponto, index) => (
-                <div key={index} className={styles.item_ponto}>
-                  <strong>
-                    {ponto.rua}, {ponto.numero}
-                  </strong>
-                  <br />
-                  {ponto.bairro} - {ponto.cep}
-                  <br />
-                  <em>{ponto.obs}</em>
-                </div>
-              ))
-            )}
+        <div className={styles.popUpOverlay}>
+          <div className={styles.popUpCard}>
+            <div className={styles.popUpHeader}>
+              <h3 className={styles.popUpTitulo}>Revisar Ponto de Coleta</h3>
+              <button
+                className={styles.popUpBotaoFechar}
+                onClick={() => setMostrarModal(false)}
+              >
+                &times;
+              </button>
+            </div>
+            <div className={styles.popUpContent}>
+              <div className={styles.info_modal}>
+                <p>
+                  <strong>Rua:</strong> {rua}
+                </p>
+                <p>
+                  <strong>Número:</strong> {numero}
+                </p>
+                <p>
+                  <strong>Bairro:</strong> {bairro}
+                </p>
+                <p>
+                  <strong>CEP:</strong> {cep}
+                </p>
+                <p>
+                  <strong>Telefone:</strong> {telefone}
+                </p>
+                <p>
+                  <strong>Horário:</strong> {horario}
+                </p>
+              </div>
+              <div className={styles.popUp_botoes}>
+                <button
+                  className={styles.botao_cancelar_agendamento}
+                  onClick={() => setMostrarModal(false)}
+                >
+                  Cancelar
+                </button>
+                <button
+                  className={styles.botao_confirmar_agendamento}
+                  onClick={confirmarRegistro}
+                >
+                  Confirmar
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       )}

@@ -180,6 +180,7 @@ const modo = location.state?.modo || "visualizacao";
             imagem_user={doacaoAtual.imagem_user}
             imagem={doacaoAtual.imagem}
             modo={modo}
+            onEditarDoacao={(novaDoacao) => setDoacaoAtual(novaDoacao)}
           />
         </main>
       </div>

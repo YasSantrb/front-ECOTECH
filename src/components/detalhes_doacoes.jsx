@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import styles from "../styles/tela_info_doacao.module.css";
+import PopUpSucesso from "./popUpSucesso";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
@@ -14,6 +15,7 @@ function InformacoesDoacaoComponente({
   imagem_user,
   imagem,
   modo = "visualizacao",
+  onEditarDoacao,
 }) {
   const navigate = useNavigate();
   const logado = localStorage.getItem("logado") === "true";
@@ -22,7 +24,7 @@ function InformacoesDoacaoComponente({
   const mostrarEditar = modo === "gerenciar";
 
   const [isEditarModalOpen, setIsEditarModalOpen] = useState(false);
-  const [especificacao, setEspecificacao] = useState(especificacoes);
+  const [especificacaoE, setEspecificacao] = useState(especificacoes);
   const [nomeEletronicoE, setNomeEletronico] = useState(nomeEletronico);
   const [infoProdutoE, setInfoProduto] = useState(infoProduto);
   const [condicaoE, setCondicao] = useState(condicao);
@@ -45,31 +47,43 @@ function InformacoesDoacaoComponente({
     setIsEditarModalOpen(false);
   }
 
+  const [mensagemSucesso, setMensagemSucesso] = useState(null);
+
   function editarPerfil(event) {
     event.preventDefault();
 
     const doacaoAtualizada = {
       nomeDoador,
       nomeEletronico: nomeEletronicoE,
-      especificacao: especificacao,
+      especificacoes: especificacaoE,
       infoProduto: infoProdutoE,
       condicao: condicaoE,
       observacao: observacaoE,
       endereco: enderecoE,
       imagem: imagemE,
+      imagem_user: imagem_user,
       disponibilidade: disponibilidade,
     };
 
+    if (onEditarDoacao) {
+      onEditarDoacao(doacaoAtualizada);
+    }
+
     console.log("Atualizado:", doacaoAtualizada);
-    setIsEditarModalOpen(false);
+    setMensagemSucesso("Informações editadas com sucesso!");
+
+    setTimeout(() => {
+      setMensagemSucesso(null);
+      fecharModalEditar();
+    }, 2000);
   }
 
   const [disponibilidade, setDisponibilidade] = useState("disponivel");
   const tipoUsuario = localStorage.getItem("tipoUsuario");
 
-
   return (
     <>
+    {mensagemSucesso && <PopUpSucesso mensagem={mensagemSucesso} />}
       <div className={styles.info_doacao_container}>
         <div className={styles.info_doacao_conteudos}>
           <div className={styles.info_doacao_lado_esquerdo}>
@@ -90,16 +104,18 @@ function InformacoesDoacaoComponente({
                     </p>
                     <p className={styles.dataHoraPublicacao}>{endereco}</p>
                     <div className={styles.botao_entrar_em_contato}>
-                      {logado && mostrarContato && tipoUsuario === "empresa" &&(
-                        <Link
-                          to="/chat"
-                          className={styles.link_entrar_em_contato}
-                        >
-                          <span className={styles.tag_disponibilidade}>
-                            Entrar em contato!
-                          </span>
-                        </Link>
-                      )}
+                      {logado &&
+                        mostrarContato &&
+                        tipoUsuario === "empresa" && (
+                          <Link
+                            to="/chat"
+                            className={styles.link_entrar_em_contato}
+                          >
+                            <span className={styles.tag_disponibilidade}>
+                              Entrar em contato!
+                            </span>
+                          </Link>
+                        )}
 
                       <div className={styles.botoes_acoes}>
                         {mostrarEditar && (
@@ -184,7 +200,7 @@ function InformacoesDoacaoComponente({
                   <input
                     className={styles.input}
                     type="text"
-                    value={nomeEletronico}
+                    value={nomeEletronicoE}
                     placeholder="Insira o novo nome do eletrônico"
                     onChange={(e) => setNomeEletronico(e.target.value)}
                     required
@@ -195,7 +211,7 @@ function InformacoesDoacaoComponente({
                   <input
                     className={styles.input}
                     type="text"
-                    value={especificacao}
+                    value={especificacaoE}
                     placeholder="Insira a nova especificação"
                     onChange={(e) => setEspecificacao(e.target.value)}
                     required
@@ -206,7 +222,7 @@ function InformacoesDoacaoComponente({
                   <input
                     className={styles.input}
                     type="text"
-                    value={endereco}
+                    value={enderecoE}
                     placeholder="Insira o novo endereco"
                     onChange={(e) => setEndereco(e.target.value)}
                     required
@@ -219,7 +235,7 @@ function InformacoesDoacaoComponente({
                   <input
                     className={styles.input}
                     type="text"
-                    value={infoProduto}
+                    value={infoProdutoE}
                     placeholder="Insira a nova informação do produto"
                     onChange={(e) => setInfoProduto(e.target.value)}
                     required
@@ -232,7 +248,7 @@ function InformacoesDoacaoComponente({
                   <input
                     className={styles.input}
                     type="text"
-                    value={condicao}
+                    value={condicaoE}
                     placeholder="Insira a nova condição do produto"
                     onChange={(e) => setCondicao(e.target.value)}
                     required
@@ -243,7 +259,7 @@ function InformacoesDoacaoComponente({
                   <input
                     className={styles.input}
                     type="text"
-                    value={observacao}
+                    value={observacaoE}
                     placeholder="Insira a nova observação"
                     onChange={(e) => setObservacao(e.target.value)}
                     required

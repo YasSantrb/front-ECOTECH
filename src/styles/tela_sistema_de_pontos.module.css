@@ -216,73 +216,138 @@
   padding-bottom: 8px;
 }
 
-.popUpCupom {
+.popUpOverlay {
   position: fixed;
-  display: flex;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 20;
+  z-index: 100;
+  animation: fadeIn 0.3s ease-out;
 }
 
-.popUp {
+.popUpCard {
   background-color: #fff;
   color: #225c25;
-  width: auto;
-  height: auto;
-  padding: 20px;
-  border-radius: 20px;
+  width: 90%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2), 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  animation: slideInUp 0.3s ease-out;
 }
 
-.titulo_popUp {
+.popUpCard::-webkit-scrollbar {
+  width: 8px;
+}
+
+.popUpCard::-webkit-scrollbar-thumb {
+  background-color: rgba(34, 92, 37, 0.8);
+  border-radius: 4px;
+}
+
+.popUpHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 15px;
+}
+
+.popUpTitulo {
+  font-size: 24px;
+  font-weight: 700;
+  color: #225c25;
+  margin: 0;
+}
+
+.popUpContent{
+  text-align: start;
+}
+
+.popUpBotaoFechar {
+  background: none;
+  border: none;
+  font-size: 30px;
+  color: #666;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.popUpBotaoFechar:hover {
+  color: #d32f2f;
+}
+
+.popUpContent p {
+  margin-bottom: 12px;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #333;
+}
+
+.popUpContent strong {
+  color: #225c25;
+  font-weight: 600;
+}
+
+.info_modal {
+  margin-bottom: 30px;
+  padding: 15px;
+  background-color: #f7fcf7;
+  border-radius: 8px;
+  border: 1px solid #e0f2f1;
+}
+
+.popUp_botoes {
   display: flex;
   gap: 20px;
-  font-size: 20px;
+  margin-top: 30px;
+  justify-content: center;
+}
+
+.botao_confirmar_agendamento,
+.botao_cancelar_agendamento {
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-size: 17px;
   font-weight: 500;
-}
-
-.botao_sair {
   cursor: pointer;
-}
-
-.codigoCupom {
-  font-size: 18px;
-  font-weight: 400;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
   text-align: center;
-  padding-top: 15px;
 }
 
-.botaoPopUp {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-top: 15px;
-}
-
-.botaoCopiar {
-  display: flex;
-  padding: 5px;
-  height: 35px;
-  font-size: 15px;
-  align-items: center;
-  justify-content: center;
-  width: 100px;
-  gap: 5px;
+.botao_confirmar_agendamento {
   background-color: #225c25;
   color: #fff;
   border: 1px solid #225c25;
-  border-radius: 20px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 10px rgba(76, 175, 80, 0.2);
 }
 
-.botaoCopiar:hover {
-  background-color: #225c25;
+.botao_confirmar_agendamento:hover {
   transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(76, 175, 80, 0.3);
+}
+
+.botao_cancelar_agendamento {
+  background-color: #d32f2f;
+  color: #fff;
+  border: 1px solid #d32f2f;
+  box-shadow: none;
+}
+
+.botao_cancelar_agendamento:hover {
+  background-color: #d32f2f;
+  transform: translateY(-2px);
+  border-color: ##d32f2f;
+  color: #fff;
+  box-shadow: 0 6px 12px rgba(76, 175, 80, 0.3);
 }
 
 .span_popUpSucesso {
@@ -292,4 +357,32 @@
 
 .icone_sucesso {
   width: 30px;
+}
+
+.modal_informacoes_p{
+  text-align: center;
+  font-weight: 500;
+  font-size: 20px;
+  color: #225c25;
+}
+
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }

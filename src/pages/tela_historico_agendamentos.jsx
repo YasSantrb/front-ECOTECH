@@ -70,6 +70,16 @@ function TelaHistoricoAgendamentos() {
     setAgendamentoSelecionado(null);
   };
 
+  const [isExcluirModalOpen, setIsExcluirModalOpen] = useState(false);
+
+  function abrirModalExcluir() {
+    setIsExcluirModalOpen(true);
+  }
+
+  function fecharModalExcluir() {
+    setIsExcluirModalOpen(false);
+  }
+
   const cancelarAgendamento = () => {
     if (!agendamentoSelecionado) return;
 
@@ -85,9 +95,8 @@ function TelaHistoricoAgendamentos() {
     );
 
     setAgendamentoSelecionado(atualizado);
-
+    fecharModalExcluir();
     setMensagemSucesso("Agendamento cancelado com sucesso!");
-
     setTimeout(() => {
       setMensagemSucesso(null);
     }, 2000);
@@ -237,7 +246,7 @@ function TelaHistoricoAgendamentos() {
                     <>
                       <button
                         className={styles.botao_cancelar_agendamento}
-                        onClick={cancelarAgendamento}
+                        onClick={() => abrirModalExcluir()}
                       >
                         Cancelar coleta
                       </button>
@@ -248,6 +257,43 @@ function TelaHistoricoAgendamentos() {
                         Confirmar coleta
                       </button>
                     </>
+                  )}
+                  {isExcluirModalOpen && (
+                    <div className={styles.popUpOverlay}>
+                      <div className={styles.popUpCard}>
+                        <div className={styles.popUpHeader}>
+                          <h3 className={styles.popUpTitulo}>
+                            Cancelar agendamento
+                          </h3>
+                          <button
+                            className={styles.popUpBotaoFechar}
+                            onClick={fecharModalExcluir}
+                          >
+                            &times;
+                          </button>
+                        </div>
+                        <div className={styles.popUpContent}>
+                          <p className={styles.modal_informacoes_p}>
+                            Você tem certeza que deseja cancelar esse
+                            agendamento?
+                          </p>
+                          <div className={styles.popUp_botoes}>
+                            <button
+                              className={styles.botao_cancelar_agendamento}
+                              onClick={fecharModalExcluir}
+                            >
+                              Cancelar
+                            </button>
+                            <button
+                              className={styles.botao_confirmar_agendamento}
+                              onClick={cancelarAgendamento}
+                            >
+                              Confirmar
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   )}
                 </div>
               </div>

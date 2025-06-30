@@ -24,6 +24,25 @@ function TelaCadastro() {
   const [erroConfirmarSenha, setErroConfirmarSenha] = useState("");
   const [erroTipo, setErroTipo] = useState("");
 
+  function validarEmail(email) {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+  }
+
+  function validarSenha(senha) {
+    return senha.length >= 6;
+  }
+
+  function validarCep(cep) {
+    const numeros = cep.replace(/\D/g, "");
+    return numeros.length === 8;
+  }
+
+  function validarTelefone(telefone) {
+    const numeros = telefone.replace(/\D/g, "");
+    return numeros.length >= 10;
+  }
+
   const navigate = useNavigate();
 
   function handleSubmit(e) {
@@ -41,6 +60,9 @@ function TelaCadastro() {
     if (!email.trim()) {
       setErroEmail("Preencha o email.");
       valido = false;
+    } else if (!validarEmail(email)) {
+      setErroEmail("Email inválido.");
+      valido = false;
     } else {
       setErroEmail("");
     }
@@ -55,6 +77,9 @@ function TelaCadastro() {
     if (!telefone.trim()) {
       setErroTelefone("Preencha o telefone.");
       valido = false;
+    } else if (!validarTelefone(telefone)) {
+      setErroTelefone("Telefone inválido. Deve conter ao menos 10 números.");
+      valido = false;
     } else {
       setErroTelefone("");
     }
@@ -62,12 +87,18 @@ function TelaCadastro() {
     if (!cep.trim()) {
       setErroCep("Preencha o CEP.");
       valido = false;
+    } else if (!validarCep(cep)) {
+      setErroCep("CEP inválido. Deve conter 8 números.");
+      valido = false;
     } else {
       setErroCep("");
     }
 
     if (!senha.trim()) {
       setErroSenha("Preencha a senha.");
+      valido = false;
+    } else if (!validarSenha(senha)) {
+      setErroSenha("Senha deve ter pelo menos 6 caracteres.");
       valido = false;
     } else {
       setErroSenha("");

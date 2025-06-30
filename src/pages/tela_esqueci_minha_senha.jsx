@@ -17,6 +17,7 @@ function TelaEsqueciMinhaSenha() {
 
   const navigate = useNavigate();
 
+
   function handleSubmit(e) {
     e.preventDefault();
 

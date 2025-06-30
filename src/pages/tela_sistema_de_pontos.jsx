@@ -11,7 +11,6 @@ import logo_mercado_livre from "../assets/imagens/Mercado Livre 2.png";
 import logo_positivo from "../assets/imagens/POSITIVO ICON 1.png";
 import fundo_cupom from "../assets/imagens/Vouchers 4.png";
 import logo_lenovo from "../assets/imagens/Lenovo-Logo-PNG-File 1.png";
-import icon_sucesso from "../assets/imagens/checked 2.png";
 import PopUpSucesso from "../components/popUpSucesso";
 import { useState } from "react";
 import { Link } from "react-router-dom";
@@ -101,12 +100,7 @@ function TelaSistemaPontos() {
   const copiarCodigo = async () => {
     try {
       await navigator.clipboard.writeText(cupomSelecionado.codigo_cupom);
-      setMensagemSucesso(
-        <span className={styles.span_popUpSucesso}>
-          Código copiado com sucesso!{" "}
-          <img className={styles.icone_sucesso} src={icon_sucesso} alt="" />
-        </span>
-      );
+      setMensagemSucesso("Código copiado com sucesso!");
 
       setTimeout(() => {
         setMensagemSucesso(null);
@@ -184,22 +178,35 @@ function TelaSistemaPontos() {
             ))}
           </div>
           {isPopUpAberto && cupomSelecionado && (
-            <div className={styles.popUpCupom}>
-              <div className={styles.popUp}>
-                <div className={styles.titulo_popUp}>
-                  <p>Código do cupom</p>
-                  <i
-                    className={`${styles.botao_sair} fa-solid fa-x`}
+            <div className={styles.popUpOverlay}>
+              <div className={styles.popUpCard}>
+                <div className={styles.popUpHeader}>
+                  <h3 className={styles.popUpTitulo}>Código cupom</h3>
+                  <button
+                    className={styles.popUpBotaoFechar}
                     onClick={fecharPopUp}
-                  ></i>
-                </div>
-                <p className={styles.codigoCupom}>
-                  {cupomSelecionado.codigo_cupom}
-                </p>
-                <div className={styles.botaoPopUp}>
-                  <button onClick={copiarCodigo} className={styles.botaoCopiar}>
-                    <i class="fa-solid fa-copy"></i>Copiar
+                  >
+                    &times;
                   </button>
+                </div>
+                <div className={styles.popUpContent}>
+                  <h4 className={styles.modal_informacoes_p}>
+                    {cupomSelecionado.codigo_cupom}
+                  </h4>
+                  <div className={styles.popUp_botoes}>
+                    <button
+                      className={styles.botao_cancelar_agendamento}
+                      onClick={fecharPopUp}
+                    >
+                      Cancelar
+                    </button>
+                    <button
+                      className={styles.botao_confirmar_agendamento}
+                      onClick={copiarCodigo}
+                    >
+                      Confirmar
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>

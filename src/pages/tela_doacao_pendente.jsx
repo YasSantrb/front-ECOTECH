@@ -3,6 +3,7 @@ import fundo_login_cadastro from "../assets/imagens/fundo_login_cadastro.jpg";
 import icon_voltar from "../assets/imagens/icon_voltar.png";
 import icon_user from "../assets/imagens/woman (1).png";
 import televisao from "../assets/imagens/tv_tubo.png";
+import PopUpSucesso from "../components/popUpSucesso";
 import { useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -47,6 +48,8 @@ function TelaDoacaoPendente() {
     setIsEditarModalOpen(false);
   }
 
+  const [mensagemSucesso, setMensagemSucesso] = useState(null);
+
   function editarPerfil(evento) {
     evento.preventDefault();
 
@@ -62,7 +65,12 @@ function TelaDoacaoPendente() {
     };
 
     setDoacao(perfilAtualizado);
-    fecharModalEditar();
+    setMensagemSucesso("Informações salvas com sucesso!");
+
+    setTimeout(() => {
+      setMensagemSucesso(null);
+      fecharModalEditar();
+    }, 2000);
   }
 
   useEffect(() => {
@@ -88,6 +96,7 @@ function TelaDoacaoPendente() {
 
   return (
     <div className={styles.tela_doacao_pendente}>
+      {mensagemSucesso && <PopUpSucesso mensagem={mensagemSucesso} />}
       <img
         src={fundo_login_cadastro}
         alt="imagem_de_fundo"
@@ -114,7 +123,6 @@ function TelaDoacaoPendente() {
                 alt={nomeEletronico}
               />
               <div className={styles.informacoes_esquerda}>
-
                 <div className={styles.doador_info_esquerda}>
                   <h3 className={styles.info_esquerda_h3}>Doado por:</h3>
                   <div className={styles.info_doador}>
@@ -135,7 +143,6 @@ function TelaDoacaoPendente() {
                           <i
                             className={`${styles.pincel} fa-solid fa-pencil`}
                           ></i>
-
                           Editar
                         </button>
                       </div>

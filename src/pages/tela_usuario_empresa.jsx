@@ -2,6 +2,7 @@ import styles from "../styles/tela_usuario_empresa.module.css";
 import fundo_login_cadastro from "../assets/imagens/fundo_login_cadastro.jpg";
 import icon_amazon from "../assets/imagens/logo_amazon.png";
 import icon_voltar from "../assets/imagens/icon_voltar.png";
+import PopUpSucesso from "../components/popUpSucesso";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -29,6 +30,8 @@ function TelaUsuarioEmpresa() {
     setIsEditarModalOpen(false);
   }
 
+  const [mensagemSucesso, setMensagemSucesso] = useState(null);
+
   function editarPerfil(evento) {
     evento.preventDefault();
 
@@ -40,11 +43,17 @@ function TelaUsuarioEmpresa() {
     };
 
     setUsuario(perfilAtualizado);
-    fecharModalEditar();
+    setMensagemSucesso("Informações salvas com sucesso!!");
+
+    setTimeout(() => {
+      setMensagemSucesso(null);
+      setIsEditarModalOpen(false);
+    }, 2000);
   }
 
   return (
     <div className={styles.tela_usuario_empresa}>
+      {mensagemSucesso && <PopUpSucesso mensagem={mensagemSucesso} />}
       <img
         src={fundo_login_cadastro}
         alt="imagem_de_fundo"
