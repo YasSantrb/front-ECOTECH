@@ -262,17 +262,18 @@
 }
 
 .botao_cancelar_agendamento {
-  background-color: transparent;
-  color: #225c25;
-  border: 1px solid #225c25;
+  background-color: #d32f2f;
+  color: #fff;
+  border: 1px solid #d32f2f;
   box-shadow: none;
 }
 
 .botao_cancelar_agendamento:hover {
-  background-color: #f0f4f8;
+  background-color: #d32f2f;
   transform: translateY(-2px);
-  border-color: #225c25;
-  color: #225c25;
+  border-color: ##d32f2f;
+  color: #fff;
+  box-shadow: 0 6px 12px rgba(76, 175, 80, 0.3);
 }
 
 @keyframes fadeIn {

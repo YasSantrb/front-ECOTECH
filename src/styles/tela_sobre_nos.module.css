@@ -3,6 +3,35 @@
   overflow: hidden;
 }
 
+.top_bar_doacao {
+  width: 100%;
+  display: flex;
+  padding: 10px 0 0 20px;
+  position: relative;
+  z-index: 2;
+}
+
+.voltar {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #225C25;
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.icone_voltar {
+  width: 26px;
+  height: 26px;
+}
+
+.nav_chat_p {
+  font-size: 20px;
+  color: #225c25;
+  font-weight: 500;
+}
+
 .paragrafo {
   color: #225c25;
   width: 50%;

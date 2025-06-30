@@ -1,6 +1,6 @@
 import styles from "../styles/tela_sobre_nos.module.css";
 import fundo from "../assets/imagens/Tela inicial (2).png";
-import logo from "../assets/imagens/Logo.png";
+import icon_voltar from "../assets/imagens/icon_voltar.png";
 import { Link } from "react-router-dom";
 
 function TelaSobreNos() {
@@ -8,28 +8,12 @@ function TelaSobreNos() {
     <div className={styles.container}>
       <img src={fundo} className={styles.background} alt="fundo" />
 
-      <nav className={styles.nav}>
-        <div className={styles.menu}>
-          <img alt="logo_ecotech" src={logo} className={styles.logo} />
-          <ul className={styles.lista_inicial}>
-            <li>
-              <Link className={styles.link} to="/">
-                Feed
-              </Link>
-            </li>
-            <li>
-              <Link className={styles.link} to="/login">
-                Login
-              </Link>
-            </li>
-            <li>
-              <Link className={styles.link} to="/cadastro">
-                Criar Conta
-              </Link>
-            </li>
-          </ul>
-        </div>
-      </nav>
+      <div className={styles.top_bar_doacao}>
+        <Link to="/" className={styles.voltar}>
+          <img src={icon_voltar} alt="voltar" className={styles.icone_voltar} />
+          <p className={styles.nav_chat_p}>VOLTAR</p>
+        </Link>
+      </div>
 
       <div>
         <h2 className={styles.titulo}>Sobre Nós</h2>

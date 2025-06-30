@@ -204,12 +204,12 @@
   margin-top: 16px;
   font-weight: 500;
   font-size: 16px;
-  color: #225c25;
+  color: #000;
 }
 
 .link {
-  text-decoration: none;
-  color: #000;
+  /* text-decoration: none; */
+  color: #225c25;
 }
 
 .esqueci_a_senha {
