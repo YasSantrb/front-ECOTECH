@@ -121,7 +121,6 @@ function TelaHistoricoAgendamentos() {
 
     setTimeout(() => {
       setMensagemSucesso(null);
-      setIsModalDetalhesOpen(false);
     }, 2000);
   };
 

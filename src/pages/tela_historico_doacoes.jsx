@@ -79,30 +79,39 @@ function TelaHistoricoDoacoes() {
     setDoacaoSelecionada(null);
   };
 
-   const cancelarAgendamento = () => {
-  if (!doacaoSelecionada) return;
+  const cancelarAgendamento = () => {
+    if (!doacaoSelecionada) return;
 
-  const atualizado = {
-    ...doacaoSelecionada,
-    status: "Cancelado",
-    classeStatus: "cancelada",
-    icone: icon_cancelar,
+    const atualizado = {
+      ...doacaoSelecionada,
+      status: "Cancelado",
+      classeStatus: "cancelada",
+      icone: icon_cancelar,
+    };
+
+    setDoacoes((prevDoacoes) =>
+      prevDoacoes.map((doacao) =>
+        doacao.id === atualizado.id ? atualizado : doacao
+      )
+    );
+
+    setDoacaoSelecionada(atualizado);
+    fecharModalExcluir();
+    setMensagemSucesso("Doação cancelada com sucesso!");
+    setTimeout(() => {
+      setMensagemSucesso(null);
+    }, 2000);
   };
 
-  setDoacoes((prevDoacoes) =>
-    prevDoacoes.map((doacao) =>
-      doacao.id === atualizado.id ? atualizado : doacao
-    )
-  );
+  const [isExcluirModalOpen, setIsExcluirModalOpen] = useState(false);
 
-  setDoacaoSelecionada(atualizado);
+  function abrirModalExcluir() {
+    setIsExcluirModalOpen(true);
+  }
 
-  setMensagemSucesso("Doação cancelada com sucesso!");
-  setTimeout(() => {
-    setMensagemSucesso(null);
-  }, 2000);
-};
-
+  function fecharModalExcluir() {
+    setIsExcluirModalOpen(false);
+  }
 
   return (
     <div className={styles.tela_historico_doacoes}>
@@ -233,15 +242,13 @@ function TelaHistoricoDoacoes() {
                 <div className={styles.popUp_botoes}>
                   {doacaoSelecionada?.status !== "Concluída" &&
                     doacaoSelecionada?.status !== "Cancelada" && (
-                  <button
-                    className={styles.botao_cancelar_agendamento}
-                    onClick={() => {
-                      cancelarAgendamento();
-                    }}
-                    disabled={doacaoSelecionada?.status === "Cancelada"}
-                  >
-                    Cancelar doação
-                  </button>
+                      <button
+                        className={styles.botao_cancelar_agendamento}
+                        onClick={abrirModalExcluir}
+                        disabled={doacaoSelecionada?.status === "Cancelada"}
+                      >
+                        Cancelar doação
+                      </button>
                     )}
 
                   <button
@@ -254,6 +261,45 @@ function TelaHistoricoDoacoes() {
                   >
                     Ver doação
                   </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {isExcluirModalOpen && (
+          <div className={styles.popUpOverlay}>
+            <div className={styles.popUpCard}>
+              <div className={styles.popUpHeader}>
+                <h3 className={styles.popUpTitulo}>Cancelar agendamento</h3>
+                <button
+                  className={styles.popUpBotaoFechar}
+                  onClick={fecharModalExcluir}
+                >
+                  &times;
+                </button>
+              </div>
+              <div className={styles.popUpContent}>
+                <p className={styles.modal_informacoes_p}>
+                  Você tem certeza que deseja cancelar esse agendamento?
+                </p>
+                <div className={styles.popUp_botoes}>
+                  <button
+                    className={styles.botao_cancelar_agendamento}
+                    onClick={fecharModalExcluir}
+                  >
+                    Cancelar
+                  </button>
+                  {doacaoSelecionada?.status !== "Concluída" &&
+                    doacaoSelecionada?.status !== "Cancelada" && (
+                      <button
+                        className={styles.botao_confirmar_agendamento}
+                        onClick={cancelarAgendamento}
+                        disabled={doacaoSelecionada?.status === "Cancelada"}
+                      >
+                        Confirmar
+                      </button>
+                    )}
                 </div>
               </div>
             </div>
