@@ -106,7 +106,7 @@
 .input_container {
   position: relative;
   width: 100%;
-  margin-bottom: 5px;
+  margin-bottom: 8px;
 }
 
 .input_container input {
@@ -208,7 +208,6 @@
 }
 
 .link {
-  /* text-decoration: none; */
   color: #225c25;
 }
 

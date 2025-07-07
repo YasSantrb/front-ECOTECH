@@ -15,6 +15,7 @@ function InformacoesDoacaoComponente({
   imagem_user,
   imagem,
   modo = "visualizacao",
+  status,
   onEditarDoacao,
 }) {
   const navigate = useNavigate();
@@ -62,7 +63,6 @@ function InformacoesDoacaoComponente({
       endereco: enderecoE,
       imagem: imagemE,
       imagem_user: imagem_user,
-      disponibilidade: disponibilidade,
     };
 
     if (onEditarDoacao) {
@@ -78,12 +78,11 @@ function InformacoesDoacaoComponente({
     }, 2000);
   }
 
-  const [disponibilidade, setDisponibilidade] = useState("disponivel");
   const tipoUsuario = localStorage.getItem("tipoUsuario");
 
   return (
     <>
-    {mensagemSucesso && <PopUpSucesso mensagem={mensagemSucesso} />}
+      {mensagemSucesso && <PopUpSucesso mensagem={mensagemSucesso} />}
       <div className={styles.info_doacao_container}>
         <div className={styles.info_doacao_conteudos}>
           <div className={styles.info_doacao_lado_esquerdo}>
@@ -118,7 +117,7 @@ function InformacoesDoacaoComponente({
                         )}
 
                       <div className={styles.botoes_acoes}>
-                        {mostrarEditar && (
+                        {mostrarEditar && status !== "Concluída" && (
                           <button
                             onClick={abrirModalEditar}
                             className={styles.botoes_doacao}
@@ -282,17 +281,6 @@ function InformacoesDoacaoComponente({
                       }
                     }}
                   />
-                </div>
-                <div className={styles.campo}>
-                  <label className={styles.label_modal}>Disponibilidade</label>
-                  <select
-                    className={styles.input}
-                    value={disponibilidade}
-                    onChange={(e) => setDisponibilidade(e.target.value)}
-                  >
-                    <option value="disponivel">Disponível</option>
-                    <option value="indisponivel">Indisponível</option>
-                  </select>
                 </div>
               </div>
               <div className={styles.popUp_botoes}>

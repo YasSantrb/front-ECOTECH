@@ -9,8 +9,6 @@ import placa_mae from "../assets/imagens/download 3.png";
 import tablet from "../assets/imagens/OIP 8.png";
 import computador_antigo from "../assets/imagens/OIP 12.png";
 import mulher1 from "../assets/imagens/woman (1).png";
-import mulher2 from "../assets/imagens/woman.png";
-import homem1 from "../assets/imagens/ceo.png";
 import homem2 from "../assets/imagens/businessman.png";
 import { useLocation } from "react-router-dom";
 
@@ -27,23 +25,25 @@ const todasAsDoacoes = [
     observacao: "Pode ser reutilizado ou ter partes aproveitadas.",
     imagem_user: mulher1,
     imagem: televisao,
+    status: "Pendente", 
   },
   {
     id: "2",
-    nomeDoador: "Pedro Souza Costa",
+    nomeDoador: "Ana Clara Lima",
     especificacoes: "Socket AM4, chipset B450, 4 slots RAM DDR4.",
     nomeEletronico: "Placa-mãe ASUS",
     infoProduto:
       "Placa-mãe ASUS usada, mas em ótimo estado. Perfeita para montar um PC de entrada ou para substituir uma peça danificada.",
     condicao: "Para peças.",
-    endereco: "Teresina - PI, rua Flores",
+    endereco: "Floriano - PI, rua João Dantas",
     observacao: "Ideal para reaproveitamento de peças.",
-    imagem_user: homem1,
+    imagem_user: mulher1,
     imagem: placa_mae,
+    status: "Concluída", 
   },
   {
     id: "3",
-    nomeDoador: "Carla Pires",
+    nomeDoador: "Ana Clara Lima",
     especificacoes: "Tela de 10.1 polegadas, 32GB de armazenamento.",
     nomeEletronico: "Tablet Samsung",
     infoProduto:
@@ -51,12 +51,13 @@ const todasAsDoacoes = [
     condicao: "Novo",
     endereco: "Floriano - PI, rua João Dantas",
     observacao: "Produto novo, mas quebrado.",
-    imagem_user: mulher2,
+    imagem_user: mulher1,
     imagem: tablet,
+    status: "Concluída", 
   },
   {
     id: "4",
-    nomeDoador: "Mariana Oliveira",
+    nomeDoador: "Ana Clara Lima",
     especificacoes: "Processador Pentium III, 256MB RAM, HD 40GB.",
     nomeEletronico: "Computador antigo",
     infoProduto:
@@ -66,6 +67,7 @@ const todasAsDoacoes = [
     observacao: "Pode ser reutilizado ou ter partes aproveitadas.",
     imagem_user: mulher1,
     imagem: computador_antigo,
+    status: "Concluída", 
   },
   {
     id: "5",
@@ -79,6 +81,7 @@ const todasAsDoacoes = [
     observacao: "Pode ser reutilizado ou ter partes aproveitadas.",
     imagem_user: homem2,
     imagem: televisao,
+    status: "Concluída", 
   },
   {
     id: "6",
@@ -93,6 +96,7 @@ const todasAsDoacoes = [
     observacao: "Produto novo, mas já está quebrado.",
     imagem_user: mulher1,
     imagem: tablet,
+    status: "Concluída", 
   },
 ];
 
@@ -180,6 +184,7 @@ const modo = location.state?.modo || "visualizacao";
             imagem_user={doacaoAtual.imagem_user}
             imagem={doacaoAtual.imagem}
             modo={modo}
+            status={doacaoAtual.status}
             onEditarDoacao={(novaDoacao) => setDoacaoAtual(novaDoacao)}
           />
         </main>

@@ -12,47 +12,47 @@ function TelaHistoricoAgendamentos() {
   const [agendamentos, setAgendamentos] = useState([
     {
       id: "A1",
+      item: "TV Samsung",
+      dataAgendamento: "04/07/2025",
+      local: "Rua João Dantas, 677",
+      status: "Aguardando coleta",
+      classeStatus: "aguardando",
+      horaAgendamento: "10:30",
+      icone: icon_aguardando,
+      observacao: "Aguardando confirmação",
+    },
+    {
+      id: "A2",
+      item: "Caixa de Som",
+      status: "Aguardando coleta",
+      local: "Rua João Dantas, 123",
+      dataAgendamento: "03/07/2025",
+      horaAgendamento: "14:00",
+      observacao: "Tocar a campainha ao chegar",
+      classeStatus: "aguardando",
+      icone: icon_aguardando,
+    },
+    {
+      id: "A3",
       item: "Notebook Positivo",
-      dataSolicitacao: "20/06/2020",
       status: "Concluído",
       local: "Rua das Flores, 456",
-      dataAgendamento: "22/06/2020",
+      dataAgendamento: "22/06/2025",
       horaAgendamento: "09:00",
       observacao: "Recebido pelo porteiro",
       icone: icon_concluido,
       classeStatus: "concluida",
     },
     {
-      id: "A2",
-      item: "TV Samsung",
-      dataSolicitacao: "04/12/2024",
-      local: "Teresina - PI",
-      status: "Aguardando coleta",
-      classeStatus: "aguardando",
-      icone: icon_aguardando,
-      observacao: "Aguardando confirmação",
-    },
-    {
-      id: "A3",
+      id: "A4",
       item: "Relógio Ben10",
-      dataSolicitacao: "21/01/2022",
-      local: "-",
+      dataAgendamento: "21/01/2022",
+      local: "Rua Padre Uchoa, 55",
       status: "Cancelado",
       classeStatus: "cancelada",
+      horaAgendamento: "16:30",
       icone: icon_cancelar,
       observacao: "Agendamento cancelado pelo usuário",
-    },
-    {
-      id: "A4",
-      item: "Caixa de Som",
-      dataSolicitacao: "15/12/2024",
-      status: "Aguardando coleta",
-      local: "Rua João Dantas, 123",
-      dataAgendamento: "20/12/2024",
-      horaAgendamento: "14:00",
-      observacao: "Tocar a campainha ao chegar",
-      classeStatus: "aguardando",
-      icone: icon_aguardando,
     },
   ]);
 
@@ -150,9 +150,9 @@ function TelaHistoricoAgendamentos() {
           <table className={styles.tabela_doacoes}>
             <thead>
               <tr>
-                <th>ID Agendamento</th>
                 <th>Item</th>
-                <th>Data Solicitação</th>
+                <th>Data Agendamento</th>
+                <th>Hora</th>
                 <th>Local</th>
                 <th>Status</th>
                 <th>Ações</th>
@@ -161,9 +161,9 @@ function TelaHistoricoAgendamentos() {
             <tbody>
               {agendamentos.map((a) => (
                 <tr key={a.id}>
-                  <td>{a.id}</td>
                   <td>{a.item}</td>
-                  <td>{a.dataSolicitacao}</td>
+                  <td>{a.dataAgendamento}</td>
+                  <td>{a.horaAgendamento ?? "-"}</td>
                   <td>{a.local}</td>
                   <td>
                     <span
@@ -214,21 +214,13 @@ function TelaHistoricoAgendamentos() {
                     <strong>Status:</strong> {agendamentoSelecionado?.status}
                   </p>
                   <p>
-                    <strong>Data da Solicitação:</strong>{" "}
-                    {agendamentoSelecionado?.dataSolicitacao}
+                    <strong>Data da Coleta:</strong>{" "}
+                    {agendamentoSelecionado?.dataAgendamento ?? "-"}
                   </p>
-                  {agendamentoSelecionado?.dataAgendamento && (
-                    <p>
-                      <strong>Data da Coleta:</strong>{" "}
-                      {agendamentoSelecionado.dataAgendamento}
-                    </p>
-                  )}
-                  {agendamentoSelecionado?.horaAgendamento && (
-                    <p>
-                      <strong>Hora da Coleta:</strong>{" "}
-                      {agendamentoSelecionado.horaAgendamento}
-                    </p>
-                  )}
+                  <p>
+                    <strong>Hora da Coleta:</strong>{" "}
+                    {agendamentoSelecionado?.horaAgendamento ?? "-"}
+                  </p>
                   <p>
                     <strong>Local:</strong> {agendamentoSelecionado?.local}
                   </p>

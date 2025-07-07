@@ -15,7 +15,7 @@ function TelaHistoricoDoacoes() {
       id: "1",
       item: "Televisão de tubo",
       data: "20/06/2025",
-      local: "Floriano - PI",
+      local: "Rua João Dantas, 677",
       status: "Pendente",
       receptor: "-",
       icone: icon_pendente,
@@ -37,7 +37,7 @@ function TelaHistoricoDoacoes() {
     },
     {
       id: "3",
-      item: "Mouse antigo",
+      item: "Tablet Samsung",
       data: "13/05/2025",
       local: "Floriano - PI",
       endereco: "Rua João Dantas, 677",
@@ -51,7 +51,7 @@ function TelaHistoricoDoacoes() {
     },
     {
       id: "4",
-      item: "Caixa de Som",
+      item: "Computador antigo",
       data: "02/05/2025",
       local: "Floriano - PI",
       endereco: "Rua João Dantas, 677",
@@ -139,10 +139,9 @@ function TelaHistoricoDoacoes() {
           <table className={styles.tabela_doacoes}>
             <thead>
               <tr>
-                <th>ID Doação</th>
                 <th>Item</th>
                 <th>Data</th>
-                <th>Local</th>
+                <th>Endereço</th>
                 <th>Receptor</th>
                 <th>Status</th>
                 <th>Ações</th>
@@ -151,10 +150,9 @@ function TelaHistoricoDoacoes() {
             <tbody>
               {doacoes.map((d) => (
                 <tr key={d.id}>
-                  <td>{d.id}</td>
                   <td>{d.item}</td>
                   <td>{d.data}</td>
-                  <td>{d.local}</td>
+                  <td>{d.endereco ?? d.local}</td>
                   <td>{d.receptor}</td>
                   <td>
                     <span
@@ -241,11 +239,10 @@ function TelaHistoricoDoacoes() {
 
                 <div className={styles.popUp_botoes}>
                   {doacaoSelecionada?.status !== "Concluída" &&
-                    doacaoSelecionada?.status !== "Cancelada" && (
+                    doacaoSelecionada?.status !== "Cancelado" && (
                       <button
                         className={styles.botao_cancelar_agendamento}
                         onClick={abrirModalExcluir}
-                        disabled={doacaoSelecionada?.status === "Cancelada"}
                       >
                         Cancelar doação
                       </button>
@@ -271,7 +268,7 @@ function TelaHistoricoDoacoes() {
           <div className={styles.popUpOverlay}>
             <div className={styles.popUpCard}>
               <div className={styles.popUpHeader}>
-                <h3 className={styles.popUpTitulo}>Cancelar agendamento</h3>
+                <h3 className={styles.popUpTitulo}>Cancelar doação</h3>
                 <button
                   className={styles.popUpBotaoFechar}
                   onClick={fecharModalExcluir}
@@ -281,7 +278,7 @@ function TelaHistoricoDoacoes() {
               </div>
               <div className={styles.popUpContent}>
                 <p className={styles.modal_informacoes_p}>
-                  Você tem certeza que deseja cancelar esse agendamento?
+                  Você tem certeza que deseja cancelar essa doação?
                 </p>
                 <div className={styles.popUp_botoes}>
                   <button
