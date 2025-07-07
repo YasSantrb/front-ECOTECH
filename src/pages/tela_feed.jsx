@@ -143,7 +143,7 @@ function TelaFeed() {
       tipo: "Eletrônico",
       titulo: "Placa-mãe ASUS",
       descricao: "Ideal para reaproveitamento de peças.",
-      local: "Teresina – PI",
+      local: "Floriano – PI",
       condicao: "Para peças",
     },
     {
@@ -161,7 +161,7 @@ function TelaFeed() {
       tipo: "Computador",
       titulo: "Computador antigo",
       descricao: "Pode ser reutilizado ou ter partes aproveitadas.",
-      local: "Teresina – PI",
+      local: "Floriano – PI",
       condicao: "Usado",
     },
     {

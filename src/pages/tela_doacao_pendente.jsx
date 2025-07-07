@@ -89,10 +89,21 @@ function TelaDoacaoPendente() {
         observacao: location.state.observacao,
         endereco: location.state.endereco,
         imagem: imagemCriacao,
+        dataCriacao: new Date().toISOString(),
       });
       setImagem(imagemCriacao);
     }
   }, [location.state]);
+
+  function formatarDataHora(isoString) {
+    const data = new Date(isoString);
+    const dia = String(data.getDate()).padStart(2, "0");
+    const mes = String(data.getMonth() + 1).padStart(2, "0");
+    const ano = data.getFullYear();
+    const hora = String(data.getHours()).padStart(2, "0");
+    const minuto = String(data.getMinutes()).padStart(2, "0");
+    return `${dia}/${mes}/${ano} às ${hora}:${minuto}`;
+  }
 
   return (
     <div className={styles.tela_doacao_pendente}>
@@ -130,7 +141,7 @@ function TelaDoacaoPendente() {
                     <div className={styles.doador_contato}>
                       <p className={styles.nome_doador}>{doacao.nomeDoador}</p>
                       <p className={styles.dataHoraPublicacao}>
-                        Publicado 19/05/2025 às 18:02
+                        Publicado {formatarDataHora(doacao.dataCriacao)}
                       </p>
                       <p className={styles.dataHoraPublicacao}>
                         {doacao.endereco}
