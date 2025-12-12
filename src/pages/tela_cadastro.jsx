@@ -4,6 +4,8 @@ import fundo_login_cadastro from "../assets/imagens/fundo_login_cadastro.jpg";
 import icon_voltar from "../assets/imagens/icon_voltar.png";
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import axios from "axios";
+import api from "../services/api";
 
 function TelaCadastro() {
   const [nome, setNome] = useState("");
@@ -13,7 +15,6 @@ function TelaCadastro() {
   const [cep, setCep] = useState("");
   const [senha, setSenha] = useState("");
   const [confirmarSenha, setConfirmarSenha] = useState("");
-  const [tipoUsuario, setTipoUsuario] = useState("");
 
   const [erroNome, setErroNome] = useState("");
   const [erroEmail, setErroEmail] = useState("");
@@ -22,129 +23,82 @@ function TelaCadastro() {
   const [erroCep, setErroCep] = useState("");
   const [erroSenha, setErroSenha] = useState("");
   const [erroConfirmarSenha, setErroConfirmarSenha] = useState("");
-  const [erroTipo, setErroTipo] = useState("");
-
-  function validarEmail(email) {
-    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return re.test(email);
-  }
-
-  function validarSenha(senha) {
-    return senha.length >= 6;
-  }
-
-  function validarCep(cep) {
-    const numeros = cep.replace(/\D/g, "");
-    return numeros.length === 8;
-  }
-
-  function validarTelefone(telefone) {
-    const numeros = telefone.replace(/\D/g, "");
-    return numeros.length >= 10;
-  }
 
   const navigate = useNavigate();
 
-  function handleSubmit(e) {
-    e.preventDefault();
+  async function handleSubmit(event) {
+    event.preventDefault();
 
-    let valido = true;
+    if (!email.trim() ||
+        !senha.trim() ||
+        !nome.trim() ||
+        !confirmarSenha.trim() ||
+        !cpf.trim() || 
+        !telefone.trim() ||
+        !cep.trim() ||
+        senha !== confirmarSenha) {
+      setErroEmail(!email.trim() ? "Por favor, insira o seu email!" : "");
+      setErroSenha(!senha.trim() ? "Por favor, insira a sua senha!" : "");
+      setErroNome(!nome.trim() ? "Por favor, insira o seu nome!" : "");
+      setErroCpf(!cpf.trim() ? "Por favor, insira o seu CPF/CNPJ!" : "");
+      setErroTelefone(!telefone.trim() ? "Por favor, insira o seu telefone!" : "");
+      setErroCep(!cep.trim() ? "Por favor, insira o seu CEP!" : "");
 
-    if (!nome.trim()) {
-      setErroNome("Preencha o nome do usuário.");
-      valido = false;
-    } else {
-      setErroNome("");
+      if (!confirmarSenha.trim()) {
+            setErroConfirmarSenha("Por favor, confirme a sua senha!");
+        } else if (senha !== confirmarSenha) {
+             setErroConfirmarSenha("As senhas não coincidem!");
+        } else {
+             setErroConfirmarSenha("");
+        }
+        return;
     }
 
-    if (!email.trim()) {
-      setErroEmail("Preencha o email.");
-      valido = false;
-    } else if (!validarEmail(email)) {
-      setErroEmail("Email inválido.");
-      valido = false;
-    } else {
-      setErroEmail("");
+    setErroEmail("");
+    setErroSenha("");
+    setErroNome("");
+    setErroCpf("");
+    setErroTelefone("");
+    setErroCep("");
+    setErroConfirmarSenha("");
+
+    const body = {
+      email: email,
+      password: senha,
+      username: nome,
+      confirmar_senha: confirmarSenha, 
+      profile : {
+        cpf_cnpj: cpf,
+        telefone: telefone,
+        cep: cep,
+      }
+    };
+
+    try {
+      const response = await api.post("registro/", body);
+      console.log("Usuário cadastrado com sucesso:", response.data);
+      navigate("/login");
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        const statusResponse = error.response?.status;
+        const errorMessage =
+        error.response?.data?.erro || "Erro inesperado de servidor.";
+        
+        setErroSenha(""); 
+        
+        if (statusResponse === 400) {
+          setErroSenha("Dados inválidos ou faltando. Verifique todos os campos!");
+        } else if (statusResponse === 409 || statusResponse === 403) { 
+          setErroSenha("E-mail ou CPF/CNPJ já cadastrado no sistema.");
+        } else if (statusResponse === 500) {
+          setErroSenha("Erro interno do servidor! Contate o suporte.");
+        } else {
+          setErroSenha(errorMessage);
+        }
+      } else {
+        setErroSenha("Erro de conexão. Verifique sua rede.");
+      }
     }
-
-    if (!cpf.trim()) {
-      setErroCpf("Preencha o CPF ou CNPJ.");
-      valido = false;
-    } else {
-      setErroCpf("");
-    }
-
-    if (!telefone.trim()) {
-      setErroTelefone("Preencha o telefone.");
-      valido = false;
-    } else if (!validarTelefone(telefone)) {
-      setErroTelefone("Telefone inválido. Deve conter ao menos 10 números.");
-      valido = false;
-    } else {
-      setErroTelefone("");
-    }
-
-    if (!cep.trim()) {
-      setErroCep("Preencha o CEP.");
-      valido = false;
-    } else if (!validarCep(cep)) {
-      setErroCep("CEP inválido. Deve conter 8 números.");
-      valido = false;
-    } else {
-      setErroCep("");
-    }
-
-    if (!senha.trim()) {
-      setErroSenha("Preencha a senha.");
-      valido = false;
-    } else if (!validarSenha(senha)) {
-      setErroSenha("Senha deve ter pelo menos 6 caracteres.");
-      valido = false;
-    } else {
-      setErroSenha("");
-    }
-
-    if (!confirmarSenha.trim()) {
-      setErroConfirmarSenha("Confirme a sua senha.");
-      valido = false;
-    } else if (senha !== confirmarSenha) {
-      setErroConfirmarSenha("As senhas não coincidem.");
-      valido = false;
-    } else {
-      setErroConfirmarSenha("");
-    }
-
-    if (!tipoUsuario) {
-      setErroTipo("Selecione o tipo de usuário.");
-      valido = false;
-    } else {
-      setErroTipo("");
-    }
-
-    if (!valido) return;
-
-    const cpfNumeros = cpf.replace(/\D/g, "");
-
-    if (
-      (tipoUsuario === "doador" && cpfNumeros.length !== 11) ||
-      (tipoUsuario === "empresa" && cpfNumeros.length !== 14)
-    ) {
-      setErroCpf("CPF ou CNPJ inválido para o tipo selecionado.");
-      return;
-    }
-
-    localStorage.setItem("logado", "true");
-    localStorage.setItem("tipoUsuario", tipoUsuario);
-
-    setNome("");
-    setEmail("");
-    setCpf("");
-    setTelefone("");
-    setCep("");
-    setSenha("");
-    setTipoUsuario("");
-
-    navigate("/");
   }
 
   return (
@@ -227,20 +181,6 @@ function TelaCadastro() {
           </div>
 
           <div className={styles.coluna}>
-            <div className={styles.campo}>
-              <label className={styles.label_formulario}>Tipo de usuário</label>
-              <select
-                className={`${styles.input} ${
-                  erroTipo ? styles.erro_input : ""
-                }`}
-                onChange={(e) => setTipoUsuario(e.target.value)}
-              >
-                <option value="">Selecione o tipo de usuário</option>
-                <option value="doador">Doador</option>
-                <option value="empresa">Empresa</option>
-              </select>
-              {erroTipo && <p className={styles.erro}>{erroTipo}</p>}
-            </div>
             <div className={styles.campo}>
               <label className={styles.label_formulario}>CPF/CNPJ</label>
               <input

@@ -158,7 +158,7 @@ function TelaLogin() {
             </div>
 
             <button className={styles.botao_login} type="submit">
-              "ENTRAR"
+              ENTRAR
             </button>
           </form>
           <p className={styles.Cadastro}>
