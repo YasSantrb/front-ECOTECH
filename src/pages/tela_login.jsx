@@ -8,82 +8,89 @@ import iconSenha from "../assets/imagens/icon-senha.png";
 import icon_voltar from "../assets/imagens/icon_voltar.png";
 import fundo_login_cadastro from "../assets/imagens/fundo_login_cadastro.jpg";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import api from "../services/api";
 
 function TelaLogin() {
   const [email, setEmail] = useState("");
-  const [cpf, setCpf] = useState("");
   const [senha, setSenha] = useState("");
   const [mostrarSenha, setMostrarSenha] = useState(false);
-
   const [erroEmail, setErroEmail] = useState("");
-  const [erroCpf, setErroCpf] = useState("");
   const [erroSenha, setErroSenha] = useState("");
-
-  function validarEmail(email) {
-    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return re.test(email);
-  }
-
-  function validarSenha(senha) {
-    return senha.length >= 6;
-  }
 
   const navigate = useNavigate();
 
-  function handleSubmit(e) {
-    e.preventDefault();
-
-    let valido = true;
-
-    setErroEmail("");
-    setErroCpf("");
-    setErroSenha("");
-
-    if (!email.trim()) {
-      setErroEmail("Preencha o email.");
-      valido = false;
-    } else if (!validarEmail(email)) {
-      setErroEmail("Email inválido.");
-      valido = false;
+  const redirectUserTo = (userType) => {
+    const tipoUsuario = userType ? userType.trim().toUpperCase() : null;
+    if (tipoUsuario === "DOADOR"){
+      return "/";
+    } else if (tipoUsuario === "EMPRESA"){
+      return "/"
     } else {
-      setErroEmail("");
+      return "/";
     }
+  };
 
-    if (!cpf.trim()) {
-      setErroCpf("Preencha o campo de CPF ou CNPJ.");
-      valido = false;
-    }
+  async function handleSubmit(event) {
+    event.preventDefault();
 
-    if (!senha.trim()) {
-      setErroSenha("Preencha a senha.");
-      valido = false;
-    } else if (!validarSenha(senha)) {
-      setErroSenha("Senha deve ter pelo menos 6 caracteres.");
-      valido = false;
-    } else {
-      setErroSenha("");
-    }
-
-    if (!valido) return;
-
-    const cpfNumeros = cpf.replace(/\D/g, "");
-
-    if (cpfNumeros.length === 11) {
-      localStorage.setItem("tipoUsuario", "doador");
-    } else if (cpfNumeros.length === 14) {
-      localStorage.setItem("tipoUsuario", "empresa");
-    } else {
-      setErroCpf("CPF ou CNPJ inválido.");
+    if (!email.trim() || !senha.trim()) {
+      setErroEmail(!email.trim() ? "Por favor, insira o seu email!" : "");
+      setErroSenha(!senha.trim() ? "Por favor, insira a sua senha!" : "");
       return;
     }
 
-    localStorage.setItem("logado", "true");
+    setErroEmail("");
+    setErroSenha("");
 
-    setEmail("");
-    setCpf("");
-    setSenha("");
+    const body = {
+      email: email,
+      password: senha,
+    };
 
-    navigate("/");
+    try {
+      const response = await api.post("login/", body);
+      const { token, profile, usuario_id, username, email  } = response.data;
+      const tipo_usuario = profile?.tipo_usuario;
+      const informacoes_usuario = { usuario_id, username, email, profile };
+
+      if (token) {
+        localStorage.setItem("authToken", token);
+        localStorage.setItem("logado", "true");
+
+        if (tipo_usuario) {
+          localStorage.setItem("userType", tipo_usuario);
+        }
+        if (informacoes_usuario) {
+          localStorage.setItem("userData", JSON.stringify(informacoes_usuario));
+        }
+
+        const route = redirectUserTo(tipo_usuario?.trim());
+        navigate(route);
+      }
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        const statusResponse = error.response?.status;
+        const errorMessage =
+          error.response?.data?.erro || "Erro inesperado de servidor.";
+
+        setErroSenha("");
+
+        if (statusResponse === 400) {
+          setErroSenha("Preencha os campos corretamente!");
+        } else if (statusResponse === 401) {
+          setErroSenha("E-mail ou senha incorretos!");
+        } else if (statusResponse === 403) {
+          setErroSenha("Usuário não autorizado no sistema!");
+        } else if (statusResponse === 500) {
+          setErroSenha("Erro interno do servidor! Contate o suporte.");
+        } else {
+          setErroSenha(errorMessage);
+        }
+      } else {
+        setErroSenha("Erro de conexão. Verifique sua rede.");
+      }
+    }
   }
 
   return (
@@ -125,19 +132,6 @@ function TelaLogin() {
             </div>
 
             <div className={styles.input_container}>
-              <label htmlFor="cpfCnpjInput">CPF ou CNPJ</label>
-              <input
-                id="cpfCnpjInput"
-                type="text"
-                placeholder="Insira seu CPF ou CNPJ"
-                value={cpf}
-                onChange={(e) => setCpf(e.target.value)}
-                className={erroCpf ? styles.erroBorda : ""}
-              />
-              {erroCpf && <span className={styles.erro}>{erroCpf}</span>}
-            </div>
-
-            <div className={styles.input_container}>
               <label htmlFor="senhaInput">Senha</label>
               <input
                 id="senhaInput"
@@ -164,7 +158,7 @@ function TelaLogin() {
             </div>
 
             <button className={styles.botao_login} type="submit">
-              Entrar
+              "ENTRAR"
             </button>
           </form>
           <p className={styles.Cadastro}>

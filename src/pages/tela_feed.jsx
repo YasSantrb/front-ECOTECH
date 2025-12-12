@@ -261,15 +261,15 @@ function TelaFeed() {
     return pesquisaMatch;
   });
 
-  const tipoUsuario = localStorage.getItem("tipoUsuario");
+  const tipoUsuario = localStorage.getItem("userType");
   const logado = localStorage.getItem("logado") === "true";
 
   return (
     <>
-      {logado && tipoUsuario === "doador" && (
+      {logado && tipoUsuario === "DOADOR" && (
         <BarraNavegacaoDoador pesquisa={pesquisa} setPesquisa={setPesquisa} />
       )}
-      {logado && tipoUsuario === "empresa" && (
+      {logado && tipoUsuario === "EMPRESA" && (
         <BarraNavegacaoEmpresa pesquisa={pesquisa} setPesquisa={setPesquisa} />
       )}
       {!logado && (
@@ -383,7 +383,7 @@ function TelaFeed() {
                       to={`/info/doacao/${doacao.id}`}
                     >
                       <button className={styles.botao_card}>
-                        {tipoUsuario === "doador" ? "Ver mais" : "Eu quero!"}
+                        {tipoUsuario === "EMPRESA" ? "Ver mais" : "Eu quero!"}
                       </button>
                     </Link>
                   </div>
@@ -499,7 +499,7 @@ function TelaFeed() {
                     to={`/info/doacao/${doacao.id}`}
                   >
                     <button className={styles.botao_card}>
-                      {tipoUsuario === "doador" ? "Ver mais" : "Eu quero!"}
+                      {tipoUsuario === "DOADOR" ? "Ver mais" : "Eu quero!"}
                     </button>
                   </Link>
                 </div>

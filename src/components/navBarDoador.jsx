@@ -18,11 +18,14 @@ function BarraNavegacaoDoador({ pesquisa, setPesquisa }) {
   }
 
   const logado = localStorage.getItem("logado") === "true";
-  localStorage.setItem("tipoUsuario", "doador");
 
   const sairPlataforma = () => {
     localStorage.removeItem("logado");
+    localStorage.removeItem("userType");
     localStorage.removeItem("tipoUsuario");
+    localStorage.removeItem("userName");
+    localStorage.removeItem("userData");
+    localStorage.removeItem("authToken");
     navigate("/inicial");
   };
 
