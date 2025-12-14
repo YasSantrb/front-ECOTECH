@@ -69,6 +69,8 @@ function TelaLogin() {
         navigate(route);
       }
     } catch (error) {
+      localStorage.removeItem("authToken");
+      localStorage.removeItem("logado");
       if (axios.isAxiosError(error)) {
         const statusResponse = error.response?.status;
         const errorMessage =
