@@ -1,46 +1,62 @@
 import { Link } from "react-router-dom";
 import styles from "../styles/tela_info_doacao.module.css";
 import PopUpSucesso from "./popUpSucesso";
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { useState } from "react"; 
+import apiMedia from "../services/api_media.ts";
 
 function InformacoesDoacaoComponente({
   nomeDoador,
   especificacoes,
-  nomeEletronico,
-  infoProduto,
+  nome_doacao,
+  descricao_geral, 
   condicao,
   observacao,
   endereco,
   imagem_user,
-  imagem,
+  fotos_eletronico,
   modo = "visualizacao",
   status,
-  onEditarDoacao,
+  dataCriacao, 
+  onEditarDoacao, 
 }) {
   const navigate = useNavigate();
+  const { id } = useParams();
   const logado = localStorage.getItem("logado") === "true";
   const mostrarContato = logado && modo === "visualizacao";
   const mostrarAgendar = logado && modo === "visualizacao";
   const mostrarEditar = modo === "gerenciar";
-
+  
   const [isEditarModalOpen, setIsEditarModalOpen] = useState(false);
-  const [especificacaoE, setEspecificacao] = useState(especificacoes);
-  const [nomeEletronicoE, setNomeEletronico] = useState(nomeEletronico);
-  const [infoProdutoE, setInfoProduto] = useState(infoProduto);
-  const [condicaoE, setCondicao] = useState(condicao);
-  const [observacaoE, setObservacao] = useState(observacao);
-  const [enderecoE, setEndereco] = useState(endereco);
-  const [imagemE, setImagem] = useState(imagem);
+  const [especificacaoE, setEspecificacaoE] = useState(especificacoes); 
+  const [nomeEletronicoE, setNomeEletronicoE] = useState(nome_doacao);
+  const [infoProdutoE, setInfoProdutoE] = useState(descricao_geral);
+  const [condicaoE, setCondicaoE] = useState(condicao);
+  const [observacaoE, setObservacaoE] = useState(observacao);
+  const [enderecoE, setEnderecoE] = useState(endereco);
+  const [imagemE, setImagemE] = useState(fotos_eletronico);
+  const [novoArquivoEletronico, setNovoArquivoEletronico] = useState(null);
+
+  const [mensagemSucesso, setMensagemSucesso] = useState(null);
+
+  function formatarDataHora(isoString) {
+    if (!isoString) return "Data Indisponível";
+    const data = new Date(isoString);
+    const dia = String(data.getDate()).padStart(2, "0");
+    const mes = String(data.getMonth() + 1).padStart(2, "0");
+    const ano = data.getFullYear();
+    return `${dia}/${mes}/${ano}`;
+  }
 
   function abrirModalEditar() {
-    setEspecificacao(especificacoes);
-    setNomeEletronico(nomeEletronico);
-    setInfoProduto(infoProduto);
-    setCondicao(condicao);
-    setObservacao(observacao);
-    setEndereco(endereco);
-    setImagem(imagem);
+    setEspecificacaoE(especificacoes);
+    setNomeEletronicoE(nome_doacao);
+    setInfoProdutoE(descricao_geral);
+    setCondicaoE(condicao);
+    setObservacaoE(observacao);
+    setEnderecoE(endereco);
+    setImagemE(fotos_eletronico);
+    setNovoArquivoEletronico(null);
     setIsEditarModalOpen(true);
   }
 
@@ -48,34 +64,78 @@ function InformacoesDoacaoComponente({
     setIsEditarModalOpen(false);
   }
 
-  const [mensagemSucesso, setMensagemSucesso] = useState(null);
+  async function editarBlocoAPI(formDataPayload, idDoacao) {
+    try {
+      const response = await apiMedia.patch(
+        `minhas_doacoes/${idDoacao}/`,
+        formDataPayload,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
 
-  function editarPerfil(event) {
-    event.preventDefault();
+      if (response.status === 200) {
+        return { success: true, data: response.data };
+      }
+    } catch (erro) {
+      console.error("Erro ao editar doação.", erro);
+      return { success: false, error: erro };
+    }
+  }
 
-    const doacaoAtualizada = {
-      nomeDoador,
-      nomeEletronico: nomeEletronicoE,
-      especificacoes: especificacaoE,
-      infoProduto: infoProdutoE,
-      condicao: condicaoE,
-      observacao: observacaoE,
-      endereco: enderecoE,
-      imagem: imagemE,
-      imagem_user: imagem_user,
-    };
+  async function editar(evento) {
+    evento.preventDefault();
 
-    if (onEditarDoacao) {
-      onEditarDoacao(doacaoAtualizada);
+    if (!id) {
+      console.error("ID da doação não encontrado na URL.");
+      return;
     }
 
-    console.log("Atualizado:", doacaoAtualizada);
-    setMensagemSucesso("Informações editadas com sucesso!");
+    const formData = new FormData();
+    formData.append("nome_doacao", nomeEletronicoE);
+    formData.append("especificacao", especificacaoE);
+    formData.append("descricao_geral", infoProdutoE);
+    formData.append("condicao", condicaoE);
+    formData.append("observacao", observacaoE);
+    formData.append("endereco", enderecoE);
+    
+    if (novoArquivoEletronico) {
+      formData.append("fotos_eletronico", novoArquivoEletronico);
+    }
 
-    setTimeout(() => {
-      setMensagemSucesso(null);
+    const resultado = await editarBlocoAPI(formData, id);
+
+    if (resultado && resultado.success) {
+      setMensagemSucesso("Doação editada com sucesso!");
+      
+      const dadosAtualizados = {
+        nomeEletronico: nomeEletronicoE,
+        especificacoes: especificacaoE,
+        infoProduto: infoProdutoE,
+        condicao: condicaoE,
+        observacao: observacaoE,
+        endereco: enderecoE,
+        fotos_eletronico: novoArquivoEletronico
+          ? URL.createObjectURL(novoArquivoEletronico)
+          : fotos_eletronico,
+      };
+
+      if (onEditarDoacao) {
+        onEditarDoacao(dadosAtualizados);
+      }
+
+      setNovoArquivoEletronico(null);
       fecharModalEditar();
-    }, 2000);
+
+      setTimeout(() => {
+        setMensagemSucesso(null);
+      }, 3000);
+
+    } else {
+      alert("Falha ao editar a doação. Tente novamente.");
+    }
   }
 
   const tipoUsuario = localStorage.getItem("tipoUsuario");
@@ -88,18 +148,18 @@ function InformacoesDoacaoComponente({
           <div className={styles.info_doacao_lado_esquerdo}>
             <img
               className={styles.doacao_main_img}
-              src={imagem}
-              alt={nomeEletronico}
+              src={imagemE || fotos_eletronico}
+              alt={nomeEletronicoE}
             />
             <div className={styles.informacoes_esquerda}>
               <div className={styles.doador_info_esquerda}>
                 <h3>Doado por:</h3>
                 <div className={styles.info_doador}>
-                  <img className={styles.img_doador} src={imagem_user} alt="" />
+                  <img className={styles.img_doador} src={imagem_user} alt="Ícone do usuário" />
                   <div className={styles.doador_contato}>
                     <p className={styles.nome_doador}>{nomeDoador}</p>
                     <p className={styles.dataHoraPublicacao}>
-                      Publicado 19/05/2025 às 18:02
+                      Publicado em {formatarDataHora(dataCriacao)}
                     </p>
                     <p className={styles.dataHoraPublicacao}>{endereco}</p>
                     <div className={styles.botao_entrar_em_contato}>
@@ -122,9 +182,7 @@ function InformacoesDoacaoComponente({
                             onClick={abrirModalEditar}
                             className={styles.botoes_doacao}
                           >
-                            <i
-                              className={`${styles.pincel} fa-solid fa-pencil`}
-                            ></i>
+                            <i className={`${styles.pincel} fa-solid fa-pencil`}></i>
                             Editar
                           </button>
                         )}
@@ -137,11 +195,11 @@ function InformacoesDoacaoComponente({
           </div>
 
           <div className={styles.info_doacao_lado_direito}>
-            <h1>{nomeEletronico}</h1>
+            <h1>{nome_doacao}</h1>
 
             <div className={styles.secao_info_direito}>
               <h3>Informações sobre o produto:</h3>
-              <p>{infoProduto}</p>
+              <p>{descricao_geral}</p>
             </div>
 
             <div className={styles.secao_info_direito}>
@@ -166,9 +224,10 @@ function InformacoesDoacaoComponente({
                   onClick={() =>
                     navigate("/agendamento", {
                       state: {
-                        produto: nomeEletronico,
+                        produto: fotos_eletronico,
                         doador: nomeDoador,
                         endereco: endereco,
+                        idDoacao: id, 
                       },
                     })
                   }
@@ -180,6 +239,7 @@ function InformacoesDoacaoComponente({
           </div>
         </div>
       </div>
+
       {isEditarModalOpen && (
         <div className={styles.popUp_overlay}>
           <div className={styles.popUp}>
@@ -194,14 +254,14 @@ function InformacoesDoacaoComponente({
             </div>
             <div className={styles.popUp_conteudo}>
               <div className={styles.inputs}>
+                
                 <div className={styles.campo}>
                   <label className={styles.label_modal}>Nome</label>
                   <input
                     className={styles.input}
                     type="text"
                     value={nomeEletronicoE}
-                    placeholder="Insira o novo nome do eletrônico"
-                    onChange={(e) => setNomeEletronico(e.target.value)}
+                    onChange={(e) => setNomeEletronicoE(e.target.value)}
                     required
                   />
                 </div>
@@ -211,8 +271,7 @@ function InformacoesDoacaoComponente({
                     className={styles.input}
                     type="text"
                     value={especificacaoE}
-                    placeholder="Insira a nova especificação"
-                    onChange={(e) => setEspecificacao(e.target.value)}
+                    onChange={(e) => setEspecificacaoE(e.target.value)}
                     required
                   />
                 </div>
@@ -222,34 +281,27 @@ function InformacoesDoacaoComponente({
                     className={styles.input}
                     type="text"
                     value={enderecoE}
-                    placeholder="Insira o novo endereco"
-                    onChange={(e) => setEndereco(e.target.value)}
+                    onChange={(e) => setEnderecoE(e.target.value)}
                     required
                   />
                 </div>
                 <div className={styles.campo}>
-                  <label className={styles.label_modal}>
-                    Informação do produto
-                  </label>
+                  <label className={styles.label_modal}>Informação do produto</label>
                   <input
                     className={styles.input}
                     type="text"
                     value={infoProdutoE}
-                    placeholder="Insira a nova informação do produto"
-                    onChange={(e) => setInfoProduto(e.target.value)}
+                    onChange={(e) => setInfoProdutoE(e.target.value)}
                     required
                   />
                 </div>
                 <div className={styles.campo}>
-                  <label className={styles.label_modal}>
-                    Condição do produto
-                  </label>
+                  <label className={styles.label_modal}>Condição do produto</label>
                   <input
                     className={styles.input}
                     type="text"
                     value={condicaoE}
-                    placeholder="Insira a nova condição do produto"
-                    onChange={(e) => setCondicao(e.target.value)}
+                    onChange={(e) => setCondicaoE(e.target.value)}
                     required
                   />
                 </div>
@@ -259,41 +311,31 @@ function InformacoesDoacaoComponente({
                     className={styles.input}
                     type="text"
                     value={observacaoE}
-                    placeholder="Insira a nova observação"
-                    onChange={(e) => setObservacao(e.target.value)}
+                    onChange={(e) => setObservacaoE(e.target.value)}
                     required
                   />
                 </div>
                 <div className={styles.campo}>
-                  <label className={styles.label_modal}>
-                    Insira a foto do eletrônico
-                  </label>
+                  <label className={styles.label_modal}>Foto do eletrônico</label>
                   <input
                     type="file"
                     accept="image/*"
-                    multiple={false}
                     className={styles.input}
                     onChange={(e) => {
                       const file = e.target.files[0];
                       if (file) {
-                        setImagem(file);
-                        setImagem(URL.createObjectURL(file));
+                        setNovoArquivoEletronico(file);
+                        setImagemE(URL.createObjectURL(file)); 
                       }
                     }}
                   />
                 </div>
               </div>
               <div className={styles.popUp_botoes}>
-                <button
-                  className={styles.botao_cancelar_agendamento}
-                  onClick={fecharModalEditar}
-                >
+                <button className={styles.botao_cancelar_agendamento} onClick={fecharModalEditar}>
                   Cancelar
                 </button>
-                <button
-                  className={styles.botao_confirmar_agendamento}
-                  onClick={editarPerfil}
-                >
+                <button className={styles.botao_confirmar_agendamento} onClick={editar}>
                   Confirmar
                 </button>
               </div>

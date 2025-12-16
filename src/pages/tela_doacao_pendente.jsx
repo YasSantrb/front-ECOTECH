@@ -6,41 +6,39 @@ import televisao from "../assets/imagens/tv_tubo.png";
 import PopUpSucesso from "../components/popUpSucesso";
 import { useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import useGetMinhasDoacoes from "../hooks/doacoes/useGetMinhasDoacoes";
+import apiMedia from "../services/api_media.ts";
 
 function TelaDoacaoPendente() {
   const location = useLocation();
   const navigate = useNavigate();
+  const { id } = useParams();
 
-  const [doacao, setDoacao] = useState({
-    nomeDoador: "Ana Clara Lima",
-    especificacao: "Tela de 29 polegadas, som estéreo, entrada AV.",
-    nomeEletronico: "Televisão de tubo",
-    infoProduto:
-      "TV de tubo clássica em bom estado. Ideal para quem busca um toque vintage ou para uso em projetos de reaproveitamento de peças.",
-    condicao: "Usado",
-    observacao: "Pode ser reutilizado ou ter partes aproveitadas.",
-    endereco: "Rua das flores, Floriano - PI",
-    imagem: televisao,
-  });
+  const [doacao, setDoacao] = useState({});
+  const { doacoes: doacoesAPI } = useGetMinhasDoacoes();
 
   const [isEditarModalOpen, setIsEditarModalOpen] = useState(false);
   const [especificacao, setEspecificacao] = useState("");
-  const [nomeEletronico, setNomeEletronico] = useState("");
-  const [infoProduto, setInfoProduto] = useState("");
+  const [nome_doacao, setNomeDoacao] = useState("");
+  const [descricao_geral, setDescricao] = useState("");
   const [condicao, setCondicao] = useState("");
   const [observacao, setObservacao] = useState("");
   const [endereco, setEndereco] = useState("");
-  const [imagem, setImagem] = useState(null);
+  const [fotos_eletronico, setFotoEletronico] = useState(null);
+  const [doacaoSelecionada, setDoacaoSelecionada] = useState({});
+
+  const [novoArquivoEletronico, setNovoArquivoEletronico] = useState(null);
 
   function abrirModalEditar() {
     setEspecificacao(doacao.especificacao);
-    setNomeEletronico(doacao.nomeEletronico);
-    setInfoProduto(doacao.infoProduto);
+    setNomeDoacao(doacao.nome_doacao);
+    setDescricao(doacao.descricao_geral);
     setCondicao(doacao.condicao);
     setObservacao(doacao.observacao);
     setEndereco(doacao.endereco);
-    setImagem(doacao.imagem);
+    setFotoEletronico(doacao.fotos_eletronico);
+    setNovoArquivoEletronico(null);
     setIsEditarModalOpen(true);
   }
 
@@ -50,31 +48,103 @@ function TelaDoacaoPendente() {
 
   const [mensagemSucesso, setMensagemSucesso] = useState(null);
 
-  function editarPerfil(evento) {
+  async function editarBlocoAPI(formDataPayload, idDoacao) {
+    try {
+      const response = await apiMedia.patch(
+        `minhas_doacoes/${idDoacao}/`,
+        formDataPayload,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      if (response.status === 200) {
+        console.log("Doação editada com sucesso", response.data);
+        return { success: true, data: response.data };
+      }
+    } catch (erro) {
+      console.error("Erro ao editar doação.", erro);
+      return { success: false, error: erro };
+    }
+  }
+
+  async function editar(evento) {
     evento.preventDefault();
 
-    const perfilAtualizado = {
-      ...doacao,
-      nomeEletronico: nomeEletronico,
-      especificacao,
-      infoProduto,
-      condicao,
-      observacao,
-      endereco,
-      imagem,
-    };
+    if (!doacaoSelecionada || !doacaoSelecionada.id) {
+      console.error("Nenhuma doação selecionada para edição.");
+      return;
+    }
+    const formData = new FormData();
 
-    setDoacao(perfilAtualizado);
-    setMensagemSucesso("Informações salvas com sucesso!");
+    formData.append("nome_doacao", nome_doacao);
+    formData.append("especificacao", especificacao);
+    formData.append("descricao_geral", descricao_geral);
+    formData.append("condicao", condicao);
+    formData.append("observacao", observacao);
+    formData.append("endereco", endereco);
+    if (novoArquivoEletronico) {
+      formData.append("fotos_eletronico", novoArquivoEletronico);
+    }
+    const resultado = await editarBlocoAPI(formData, doacaoSelecionada.id);
 
-    setTimeout(() => {
-      setMensagemSucesso(null);
+    if (resultado && resultado.success) {
+      setMensagemSucesso("Doação editada com sucesso!");
+      const dadosParaAtualizarLocalmente = {
+        nome_doacao,
+        especificacao,
+        descricao_geral,
+        condicao,
+        observacao,
+        endereco,
+        fotos_eletronico: novoArquivoEletronico
+          ? URL.createObjectURL(novoArquivoEletronico)
+          : fotos_eletronico,
+      };
+
+      setDoacao((prevDoacao) => ({
+        ...prevDoacao,
+        ...dadosParaAtualizarLocalmente,
+      }));
+
+      setNovoArquivoEletronico(null);
+
       fecharModalEditar();
-    }, 2000);
+      setTimeout(() => {
+        setMensagemSucesso(null);
+      }, 3000);
+    } else {
+      alert(
+        "Falha ao editar a doação. Por favor, verifique sua conexão ou tente novamente."
+      );
+    }
   }
 
   useEffect(() => {
-    if (location.state) {
+    const doacaoEncontrada = doacoesAPI?.find(
+      (doacao) => String(doacao.id) === id
+    );
+    if (doacaoEncontrada) {
+      const urlFoto = doacaoEncontrada.fotos_eletronico;
+
+      setDoacao({
+        id: doacaoEncontrada.id,
+        nomeDoador: "Você",
+        nome_doacao: doacaoEncontrada.nome_doacao,
+        especificacao: doacaoEncontrada.especificacao,
+        descricao_geral: doacaoEncontrada.descricao_geral,
+        condicao: doacaoEncontrada.condicao,
+        observacao: doacaoEncontrada.observacao,
+        endereco: doacaoEncontrada.endereco,
+        fotos_eletronico: urlFoto,
+        dataCriacao: doacaoEncontrada.criado_em,
+      });
+
+      setDoacaoSelecionada(doacaoEncontrada);
+      setFotoEletronico(urlFoto);
+    } else if (location.state && location.state.nome) {
       const imagemCriacao =
         location.state.imagens && location.state.imagens.length > 0
           ? URL.createObjectURL(location.state.imagens[0])
@@ -82,18 +152,18 @@ function TelaDoacaoPendente() {
 
       setDoacao({
         nomeDoador: "Você",
-        nomeEletronico: location.state.nome,
+        nome_doacao: location.state.nome_doacao,
         especificacao: location.state.especificacao,
-        infoProduto: location.state.descricao,
+        descricao_geral: location.state.descricao_geral,
         condicao: location.state.condicao,
         observacao: location.state.observacao,
         endereco: location.state.endereco,
-        imagem: imagemCriacao,
+        fotos_eletronico: imagemCriacao,
         dataCriacao: new Date().toISOString(),
       });
-      setImagem(imagemCriacao);
+      setFotoEletronico(imagemCriacao);
     }
-  }, [location.state]);
+  }, [doacoesAPI, id, location.state]);
 
   function formatarDataHora(isoString) {
     const data = new Date(isoString);
@@ -125,13 +195,15 @@ function TelaDoacaoPendente() {
               <img
                 className={styles.doacao_main_img}
                 src={
-                  imagem
-                    ? typeof imagem === "string"
-                      ? imagem
-                      : URL.createObjectURL(imagem)
-                    : doacao.imagem
+                  fotos_eletronico
+                    ? typeof fotos_eletronico === "string"
+                      ? fotos_eletronico
+                      : URL.createObjectURL(fotos_eletronico)
+                    : televisao
                 }
-                alt={nomeEletronico}
+                alt={
+                  fotos_eletronico ? "Imagem do eletrônico" : "Imagem padrão"
+                }
               />
               <div className={styles.informacoes_esquerda}>
                 <div className={styles.doador_info_esquerda}>
@@ -164,13 +236,13 @@ function TelaDoacaoPendente() {
             </div>
 
             <div className={styles.info_doacao_lado_direito}>
-              <h1>{doacao.nomeEletronico}</h1>
+              <h1>{doacao.nome_doacao}</h1>
 
               <div className={styles.secao_info_direito}>
                 <h3 className={styles.lado_direito_h3}>
                   Informações sobre o produto:
                 </h3>
-                <p>{doacao.infoProduto}</p>
+                <p>{doacao.descricao_geral}</p>
               </div>
 
               <div className={styles.secao_info_direito}>
@@ -212,9 +284,9 @@ function TelaDoacaoPendente() {
                   <input
                     className={styles.input}
                     type="text"
-                    value={nomeEletronico}
+                    value={nome_doacao}
                     placeholder="Insira o novo nome do eletrônico"
-                    onChange={(e) => setNomeEletronico(e.target.value)}
+                    onChange={(e) => setNomeDoacao(e.target.value)}
                     required
                   />
                 </div>
@@ -247,9 +319,9 @@ function TelaDoacaoPendente() {
                   <input
                     className={styles.input}
                     type="text"
-                    value={infoProduto}
+                    value={descricao_geral}
                     placeholder="Insira a nova informação do produto"
-                    onChange={(e) => setInfoProduto(e.target.value)}
+                    onChange={(e) => setDescricao(e.target.value)}
                     required
                   />
                 </div>
@@ -289,8 +361,8 @@ function TelaDoacaoPendente() {
                     onChange={(e) => {
                       const file = e.target.files[0];
                       if (file) {
-                        setImagem(file);
-                        setImagem(URL.createObjectURL(file));
+                        setNovoArquivoEletronico(file);
+                        setFotoEletronico(URL.createObjectURL(file));
                       }
                     }}
                   />
@@ -305,7 +377,7 @@ function TelaDoacaoPendente() {
                 </button>
                 <button
                   className={styles.botao_confirmar_agendamento}
-                  onClick={editarPerfil}
+                  onClick={editar}
                 >
                   Confirmar
                 </button>

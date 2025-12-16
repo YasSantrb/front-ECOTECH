@@ -7,9 +7,11 @@ import feed4 from "../assets/imagens/4.png";
 import feed5 from "../assets/imagens/1.png";
 import BarraNavegacaoDoador from "../components/navBarDoador";
 import BarraNavegacaoEmpresa from "../components/navBarEmpresa";
+import useGetTodasDoacoes from "../hooks/doacoes/useGetTodasDoacoes";
 
 function TelaFeed() {
-  // Função para o carrossel automatico
+  const { doacoes, loading, error } = useGetTodasDoacoes(); 
+  const doacoesLista = doacoes || [];
   const slideReferencia = useRef(null);
   const [indiceAtual, setIndiceAtual] = useState(0);
   const totalSlides = 5;
@@ -41,9 +43,6 @@ function TelaFeed() {
     setIndiceAtual(indiceSlideEscolhido);
   }
 
-  //Fim da função para o carrossel automatco
-
-  //Inicio da função para o carrossel manual
   const [indiceAtualFeed, setIndiceAtualFeed] = useState(0);
   const larguraImagem = 400;
 
@@ -63,9 +62,8 @@ function TelaFeed() {
   const estiloDeslizamento = {
     transform: `translateX(-${indiceAtualFeed * larguraImagem}px)`,
   };
-  //Fim da função para o carrossel manual
 
-  //Inicio da função de listagem
+
   const [filtros, setFiltros] = useState({
     categoria: "todos",
     local: "todos",
@@ -125,103 +123,6 @@ function TelaFeed() {
 
     return null;
   };
-  //Fim da função de listagem
-
-  const doacoesDoFeedCarrossel = [
-    {
-      id: "1",
-      imagem: "src/assets/imagens/download 1 (1).png",
-      tipo: "Eletrônico",
-      titulo: "Televisão de tubo",
-      descricao: "Pode ser reutilizado ou ter partes aproveitadas.",
-      local: "Floriano – PI",
-      condicao: "Usado",
-    },
-    {
-      id: "2",
-      imagem: "src/assets/imagens/download 3.png",
-      tipo: "Eletrônico",
-      titulo: "Placa-mãe ASUS",
-      descricao: "Ideal para reaproveitamento de peças.",
-      local: "Floriano – PI",
-      condicao: "Para peças",
-    },
-    {
-      id: "3",
-      imagem: "src/assets/imagens/OIP 8.png",
-      tipo: "Tablet",
-      titulo: "Tablet Samsung",
-      descricao: "Produto novo, porém com defeito que impede o uso imediato.",
-      local: "Floriano – PI",
-      condicao: "Novo",
-    },
-    {
-      id: "4",
-      imagem: "src/assets/imagens/OIP 12.png",
-      tipo: "Computador",
-      titulo: "Computador antigo",
-      descricao: "Pode ser reutilizado ou ter partes aproveitadas.",
-      local: "Floriano – PI",
-      condicao: "Usado",
-    },
-    {
-      id: "5",
-      imagem: "src/assets/imagens/download 1 (1).png",
-      tipo: "Eletrônico",
-      titulo: "Televisão de tubo",
-      descricao: "Pode ser reutilizado ou ter partes aproveitadas.",
-      local: "Floriano – PI",
-      condicao: "Usado",
-    },
-    {
-      id: "6",
-      imagem: "src/assets/imagens/OIP 8.png",
-      tipo: "Tablet",
-      titulo: "Tablet Samsung",
-      descricao: "Produto novo, porém com defeito que impede o uso imediato.",
-      local: "Floriano – PI",
-      condicao: "Novo",
-    },
-  ];
-
-  const doacoesDoFeed = [
-    {
-      id: "1",
-      imagem: "src/assets/imagens/download 1 (1).png",
-      tipo: "Eletrônico",
-      titulo: "Televisão de tubo",
-      descricao: "Pode ser reutilizado ou ter partes aproveitadas.",
-      local: "Floriano – PI",
-      condicao: "Usado",
-    },
-    {
-      id: "2",
-      imagem: "src/assets/imagens/download 3.png",
-      tipo: "Eletrônico",
-      titulo: "Placa-mãe ASUS",
-      descricao: "Ideal para reaproveitamento de peças.",
-      local: "Teresina – PI",
-      condicao: "Para peças",
-    },
-    {
-      id: "3",
-      imagem: "src/assets/imagens/OIP 8.png",
-      tipo: "Tablet",
-      titulo: "Tablet Samsung",
-      descricao: "Produto novo, porém com defeito que impede o uso imediato.",
-      local: "Floriano – PI",
-      condicao: "Novo",
-    },
-    {
-      id: "4",
-      imagem: "src/assets/imagens/OIP 12.png",
-      tipo: "Computador",
-      titulo: "Computador antigo",
-      descricao: "Pode ser reutilizado ou ter partes aproveitadas.",
-      local: "Teresina – PI",
-      condicao: "Usado",
-    },
-  ];
 
   const mapaCategorias = {
     eletronicos: "Eletrônico",
@@ -237,32 +138,52 @@ function TelaFeed() {
 
   const [pesquisa, setPesquisa] = useState("");
 
-  const doacoesFiltradas = doacoesDoFeed.filter((doacao) => {
+  const doacoesFiltradas = doacoesLista.filter((doacao) => {
     const categoria =
       filtros.categoria === "todos" ||
-      doacao.tipo === mapaCategorias[filtros.categoria];
+      doacao.categoria === mapaCategorias[filtros.categoria];
+
     const local =
       filtros.local === "todos" ||
-      doacao.local.toLowerCase().includes(filtros.local.toLowerCase());
+      (doacao.endereco && doacao.endereco.toLowerCase().includes(filtros.local.toLowerCase()));
+
     const estado =
       filtros.estado === "todos" ||
       doacao.condicao === mapaCondicoes[filtros.estado];
+      
     const pesquisaMatch =
-      doacao.titulo.toLowerCase().includes(pesquisa.toLowerCase()) ||
-      doacao.descricao.toLowerCase().includes(pesquisa.toLowerCase());
+      (doacao.nome_doacao && doacao.nome_doacao.toLowerCase().includes(pesquisa.toLowerCase())) ||
+      (doacao.descricao_geral && doacao.descricao_geral.toLowerCase().includes(pesquisa.toLowerCase()));
 
     return categoria && local && estado && pesquisaMatch;
   });
 
-  const doacoesFiltradasCarrossel = doacoesDoFeedCarrossel.filter((doacao) => {
+  const doacoesFiltradasCarrossel = doacoesLista.filter((doacao) => {
     const pesquisaMatch =
-      doacao.titulo.toLowerCase().includes(pesquisa.toLowerCase()) ||
-      doacao.descricao.toLowerCase().includes(pesquisa.toLowerCase());
+      (doacao.nome_doacao && doacao.nome_doacao.toLowerCase().includes(pesquisa.toLowerCase())) ||
+      (doacao.descricao_geral && doacao.descricao_geral.toLowerCase().includes(pesquisa.toLowerCase()));
+      
     return pesquisaMatch;
   });
 
   const tipoUsuario = localStorage.getItem("userType");
   const logado = localStorage.getItem("logado") === "true";
+
+  if (loading) {
+    return (
+        <div style={{ padding: '20px', textAlign: 'center' }}>
+            Carregando doações...
+        </div>
+    );
+  }
+  
+  if (error) {
+     return (
+        <div style={{ padding: '20px', textAlign: 'center', color: 'red' }}>
+            Erro ao carregar dados: {error.message}
+        </div>
+     );
+  }
 
   return (
     <>
@@ -304,15 +225,12 @@ function TelaFeed() {
             <div className={styles.slide_conteudo2}>
               <img src={feed2} alt="" className={styles.img_carrossel} />
             </div>
-
             <div className={styles.slide_conteudo3}>
               <img src={feed3} alt="" className={styles.img_carrossel} />
             </div>
-
             <div className={styles.slide_conteudo4}>
               <img src={feed4} alt="" className={styles.img_carrossel} />
             </div>
-
             <div className={styles.slide_conteudo5}>
               <img src={feed5} alt="" className={styles.img_carrossel} />
             </div>
@@ -363,32 +281,36 @@ function TelaFeed() {
               id="carrossel"
               style={estiloDeslizamento}
             >
-              {doacoesFiltradasCarrossel.map((doacao) => (
-                <div className={styles.card_feed_carrossel}>
-                  <img className={styles.card_img} src={doacao.imagem} alt="" />
-                  <p className={styles.tipo_card}>{doacao.tipo}</p>
-                  <div className={styles.card}>
-                    <div className={styles.card_info}>
-                      <h1 className={styles.titulo_card}>{doacao.titulo}</h1>
-                      <p className={styles.p_card}>{doacao.descricao}</p>
-                      <span className={styles.span_card}>{doacao.local}</span>
-                      <div className={styles.card_meta}>
-                        <p className={styles.p_card}>
-                          <i className="fa-solid fa-gear"></i> {doacao.condicao}
-                        </p>
+              {doacoesFiltradasCarrossel.length === 0 ? (
+                <p className={styles.mensagem_nenhuma_doacao}>Nenhuma novidade encontrada.</p>
+              ) : (
+                doacoesFiltradasCarrossel.map((doacao) => (
+                  <div className={styles.card_feed_carrossel} key={doacao.id}>
+                    <img className={styles.card_img} src={doacao.imagem} alt="" />
+                    <p className={styles.tipo_card}>{doacao.categoria}</p>
+                    <div className={styles.card}>
+                      <div className={styles.card_info}>
+                        <h1 className={styles.titulo_card}>{doacao.nome_doacao}</h1> 
+                        <p className={styles.p_card}>{doacao.descricao_geral}</p> 
+                        <span className={styles.span_card}>{doacao.endereco}</span>
+                        <div className={styles.card_meta}>
+                          <p className={styles.p_card}>
+                            <i className="fa-solid fa-gear"></i> {doacao.condicao}
+                          </p>
+                        </div>
                       </div>
+                      <Link
+                        className={styles.link_card_feed}
+                        to={`/info/doacao/${doacao.id}`}
+                      >
+                        <button className={styles.botao_card}>
+                          {tipoUsuario === "DOADOR" ? "Ver mais" : "Eu quero!"}
+                        </button>
+                      </Link>
                     </div>
-                    <Link
-                      className={styles.link_card_feed}
-                      to={`/info/doacao/${doacao.id}`}
-                    >
-                      <button className={styles.botao_card}>
-                        {tipoUsuario === "EMPRESA" ? "Ver mais" : "Eu quero!"}
-                      </button>
-                    </Link>
                   </div>
-                </div>
-              ))}
+                ))
+              )}
             </div>
           </div>
           <button
@@ -403,112 +325,103 @@ function TelaFeed() {
           <h1 className={styles.titulo_secao_cards}>Doações</h1>
           <div className={styles.secaofiltros}>
             <div className={styles.resumo_secao}>
-              <i className="fa-solid fa-recycle"></i>
-              <h2 className={styles.resumo_titulo}>Dê um novo destino</h2>
-              <p className={styles.resumo_texto}>
-                Cada doação é um passo a mais por um mundo mais justo e
-                sustentável.
-              </p>
-            </div>
+               <i className="fa-solid fa-recycle"></i>
+               <h2 className={styles.resumo_titulo}>Dê um novo destino</h2>
+               <p className={styles.resumo_texto}>
+                 Cada doação é um passo a mais por um mundo mais justo e sustentável.
+               </p>
+             </div>
+             
+             <div className={styles.filtros_container}>
+               <div className={styles.filtro_item}>
+                 <label className={styles.label_filtro} htmlFor="filtro_categoria">Categoria</label>
+                 <select
+                   className={styles.filtro_categoria}
+                   id="filtro_categoria"
+                   value={filtros.categoria}
+                   onChange={mudarFiltro}
+                 >
+                   <option value="todos">Todos</option>
+                   <option value="eletronicos">Eletrônicos</option>
+                   <option value="computadores">Computadores</option>
+                   <option value="tablets">Tablets</option>
+                 </select>
+                 <div className={styles.filtros_ativos}>
+                   {filtrosAtivos("categoria")}
+                 </div>
+               </div>
 
-            <div className={styles.filtros_container}>
-              <div className={styles.filtro_item}>
-                <label
-                  className={styles.label_filtro}
-                  htmlFor="filtro_categoria"
-                >
-                  Categoria
-                </label>
-                <select
-                  className={styles.filtro_categoria}
-                  id="filtro_categoria"
-                  value={filtros.categoria}
-                  onChange={mudarFiltro}
-                >
-                  <option value="todos">Todos</option>
-                  <option value="eletronicos">Eletrônicos</option>
-                  <option value="computadores">Computadores</option>
-                  <option value="tablets">Tablets</option>
-                </select>
-
-                <div className={styles.filtros_ativos}>
-                  {filtrosAtivos("categoria")}
-                </div>
-              </div>
-
-              <div className={styles.filtro_item}>
-                <label className={styles.label_filtro} htmlFor="filtro_local">
-                  Localidade
-                </label>
-                <select
-                  className={styles.filtro_categoria}
-                  id="filtro_local"
-                  value={filtros.local}
-                  onChange={mudarFiltro}
-                >
-                  <option value="todos">Todos</option>
-                  <option value="floriano">Floriano - PI</option>
-                  <option value="teresina">Teresina - PI</option>
-                </select>
-                <div className={styles.filtros_ativos}>
-                  {filtrosAtivos("local")}
-                </div>
-              </div>
-
-              <div className={styles.filtro_item}>
-                <label className={styles.label_filtro} htmlFor="filtro_estado">
-                  Estado
-                </label>
-                <select
-                  className={styles.filtro_categoria}
-                  id="filtro_estado"
-                  value={filtros.estado}
-                  onChange={mudarFiltro}
-                >
-                  <option value="todos">Todos</option>
-                  <option value="novo">Novo</option>
-                  <option value="usado">Usado</option>
-                  <option value="pecas">Para peças</option>
-                </select>
-
-                <div className={styles.filtros_ativos}>
-                  {filtrosAtivos("estado")}
-                </div>
-              </div>
-            </div>
+               <div className={styles.filtro_item}>
+                 <label className={styles.label_filtro} htmlFor="filtro_local">Localidade</label>
+                 <select
+                   className={styles.filtro_categoria}
+                   id="filtro_local"
+                   value={filtros.local}
+                   onChange={mudarFiltro}
+                 >
+                   <option value="todos">Todos</option>
+                   <option value="floriano">Floriano - PI</option>
+                   <option value="teresina">Teresina - PI</option>
+                 </select>
+                 <div className={styles.filtros_ativos}>
+                   {filtrosAtivos("local")}
+                 </div>
+               </div>
+               
+               <div className={styles.filtro_item}>
+                 <label className={styles.label_filtro} htmlFor="filtro_estado">Estado</label>
+                 <select
+                   className={styles.filtro_categoria}
+                   id="filtro_estado"
+                   value={filtros.estado}
+                   onChange={mudarFiltro}
+                 >
+                   <option value="todos">Todos</option>
+                   <option value="novo">Novo</option>
+                   <option value="usado">Usado</option>
+                   <option value="pecas">Para peças</option>
+                 </select>
+                 <div className={styles.filtros_ativos}>
+                   {filtrosAtivos("estado")}
+                 </div>
+               </div>
+             </div>
           </div>
 
           <div className={styles.cards_secao_cards}>
-            {doacoesFiltradas.map((doacao) => (
-              <div className={styles.card_feed_carrossel}>
-                <img className={styles.card_img} src={doacao.imagem} alt="" />
-                <p className={styles.tipo_card}>{doacao.tipo}</p>
-                <div className={styles.card}>
-                  <div className={styles.card_info}>
-                    <h1 className={styles.titulo_card}>{doacao.titulo}</h1>
-                    <p className={styles.p_card}>{doacao.descricao}</p>
-                    <span className={styles.span_card}>{doacao.local}</span>
-                    <div className={styles.card_meta}>
-                      <p className={styles.p_card}>
-                        <i className="fa-solid fa-gear"></i> {doacao.condicao}
-                      </p>
+            {doacoesFiltradas.length === 0 ? (
+                <p className={styles.mensagem_nenhuma_doacao}>Nenhuma doação encontrada com os filtros atuais.</p>
+            ) : (
+                doacoesFiltradas.map((doacao) => (
+                  <div className={styles.card_feed_carrossel} key={doacao.id}>
+                    <img className={styles.card_img} src={doacao.imagem} alt="" />
+                    <p className={styles.tipo_card}>{doacao.categoria}</p>
+                    <div className={styles.card}>
+                      <div className={styles.card_info}>
+                        <h1 className={styles.titulo_card}>{doacao.nome_doacao}</h1> 
+                        <p className={styles.p_card}>{doacao.descricao_geral}</p> 
+                        <span className={styles.span_card}>{doacao.endereco}</span>
+                        <div className={styles.card_meta}>
+                          <p className={styles.p_card}>
+                            <i className="fa-solid fa-gear"></i> {doacao.condicao}
+                          </p>
+                        </div>
+                      </div>
+                      <Link
+                        className={styles.link_card_feed}
+                        to={`/info/doacao/${doacao.id}`}
+                      >
+                        <button className={styles.botao_card}>
+                          {tipoUsuario === "DOADOR" ? "Ver mais" : "Eu quero!"}
+                        </button>
+                      </Link>
                     </div>
                   </div>
-                  <Link
-                    className={styles.link_card_feed}
-                    to={`/info/doacao/${doacao.id}`}
-                  >
-                    <button className={styles.botao_card}>
-                      {tipoUsuario === "DOADOR" ? "Ver mais" : "Eu quero!"}
-                    </button>
-                  </Link>
-                </div>
-              </div>
-            ))}
+                ))
+            )}
           </div>
         </section>
       </main>
-
       <footer className={styles.footer_feed}>
         <div className={styles.footer_content}>
           <div className={styles.footer_contacts}>

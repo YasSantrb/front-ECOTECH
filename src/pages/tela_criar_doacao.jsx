@@ -4,14 +4,15 @@ import icon_voltar from "../assets/imagens/icon_voltar.png";
 import PopUpSucesso from "../components/popUpSucesso";
 import { useRef, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import apiMedia from "../services/api_media";
 
 function TelaCriarDoacao() {
   const navigate = useNavigate();
   const inputImagemRef = useRef(null);
 
-  const [nome, setNome] = useState("");
+  const [nome_doacao, setNome] = useState("");
   const [especificacao, setEspecificacao] = useState("");
-  const [descricao, setDescricao] = useState("");
+  const [descricao_geral, setDescricao] = useState("");
   const [observacao, setObservacao] = useState("");
   const [condicao, setCondicao] = useState("");
   const [endereco, setEndereco] = useState("");
@@ -28,47 +29,56 @@ function TelaCriarDoacao() {
   const [mostrarModal, setMostrarModal] = useState(false);
   const [mensagemSucesso, setMensagemSucesso] = useState(null);
 
-  function abrirModalRevisao(evento) {
-    evento.preventDefault();
-    let erro = false;
+  async function adicionarDoacao(event) { 
+    event.preventDefault(); 
 
-    if (!nome.trim()) {
-      setErroNome("Preencha o nome do eletrônico!");
-      erro = true;
-    } else setErroNome("");
+    const formData = new FormData();
+    formData.append("nome_doacao", nome_doacao);
+    formData.append("especificacao", especificacao);
+    formData.append("descricao_geral", descricao_geral);
+    formData.append("observacao", observacao);
+    formData.append("condicao", condicao);
+    formData.append("endereco", endereco);
 
-    if (!especificacao.trim()) {
-      setErroEspecificacao("Preencha a especificação!");
-      erro = true;
-    } else setErroEspecificacao("");
+    if (imagens.length > 0){
+      formData.append(`fotos_eletronico`, imagens[0]); 
+    };
 
-    if (!descricao.trim()) {
-      setErroDescricao("Preencha a descrição!");
-      erro = true;
-    } else setErroDescricao("");
+    if (!nome_doacao || !especificacao || !descricao_geral || !condicao || !endereco) {
+        setErroCondicao("Por favor, preencha a condição.");
+        setErroDescricao("Por favor, preencha a descrição.");
+        setErroEspecificacao("Por favor, preencha a especificação.");
+        setErroNome("Por favor, preencha o nome da doação.");
+        setErroEndereco("Por favor, preencha o endereço.");
+        setErroObservacao("Por favor, preencha a observação.");
+        setErroImagens("Por favor, insira uma imagem.");
+        return;
+    }
+    
+    try {
+      const response = await apiMedia.post("minhas_doacoes/", formData); 
+      
+      if (response.status === 201 || response.status === 200) {
+        setMensagemSucesso("Doação adicionada com sucesso!");
+            const novaDoacao = response.data;
+            setTimeout(() => {
+               navigate(`/doacao/pendente`, { state: { doacao: novaDoacao } }); 
+               setMensagemSucesso(null);
+              }, 2000); 
+            
+            } else {
+            console.error("Criação de doação falhou com status inesperado:", response.status);
+            alert("Falha ao criar doação. Tente novamente.");
+        }
+      } catch (error) {
+         const mensagem = error.response?.data?.message || "Erro ao criar doação. Verifique os logs do backend.";
+         console.error("Erro ao criar doação:", error.response?.data || error.message);
+          alert(mensagem);
+        } finally {
+          console.log("Requisição de criação de doação finalizada.");
+        }
+      }
 
-    if (!observacao.trim()) {
-      setErroObservacao("Preencha a observação!");
-      erro = true;
-    } else setErroObservacao("");
-
-    if (!condicao.trim()) {
-      setErroCondicao("Preencha a condição do eletrônico!");
-      erro = true;
-    } else setErroCondicao("");
-
-    if (!endereco.trim()) {
-      setErroEndereco("Preencha o seu endereço!");
-      erro = true;
-    } else setErroEndereco("");
-
-    if (imagens.length === 0) {
-      setErroImagens("Adicione uma imagem!");
-      erro = true;
-    } else setErroImagens("");
-
-    if (!erro) setMostrarModal(true);
-  }
 
   function confirmarEnvio() {
     setMensagemSucesso("Doação criada com sucesso!");
@@ -77,9 +87,9 @@ function TelaCriarDoacao() {
       setMensagemSucesso(null);
       navigate("/doacao/pendente", {
         state: {
-          nome,
+          nome_doacao,
           especificacao,
-          descricao,
+          descricao_geral,
           observacao,
           condicao,
           endereco,
@@ -121,7 +131,7 @@ function TelaCriarDoacao() {
       <div className={styles.form_doacao}>
         <h2>Criar doação</h2>
 
-        <form onSubmit={abrirModalRevisao}>
+        <form onSubmit={adicionarDoacao}>
           <div className={styles.form_campos}>
             <div className={styles.coluna_esquerda}>
               <div className={styles.campo}>
@@ -130,7 +140,7 @@ function TelaCriarDoacao() {
                   className={`${styles.input} ${
                     erroNome ? styles.erro_input : ""
                   }`}
-                  value={nome}
+                  value={nome_doacao}
                   onChange={(e) => setNome(e.target.value)}
                   type="text"
                   placeholder="Insira o nome do eletrônico*"
@@ -175,7 +185,7 @@ function TelaCriarDoacao() {
                   className={`${styles.input} ${
                     erroDescricao ? styles.erro_input : ""
                   }`}
-                  value={descricao}
+                  value={descricao_geral}
                   onChange={(e) => setDescricao(e.target.value)}
                   placeholder="Ex: Ideal para empresas que desejam reciclar eletrônicos."
                 />
@@ -230,9 +240,9 @@ function TelaCriarDoacao() {
                   onChange={(e) => setCondicao(e.target.value)}
                 >
                   <option value="">Selecione uma opção</option>
-                  <option value="Novo">Novo</option>
-                  <option value="Usado">Usado</option>
-                  <option value="Peças">Para peças</option>
+                  <option value="NOVO">Novo</option>
+                  <option value="USADO">Usado</option>
+                  <option value="PEÇAS">Para peças</option>
                 </select>
                 {erroCondicao && <p className={styles.erro}>{erroCondicao}</p>}
               </div>
@@ -258,13 +268,13 @@ function TelaCriarDoacao() {
             </div>
             <div className={styles.popUpContent}>
               <p>
-                <strong>Nome:</strong> {nome}
+                <strong>Nome:</strong> {nome_doacao}
               </p>
               <p>
                 <strong>Especificação:</strong> {especificacao}
               </p>
               <p>
-                <strong>Descrição:</strong> {descricao}
+                <strong>Descrição:</strong> {descricao_geral}
               </p>
               <p>
                 <strong>Observação:</strong> {observacao}
