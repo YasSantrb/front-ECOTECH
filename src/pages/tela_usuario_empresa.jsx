@@ -7,12 +7,8 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 function TelaUsuarioEmpresa() {
-  const [usuario, setUsuario] = useState({
-    nome_usuario: "Amazon",
-    email: "amazon@gmail.com",
-    telefone: "(89)3521-7373",
-    localizacao: "Teresina - PI - Brasil",
-  });
+  const [usuario, setUsuario] = useState(
+  );
 
   const [isEditarModalOpen, setIsEditarModalOpen] = useState(false);
   const [nome, setNome] = useState("");
@@ -51,6 +47,17 @@ function TelaUsuarioEmpresa() {
     }, 2000);
   }
 
+  function capitalizarPrimeiraLetra(texto) {
+    if (!texto) return "";
+    return texto.charAt(0).toUpperCase() + texto.slice(1);
+  }
+
+
+  const nome_usuario = capitalizarPrimeiraLetra(localStorage.getItem("username"));
+  const email = localStorage.getItem("email");
+  const telefone_usuario = localStorage.getItem("telefone");
+  const localizacao_usuario = localStorage.getItem("cep");
+
   return (
     <div className={styles.tela_usuario_empresa}>
       {mensagemSucesso && <PopUpSucesso mensagem={mensagemSucesso} />}
@@ -72,7 +79,7 @@ function TelaUsuarioEmpresa() {
           <div className={styles.perfil_esquerda}>
             <img src={icon_amazon} alt="" className={styles.perfil} />
             <div className={styles.info_usuario}>
-              <h1 className={styles.nome_usuario}>{usuario.nome_usuario}</h1>
+              <h1 className={styles.nome_usuario}>{nome_usuario}</h1>
               <Link to="/usuario/empresa" className={styles.tipo_usuario}>
                 <span className={styles.tipo_usuario}>Empresa</span>
               </Link>
@@ -92,7 +99,7 @@ function TelaUsuarioEmpresa() {
               <i className={`${styles.info_icon} fa-solid fa-envelope`}></i>
               <div className={styles.info_content}>
                 <span className={styles.infoLabel}>Email</span>
-                <span className={styles.infovalores}>{usuario.email}</span>
+                <span className={styles.infovalores}>{email}</span>
               </div>
             </div>
             <div className={styles.info_item}>
@@ -100,7 +107,7 @@ function TelaUsuarioEmpresa() {
               <div className={styles.info_content}>
                 <span className={styles.infoLabel}>Localização</span>
                 <span className={styles.infovalores}>
-                  {usuario.localizacao}
+                  {localizacao_usuario}
                 </span>
               </div>
             </div>
@@ -108,7 +115,7 @@ function TelaUsuarioEmpresa() {
               <i className={`${styles.info_icon} fa-solid fa-phone`}></i>
               <div className={styles.info_content}>
                 <span className={styles.infoLabel}>Telefone</span>
-                <span className={styles.infovalores}>{usuario.telefone}</span>
+                <span className={styles.infovalores}>{telefone_usuario}</span>
               </div>
             </div>
             <div className={styles.info_item}>
@@ -117,7 +124,7 @@ function TelaUsuarioEmpresa() {
               ></i>
               <div className={styles.info_content}>
                 <span className={styles.infoLabel}>Data de entrada</span>
-                <span className={styles.infovalores}>19/05/2025</span>
+                <span className={styles.infovalores}>04/12/2025</span>
               </div>
             </div>
           </div>

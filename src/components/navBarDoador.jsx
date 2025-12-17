@@ -26,6 +26,11 @@ function BarraNavegacaoDoador({ pesquisa, setPesquisa }) {
     localStorage.removeItem("userName");
     localStorage.removeItem("userData");
     localStorage.removeItem("authToken");
+    localStorage.removeItem("email");
+    localStorage.removeItem("telefone");
+    localStorage.removeItem("cep");
+    localStorage.removeItem("criado_em");
+    localStorage.removeItem("username");
     navigate("/inicial");
   };
 

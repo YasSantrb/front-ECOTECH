@@ -50,16 +50,26 @@ function TelaLogin() {
 
     try {
       const response = await api.post("login/", body);
-      const { token, profile, usuario_id, username, email  } = response.data;
+      const { token, profile, usuario_id, username, email} = response.data;
       const tipo_usuario = profile?.tipo_usuario;
+      const telefone = profile?.telefone;
+      const cep = profile?.cep;
       const informacoes_usuario = { usuario_id, username, email, profile };
 
       if (token) {
         localStorage.setItem("authToken", token);
         localStorage.setItem("logado", "true");
+        localStorage.setItem("username", username);
+        localStorage.setItem("email", email);
 
         if (tipo_usuario) {
           localStorage.setItem("userType", tipo_usuario);
+        }
+        if (telefone) {
+          localStorage.setItem("telefone", telefone);
+        }
+        if (cep) {
+          localStorage.setItem("cep", cep);
         }
         if (informacoes_usuario) {
           localStorage.setItem("userData", JSON.stringify(informacoes_usuario));

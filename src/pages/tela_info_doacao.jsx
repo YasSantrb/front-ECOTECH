@@ -21,9 +21,9 @@ function TelaInfoDoacao() {
   const navigate = useNavigate();
 
   function capitalizarPrimeiraLetra(texto) {
-    if (!texto) return "";
-    return texto.charAt(0).toUpperCase() + texto.slice(1);
-  }
+  if (!texto) return ""; 
+  return texto.charAt(0).toUpperCase() + texto.slice(1);
+}
 
   useEffect(() => {
     const doacoesLista = todasAsDoacoesAPI || [];
@@ -39,9 +39,7 @@ function TelaInfoDoacao() {
       if (doacaoEncontrada) {
         setDoacaoAtual({
           id: doacaoEncontrada.id,
-          username: capitalizarPrimeiraLetra(
-            doacaoEncontrada.username || "Doador não informado"
-          ),
+          username: capitalizarPrimeiraLetra(doacaoEncontrada.username || "Doador não informado"),
           usuario: doacaoEncontrada.usuario,
           especificacao: doacaoEncontrada.especificacao,
           nome_doacao: doacaoEncontrada.nome_doacao,
