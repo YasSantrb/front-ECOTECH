@@ -64,11 +64,11 @@ function InformacoesDoacaoComponente({
     setIsEditarModalOpen(false);
   }
 
-  async function editarBlocoAPI(formDataPayload, idDoacao) {
+  async function editarBlocoAPI(formularioEdicao, idDoacao) {
     try {
       const response = await apiMedia.patch(
         `minhas_doacoes/${idDoacao}/`,
-        formDataPayload,
+        formularioEdicao,
         {
           headers: {
             "Content-Type": "multipart/form-data",
@@ -93,19 +93,19 @@ function InformacoesDoacaoComponente({
       return;
     }
 
-    const formData = new FormData();
-    formData.append("nome_doacao", nomeEletronicoE);
-    formData.append("especificacao", especificacaoE);
-    formData.append("descricao_geral", infoProdutoE);
-    formData.append("condicao", condicaoE);
-    formData.append("observacao", observacaoE);
-    formData.append("endereco", enderecoE);
+    const formulario = new FormData();
+    formulario.append("nome_doacao", nomeEletronicoE);
+    formulario.append("especificacao", especificacaoE);
+    formulario.append("descricao_geral", infoProdutoE);
+    formulario.append("condicao", condicaoE);
+    formulario.append("observacao", observacaoE);
+    formulario.append("endereco", enderecoE);
 
     if (novoArquivoEletronico) {
-      formData.append("fotos_eletronico", novoArquivoEletronico);
+      formulario.append("fotos_eletronico", novoArquivoEletronico);
     }
 
-    const resultado = await editarBlocoAPI(formData, id);
+    const resultado = await editarBlocoAPI(formulario, id);
 
     if (resultado && resultado.success) {
       setMensagemSucesso("Doação editada com sucesso!");
@@ -159,7 +159,7 @@ function InformacoesDoacaoComponente({
                     fotos_eletronico.startsWith("blob")
                     ? fotos_eletronico
                     : `${VITE_API_URL}${fotos_eletronico}`
-                  : "caminho/para/imagem_padrao.png"
+                  : "src/assets/imagens/download 1 (1).png"
               }
               alt={nomeEletronicoE}
             />

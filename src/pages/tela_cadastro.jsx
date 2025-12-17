@@ -62,7 +62,7 @@ function TelaCadastro() {
     setErroCep("");
     setErroConfirmarSenha("");
 
-    const body = {
+    const corpoRequisicao = {
       email: email,
       password: senha,
       username: nome,
@@ -75,7 +75,7 @@ function TelaCadastro() {
     };
 
     try {
-      const response = await api.post("registro/", body);
+      const response = await api.post("registro/", corpoRequisicao);
       console.log("Usuário cadastrado com sucesso:", response.data);
       navigate("/login");
     } catch (error) {

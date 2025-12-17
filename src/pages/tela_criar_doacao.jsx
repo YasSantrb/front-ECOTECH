@@ -32,16 +32,16 @@ function TelaCriarDoacao() {
   async function adicionarDoacao(event) {
     event.preventDefault();
 
-    const formData = new FormData();
-    formData.append("nome_doacao", nome_doacao);
-    formData.append("especificacao", especificacao);
-    formData.append("descricao_geral", descricao_geral);
-    formData.append("observacao", observacao);
-    formData.append("condicao", condicao);
-    formData.append("endereco", endereco);
+    const formulario = new FormData();
+    formulario.append("nome_doacao", nome_doacao);
+    formulario.append("especificacao", especificacao);
+    formulario.append("descricao_geral", descricao_geral);
+    formulario.append("observacao", observacao);
+    formulario.append("condicao", condicao);
+    formulario.append("endereco", endereco);
 
     if (imagens.length > 0) {
-      formData.append("fotos_eletronico", imagens[0]);
+      formulario.append("fotos_eletronico", imagens[0]);
     }
 
     if (
@@ -62,7 +62,7 @@ function TelaCriarDoacao() {
     }
 
     try {
-      const response = await apiMedia.post("minhas_doacoes/", formData);
+      const response = await apiMedia.post("minhas_doacoes/", formulario);
 
       if (response.status === 201 || response.status === 200) {
         setMensagemSucesso("Doação adicionada com sucesso!");
@@ -83,7 +83,6 @@ function TelaCriarDoacao() {
           "Criação de doação falhou com status inesperado:",
           response.status
         );
-        alert("Falha ao criar doação. Tente novamente.");
       }
     } catch (error) {
       const mensagem =
