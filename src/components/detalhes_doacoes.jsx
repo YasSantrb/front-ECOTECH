@@ -64,7 +64,7 @@ function InformacoesDoacaoComponente({
     setIsEditarModalOpen(false);
   }
 
-  async function editarBlocoAPI(formularioEdicao, idDoacao) {
+  async function editarAPI(formularioEdicao, idDoacao) {
     try {
       const response = await apiMedia.patch(
         `minhas_doacoes/${idDoacao}/`,
@@ -105,7 +105,7 @@ function InformacoesDoacaoComponente({
       formulario.append("fotos_eletronico", novoArquivoEletronico);
     }
 
-    const resultado = await editarBlocoAPI(formulario, id);
+    const resultado = await editarAPI(formulario, id);
 
     if (resultado && resultado.success) {
       setMensagemSucesso("Doação editada com sucesso!");
