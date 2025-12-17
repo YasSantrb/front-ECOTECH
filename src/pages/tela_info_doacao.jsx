@@ -2,20 +2,28 @@ import { useState, useEffect } from "react";
 import styles from "../styles/tela_info_doacao.module.css";
 import fundo_login_cadastro from "../assets/imagens/fundo_login_cadastro.jpg";
 import icon_voltar from "../assets/imagens/icon_voltar.png";
-import { Link, useNavigate, useParams, useLocation } from "react-router-dom"; 
+import { Link, useNavigate, useParams, useLocation } from "react-router-dom";
 import InformacoesDoacaoComponente from "../components/detalhes_doacoes";
 import useGetTodasDoacoes from "../hooks/doacoes/useGetTodasDoacoes";
-import icon_user from "../assets/imagens/icon_user.png";
+import icon_woman from "../assets/imagens/woman.png";
 
 function TelaInfoDoacao() {
-  const { id } = useParams(); 
+  const { id } = useParams();
   const [doacaoAtual, setDoacaoAtual] = useState(null);
-  const { doacoes: todasAsDoacoesAPI, loading: loadingAPI, error: errorAPI } = useGetTodasDoacoes();
-  
+  const {
+    doacoes: todasAsDoacoesAPI,
+    loading: loadingAPI,
+    error: errorAPI,
+  } = useGetTodasDoacoes();
+
   const [loading, setLoading] = useState(true);
   const location = useLocation();
   const navigate = useNavigate();
- 
+
+  function capitalizarPrimeiraLetra(texto) {
+    if (!texto) return "";
+    return texto.charAt(0).toUpperCase() + texto.slice(1);
+  }
 
   useEffect(() => {
     const doacoesLista = todasAsDoacoesAPI || [];
@@ -25,22 +33,26 @@ function TelaInfoDoacao() {
     }
     if (id) {
       const doacaoEncontrada = doacoesLista.find(
-        (doacao) => String(doacao.id) === id 
+        (doacao) => String(doacao.id) === id
       );
 
       if (doacaoEncontrada) {
         setDoacaoAtual({
-            id: doacaoEncontrada.id,
-            nome_doador: doacaoEncontrada.nome_doador || "Doador não informado",
-            especificacoes: doacaoEncontrada.especificacao, 
-            nome_doacao: doacaoEncontrada.nome_doacao,
-            descricao_geral: doacaoEncontrada.descricao_geral,
-            condicao: doacaoEncontrada.condicao,
-            observacao: doacaoEncontrada.observacao,
-            endereco: doacaoEncontrada.endereco,
-            imagem_user: doacaoEncontrada.imagem_doador || icon_user,
-            fotos_eletronico: doacaoEncontrada.fotos_eletronico, 
-            status: doacaoEncontrada.status || "Pendente", 
+          id: doacaoEncontrada.id,
+          username: capitalizarPrimeiraLetra(
+            doacaoEncontrada.username || "Doador não informado"
+          ),
+          usuario: doacaoEncontrada.usuario,
+          especificacao: doacaoEncontrada.especificacao,
+          nome_doacao: doacaoEncontrada.nome_doacao,
+          descricao_geral: doacaoEncontrada.descricao_geral,
+          condicao: doacaoEncontrada.condicao,
+          observacao: doacaoEncontrada.observacao,
+          endereco: doacaoEncontrada.endereco,
+          imagem_user: doacaoEncontrada.imagem_doador || icon_woman,
+          fotos_eletronico: doacaoEncontrada.fotos_eletronico,
+          status: doacaoEncontrada.status || "Pendente",
+          dataCriacao: doacaoEncontrada.criado_em,
         });
       } else {
         setDoacaoAtual(null);
@@ -48,8 +60,8 @@ function TelaInfoDoacao() {
     } else {
       setDoacaoAtual(null);
     }
-    setLoading(false); 
-  }, [todasAsDoacoesAPI, id, loadingAPI]); 
+    setLoading(false);
+  }, [todasAsDoacoesAPI, id, loadingAPI]);
 
   if (loading || loadingAPI) {
     return (
@@ -58,7 +70,7 @@ function TelaInfoDoacao() {
       </p>
     );
   }
-  
+
   if (errorAPI) {
     return (
       <p className={styles.mensagem_nenhuma_doacao}>
@@ -85,7 +97,10 @@ function TelaInfoDoacao() {
       />
       <div className={styles.info_doacao_div}>
         <nav className={styles.nav_info_doacao}>
-          <button className={styles.link_voltar_info_doacao} onClick={() => navigate(-1)}>
+          <button
+            className={styles.link_voltar_info_doacao}
+            onClick={() => navigate(-1)}
+          >
             <img
               className={styles.icon_voltar_info_doacao}
               src={icon_voltar}
@@ -96,8 +111,8 @@ function TelaInfoDoacao() {
         </nav>
         <main className={styles.info_doacao_main}>
           <InformacoesDoacaoComponente
-            nomeDoador={doacaoAtual.nomeDoador}
-            especificacoes={doacaoAtual.especificacoes}
+            username={doacaoAtual.username}
+            especificacao={doacaoAtual.especificacao}
             nome_doacao={doacaoAtual.nome_doacao}
             descricao_geral={doacaoAtual.descricao_geral}
             condicao={doacaoAtual.condicao}
@@ -108,6 +123,7 @@ function TelaInfoDoacao() {
             modo={modo}
             status={doacaoAtual.status}
             onEditarDoacao={(novaDoacao) => setDoacaoAtual(novaDoacao)}
+            dataCriacao={doacaoAtual.dataCriacao}
           />
         </main>
       </div>

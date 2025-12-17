@@ -2,14 +2,14 @@ import { Link } from "react-router-dom";
 import styles from "../styles/tela_info_doacao.module.css";
 import PopUpSucesso from "./popUpSucesso";
 import { useNavigate, useParams } from "react-router-dom";
-import { useState } from "react"; 
+import { useState } from "react";
 import apiMedia from "../services/api_media.ts";
 
 function InformacoesDoacaoComponente({
-  nomeDoador,
-  especificacoes,
+  username,
+  especificacao,
   nome_doacao,
-  descricao_geral, 
+  descricao_geral,
   condicao,
   observacao,
   endereco,
@@ -17,8 +17,8 @@ function InformacoesDoacaoComponente({
   fotos_eletronico,
   modo = "visualizacao",
   status,
-  dataCriacao, 
-  onEditarDoacao, 
+  dataCriacao,
+  onEditarDoacao,
 }) {
   const navigate = useNavigate();
   const { id } = useParams();
@@ -26,9 +26,9 @@ function InformacoesDoacaoComponente({
   const mostrarContato = logado && modo === "visualizacao";
   const mostrarAgendar = logado && modo === "visualizacao";
   const mostrarEditar = modo === "gerenciar";
-  
+
   const [isEditarModalOpen, setIsEditarModalOpen] = useState(false);
-  const [especificacaoE, setEspecificacaoE] = useState(especificacoes); 
+  const [especificacaoE, setEspecificacaoE] = useState(especificacao);
   const [nomeEletronicoE, setNomeEletronicoE] = useState(nome_doacao);
   const [infoProdutoE, setInfoProdutoE] = useState(descricao_geral);
   const [condicaoE, setCondicaoE] = useState(condicao);
@@ -49,7 +49,7 @@ function InformacoesDoacaoComponente({
   }
 
   function abrirModalEditar() {
-    setEspecificacaoE(especificacoes);
+    setEspecificacaoE(especificacao);
     setNomeEletronicoE(nome_doacao);
     setInfoProdutoE(descricao_geral);
     setCondicaoE(condicao);
@@ -100,7 +100,7 @@ function InformacoesDoacaoComponente({
     formData.append("condicao", condicaoE);
     formData.append("observacao", observacaoE);
     formData.append("endereco", enderecoE);
-    
+
     if (novoArquivoEletronico) {
       formData.append("fotos_eletronico", novoArquivoEletronico);
     }
@@ -109,17 +109,22 @@ function InformacoesDoacaoComponente({
 
     if (resultado && resultado.success) {
       setMensagemSucesso("Doação editada com sucesso!");
-      
+
       const dadosAtualizados = {
-        nomeEletronico: nomeEletronicoE,
-        especificacoes: especificacaoE,
-        infoProduto: infoProdutoE,
+        id: id,
+        username: username,
+        nome_doacao: nomeEletronicoE,
+        especificacao: especificacaoE,
+        descricao_geral: infoProdutoE,
         condicao: condicaoE,
         observacao: observacaoE,
         endereco: enderecoE,
+        imagem_user: imagem_user,
         fotos_eletronico: novoArquivoEletronico
           ? URL.createObjectURL(novoArquivoEletronico)
           : fotos_eletronico,
+        status: status,
+        dataCriacao: dataCriacao,
       };
 
       if (onEditarDoacao) {
@@ -132,13 +137,13 @@ function InformacoesDoacaoComponente({
       setTimeout(() => {
         setMensagemSucesso(null);
       }, 3000);
-
     } else {
       alert("Falha ao editar a doação. Tente novamente.");
     }
   }
 
-  const tipoUsuario = localStorage.getItem("tipoUsuario");
+  const tipoUsuario = localStorage.getItem("userType");
+  const VITE_API_URL = "https://yassant2.pythonanywhere.com";
 
   return (
     <>
@@ -148,16 +153,27 @@ function InformacoesDoacaoComponente({
           <div className={styles.info_doacao_lado_esquerdo}>
             <img
               className={styles.doacao_main_img}
-              src={imagemE || fotos_eletronico}
+              src={
+                fotos_eletronico
+                  ? fotos_eletronico.startsWith("http") ||
+                    fotos_eletronico.startsWith("blob")
+                    ? fotos_eletronico
+                    : `${VITE_API_URL}${fotos_eletronico}`
+                  : "caminho/para/imagem_padrao.png"
+              }
               alt={nomeEletronicoE}
             />
             <div className={styles.informacoes_esquerda}>
               <div className={styles.doador_info_esquerda}>
                 <h3>Doado por:</h3>
                 <div className={styles.info_doador}>
-                  <img className={styles.img_doador} src={imagem_user} alt="Ícone do usuário" />
+                  <img
+                    className={styles.img_doador}
+                    src={imagem_user}
+                    alt="Ícone do usuário"
+                  />
                   <div className={styles.doador_contato}>
-                    <p className={styles.nome_doador}>{nomeDoador}</p>
+                    <p className={styles.nome_doador}>{username}</p>
                     <p className={styles.dataHoraPublicacao}>
                       Publicado em {formatarDataHora(dataCriacao)}
                     </p>
@@ -165,7 +181,7 @@ function InformacoesDoacaoComponente({
                     <div className={styles.botao_entrar_em_contato}>
                       {logado &&
                         mostrarContato &&
-                        tipoUsuario === "empresa" && (
+                        tipoUsuario === "EMPRESA" && (
                           <Link
                             to="/chat"
                             className={styles.link_entrar_em_contato}
@@ -182,7 +198,9 @@ function InformacoesDoacaoComponente({
                             onClick={abrirModalEditar}
                             className={styles.botoes_doacao}
                           >
-                            <i className={`${styles.pincel} fa-solid fa-pencil`}></i>
+                            <i
+                              className={`${styles.pincel} fa-solid fa-pencil`}
+                            ></i>
                             Editar
                           </button>
                         )}
@@ -195,39 +213,39 @@ function InformacoesDoacaoComponente({
           </div>
 
           <div className={styles.info_doacao_lado_direito}>
-            <h1>{nome_doacao}</h1>
+            <h1>{nomeEletronicoE}</h1>
 
             <div className={styles.secao_info_direito}>
               <h3>Informações sobre o produto:</h3>
-              <p>{descricao_geral}</p>
+              <p>{infoProdutoE}</p>
             </div>
 
             <div className={styles.secao_info_direito}>
               <h3>Condição:</h3>
-              <p>{condicao}</p>
+              <p>{condicaoE}</p>
             </div>
 
             <div className={styles.secao_info_direito}>
               <h3>Observação:</h3>
-              <p>{observacao}</p>
+              <p>{observacaoE}</p>
             </div>
 
             <div className={styles.especificacoes_conteudo}>
               <h3>Especificações:</h3>
-              <p className={styles.especificacoes_p}>{especificacoes}</p>
+              <p className={styles.especificacoes_p}>{especificacaoE}</p>
             </div>
 
             <div className={styles.botao_agendar_div}>
-              {logado && mostrarAgendar && tipoUsuario === "empresa" && (
+              {logado && mostrarAgendar && tipoUsuario === "EMPRESA" && (
                 <button
                   className={styles.botao_agendar_coleta}
                   onClick={() =>
                     navigate("/agendamento", {
                       state: {
-                        produto: fotos_eletronico,
-                        doador: nomeDoador,
+                        produto: nomeEletronicoE,
+                        doador: username,
                         endereco: endereco,
-                        idDoacao: id, 
+                        idDoacao: id,
                       },
                     })
                   }
@@ -254,7 +272,6 @@ function InformacoesDoacaoComponente({
             </div>
             <div className={styles.popUp_conteudo}>
               <div className={styles.inputs}>
-                
                 <div className={styles.campo}>
                   <label className={styles.label_modal}>Nome</label>
                   <input
@@ -286,7 +303,9 @@ function InformacoesDoacaoComponente({
                   />
                 </div>
                 <div className={styles.campo}>
-                  <label className={styles.label_modal}>Informação do produto</label>
+                  <label className={styles.label_modal}>
+                    Detalhes do eletrônico
+                  </label>
                   <input
                     className={styles.input}
                     type="text"
@@ -296,7 +315,9 @@ function InformacoesDoacaoComponente({
                   />
                 </div>
                 <div className={styles.campo}>
-                  <label className={styles.label_modal}>Condição do produto</label>
+                  <label className={styles.label_modal}>
+                    Condição do produto
+                  </label>
                   <input
                     className={styles.input}
                     type="text"
@@ -316,7 +337,9 @@ function InformacoesDoacaoComponente({
                   />
                 </div>
                 <div className={styles.campo}>
-                  <label className={styles.label_modal}>Foto do eletrônico</label>
+                  <label className={styles.label_modal}>
+                    Foto do eletrônico
+                  </label>
                   <input
                     type="file"
                     accept="image/*"
@@ -325,17 +348,23 @@ function InformacoesDoacaoComponente({
                       const file = e.target.files[0];
                       if (file) {
                         setNovoArquivoEletronico(file);
-                        setImagemE(URL.createObjectURL(file)); 
+                        setImagemE(URL.createObjectURL(file));
                       }
                     }}
                   />
                 </div>
               </div>
               <div className={styles.popUp_botoes}>
-                <button className={styles.botao_cancelar_agendamento} onClick={fecharModalEditar}>
+                <button
+                  className={styles.botao_cancelar_agendamento}
+                  onClick={fecharModalEditar}
+                >
                   Cancelar
                 </button>
-                <button className={styles.botao_confirmar_agendamento} onClick={editar}>
+                <button
+                  className={styles.botao_confirmar_agendamento}
+                  onClick={editar}
+                >
                   Confirmar
                 </button>
               </div>

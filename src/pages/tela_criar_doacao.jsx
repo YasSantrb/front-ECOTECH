@@ -29,8 +29,8 @@ function TelaCriarDoacao() {
   const [mostrarModal, setMostrarModal] = useState(false);
   const [mensagemSucesso, setMensagemSucesso] = useState(null);
 
-  async function adicionarDoacao(event) { 
-    event.preventDefault(); 
+  async function adicionarDoacao(event) {
+    event.preventDefault();
 
     const formData = new FormData();
     formData.append("nome_doacao", nome_doacao);
@@ -40,45 +40,64 @@ function TelaCriarDoacao() {
     formData.append("condicao", condicao);
     formData.append("endereco", endereco);
 
-    if (imagens.length > 0){
-      formData.append(`fotos_eletronico`, imagens[0]); 
-    };
-
-    if (!nome_doacao || !especificacao || !descricao_geral || !condicao || !endereco) {
-        setErroCondicao("Por favor, preencha a condição.");
-        setErroDescricao("Por favor, preencha a descrição.");
-        setErroEspecificacao("Por favor, preencha a especificação.");
-        setErroNome("Por favor, preencha o nome da doação.");
-        setErroEndereco("Por favor, preencha o endereço.");
-        setErroObservacao("Por favor, preencha a observação.");
-        setErroImagens("Por favor, insira uma imagem.");
-        return;
+    if (imagens.length > 0) {
+      formData.append("fotos_eletronico", imagens[0]);
     }
-    
+
+    if (
+      !nome_doacao ||
+      !especificacao ||
+      !descricao_geral ||
+      !condicao ||
+      !endereco
+    ) {
+      setErroCondicao("Por favor, preencha a condição.");
+      setErroDescricao("Por favor, preencha a descrição.");
+      setErroEspecificacao("Por favor, preencha a especificação.");
+      setErroNome("Por favor, preencha o nome da doação.");
+      setErroEndereco("Por favor, preencha o endereço.");
+      setErroObservacao("Por favor, preencha a observação.");
+      setErroImagens("Por favor, insira uma imagem.");
+      return;
+    }
+
     try {
-      const response = await apiMedia.post("minhas_doacoes/", formData); 
-      
+      const response = await apiMedia.post("minhas_doacoes/", formData);
+
       if (response.status === 201 || response.status === 200) {
         setMensagemSucesso("Doação adicionada com sucesso!");
-            const novaDoacao = response.data;
-            setTimeout(() => {
-               navigate(`/doacao/pendente`, { state: { doacao: novaDoacao } }); 
-               setMensagemSucesso(null);
-              }, 2000); 
-            
-            } else {
-            console.error("Criação de doação falhou com status inesperado:", response.status);
-            alert("Falha ao criar doação. Tente novamente.");
-        }
-      } catch (error) {
-         const mensagem = error.response?.data?.message || "Erro ao criar doação. Verifique os logs do backend.";
-         console.error("Erro ao criar doação:", error.response?.data || error.message);
-          alert(mensagem);
-        } finally {
-          console.log("Requisição de criação de doação finalizada.");
-        }
+        const novaDoacao = response.data;
+        setTimeout(() => {
+          if (novaDoacao && novaDoacao.id) {
+            navigate(`/info/doacao/${novaDoacao.id}`, {
+              state: { doacao: novaDoacao },
+            });
+          } else {
+            console.error("Erro: O backend não retornou o ID da nova doação.");
+            navigate("/");
+          }
+          setMensagemSucesso(null);
+        }, 2000);
+      } else {
+        console.error(
+          "Criação de doação falhou com status inesperado:",
+          response.status
+        );
+        alert("Falha ao criar doação. Tente novamente.");
       }
-
+    } catch (error) {
+      const mensagem =
+        error.response?.data?.message ||
+        "Erro ao criar doação. Verifique os logs do backend.";
+      console.error(
+        "Erro ao criar doação:",
+        error.response?.data || error.message
+      );
+      alert(mensagem);
+    } finally {
+      console.log("Requisição de criação de doação finalizada.");
+    }
+  }
 
   function confirmarEnvio() {
     setMensagemSucesso("Doação criada com sucesso!");
@@ -96,7 +115,7 @@ function TelaCriarDoacao() {
           imagens,
         },
       });
-    }, 2000); 
+    }, 2000);
 
     setNome("");
     setEspecificacao("");
